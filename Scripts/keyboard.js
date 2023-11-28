@@ -4,11 +4,8 @@ window.addEventListener('keydown', function(event) { Key.onKeydown(event); }, fa
 var Key = {
   _pressed: {},
 
-  A: 65,
   W: 87,
-  D: 68,
   S: 83,
-  SPACE: 32,
   O: 79,
   L: 76,
   

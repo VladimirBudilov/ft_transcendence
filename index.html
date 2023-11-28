@@ -16,12 +16,18 @@
 		<script src='./Scripts/playerControl.js'></script>
 		<script src='./Scripts/tournamentLogic.js'></script>
 		<script src='./Scripts/gameTypeHandle.js'></script>
+		<div id='tournament'>
+			<label for="userInput">
+				<h1>Enter tournament name</h1>
+			</label><input type="text" id="userInput" placeholder="Enter text here">
+			<button onclick="ReadInput()">Submit</button>
+		</div>
 		<div>
 			<button id='StartGameVsBot' onclick='StartGameVsBot()'>Player VS Bot</button>
 			<button id='StartGameVsPlayer' onclick='StartGameVsPlayer()'>Player VS Player</button>
+			<button id='StartTournament' onclick='StartTournament()'>Start Tournament</button>
 			<button id='tournamentButton' onclick='StopGame()'>StopGame</button>
 		</div>
-
 		<div id='scoreboard'>
 			<h1 id='scores'>0-0</h1>
 			<h1 id='title'>3D PONG</h1>

@@ -37,7 +37,7 @@ function UpdateVsBot()
     }
     ballPhysics();
     paddlePhysics();
-    playerPaddleMovement(paddle1, paddle1DirY, Key.A, Key.D);
+    playerPaddleMovement(paddle1, paddle1DirY, Key.W, Key.S);
     BotPaddleMovement();
     renderer.render(scene, camera);
     animationId = requestAnimationFrame(UpdateVsBot);
