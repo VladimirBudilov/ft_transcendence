@@ -13,6 +13,9 @@ function StopGame()
     difficulty = 0.2;
     let gameCanvas = document.getElementById("gameCanvas");
     gameCanvas.removeChild(renderer.domElement);
+    cancelAnimationFrame(animationId);
+    cancelIdleCallback(animationId);
+    printScore();
 }
 
 function StartGameVsBot()
@@ -27,12 +30,17 @@ function StartGameVsBot()
 
 function UpdateVsBot()
 {
+    if(stopGame) {
+        cancelAnimationFrame(animationId);
+        cancelIdleCallback(animationId);
+        return;
+    }
     ballPhysics();
     paddlePhysics();
     playerPaddleMovement(paddle1, paddle1DirY, Key.A, Key.D);
     BotPaddleMovement();
     renderer.render(scene, camera);
-    return  requestAnimationFrame(UpdateVsBot);
+    animationId = requestAnimationFrame(UpdateVsBot);
 }
 
 function StartGameVsPlayer()
@@ -47,10 +55,15 @@ function StartGameVsPlayer()
 
 function UpdateVsPlayer()
 {
-    renderer.render(scene, camera);
-    requestAnimationFrame(UpdateVsPlayer);
+    if(stopGame) {
+        cancelAnimationFrame(animationId);
+        cancelIdleCallback(animationId);
+        return;
+    }
     ballPhysics();
     paddlePhysics();
     playerPaddleMovement(paddle1, paddle1DirY, Key.W, Key.S);
     playerPaddleMovement(paddle2, paddle2DirY, Key.O, Key.L);
+    renderer.render(scene, camera);
+    animationId = requestAnimationFrame(UpdateVsPlayer);
 }

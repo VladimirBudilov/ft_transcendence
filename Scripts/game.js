@@ -5,12 +5,16 @@ function PrepareData() {
 	score2 = 0;
 }
 
+function printScore() {
+	document.getElementById("scores").innerHTML = score1 + "-" + score2;
+}
+
 function ballPhysics()
 {
 	if (ball.position.x <= -fieldWidth/2)
 	{	
 		score2++;
-		document.getElementById("scores").innerHTML = score1 + "-" + score2;
+		printScore();
 		resetBall(2);
 		matchScoreCheck();	
 	}
@@ -21,7 +25,7 @@ function ballPhysics()
 		// Player scores
 		score1++;
 		// update scoreboard HTML
-		document.getElementById("scores").innerHTML = score1 + "-" + score2;
+		printScore();
 		// reset ball to center
 		resetBall(1);
 		matchScoreCheck();	
