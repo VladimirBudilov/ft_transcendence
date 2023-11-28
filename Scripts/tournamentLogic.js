@@ -1,13 +1,14 @@
 class Tournament
 {
+    tournamentInput = null;
     numberOfParticipants = 2;
     tournamentName = "";
     status = "";
     participants = [];
     winner = "";
     counter = 0;
+    
     GetDataAboutTournament = function () {
-
     }
 
     CreateFields() {
@@ -21,11 +22,21 @@ class Tournament
         }
     }
 }
-let tournament = new Tournament();
-function StartTournament()
-{
+
+function ChangeDivStateById(name, state){
+    let tournamentInput = document.getElementById(name);
+    if(state)
+        tournamentInput.style.display = "block";
+    else
+        tournamentInput.style.display = "none";
 }
 
+function StartTournament()
+{
+    ChangeDivStateById("tournament", true);
+}
+
+let tournament = new Tournament();
 function ReadInput()
 {
     if(tournament.tournamentName === "") {

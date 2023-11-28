@@ -1,6 +1,7 @@
 function OnLoadPreparation()
 {
-
+    tournament.tournamentInput = document.getElementById("userInput");
+    tournament.tournamentInput.style.display = "none";
 }
 function createScene()
 {

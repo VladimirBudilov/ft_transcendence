@@ -7,11 +7,11 @@ let fieldWidth = 400, fieldHeight = 200;
 
 // paddle variables
 let paddleWidth, paddleHeight, paddleDepth, paddleQuality;
-let paddle1DirY = 0, paddle2DirY = 0, paddleSpeed = 3;
+let paddle1DirY = 0, paddle2DirY = 0, paddleSpeed = 6;
 
 // ball variables
 let ball, paddle1, paddle2;
-let ballDirX = 1, ballDirY = 1, ballSpeed = 4;
+let ballDirX = 1, ballDirY = 1, ballSpeed = 5;
 
 // game-related variables
 let score1 = 0, score2 = 0;
@@ -26,4 +26,6 @@ let stopGame = false;
 let animationId;
 
 let gameCanvas;
+
+
 

@@ -16,6 +16,7 @@ function StopGame()
     cancelAnimationFrame(animationId);
     cancelIdleCallback(animationId);
     printScore();
+    ChangeDivStateById("StopGame", false);
 }
 
 function StartGameVsBot()
@@ -23,6 +24,7 @@ function StartGameVsBot()
     if(startPlaying)
         return;
     startPlaying = true;
+    ChangeDivStateById("StopGame", true);
     PrepareData();
     createScene();
     UpdateVsBot();
@@ -47,6 +49,7 @@ function StartGameVsPlayer()
 {
     if(startPlaying)
         return;
+    ChangeDivStateById("StopGame", true);
     PrepareData();
     createScene();
     UpdateVsPlayer();

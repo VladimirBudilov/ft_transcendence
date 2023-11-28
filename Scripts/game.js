@@ -5,6 +5,11 @@ function PrepareData() {
 	score2 = 0;
 }
 
+function TurnOffById(input)
+{
+	document.getElementById(input).style.display = "none";
+}
+
 function printScore() {
 	document.getElementById("scores").innerHTML = score1 + "-" + score2;
 }

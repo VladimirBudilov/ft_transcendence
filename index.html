@@ -5,8 +5,7 @@
 		<link rel="stylesheet" href="style.css">
 		<link rel = "icon" href ="https://t4.ftcdn.net/jpg/02/20/13/43/360_F_220134346_nMzUgYdBN3fvZt69qaQzicha0CVBL73z.jpg" type = "image/x-icon">
 	</head>
-	
-	<body onload='StartGameVsBot()'>
+	<body>
 		<div id='gameCanvas'></div>
 		<script src='./Scripts/three.min.js'></script>
 		<script src='./Scripts/keyboard.js'></script>
@@ -16,7 +15,7 @@
 		<script src='./Scripts/playerControl.js'></script>
 		<script src='./Scripts/tournamentLogic.js'></script>
 		<script src='./Scripts/gameTypeHandle.js'></script>
-		<div id='tournament'>
+		<div id='tournament' style='display: none;'>
 			<label for="userInput">
 				<h1>Enter tournament name</h1>
 			</label><input type="text" id="userInput" placeholder="Enter text here">
@@ -26,11 +25,11 @@
 			<button id='StartGameVsBot' onclick='StartGameVsBot()'>Player VS Bot</button>
 			<button id='StartGameVsPlayer' onclick='StartGameVsPlayer()'>Player VS Player</button>
 			<button id='StartTournament' onclick='StartTournament()'>Start Tournament</button>
-			<button id='tournamentButton' onclick='StopGame()'>StopGame</button>
+			<button id='StopGame' onclick='StopGame()' style='display: none;'>StopGame</button>
 		</div>
 		<div id='scoreboard'>
 			<h1 id='scores'>0-0</h1>
-			<h1 id='title'>3D PONG</h1>
+			<h1 id='title'>PONG</h1>
 			<h2 id='winnerBoard'>First to score 7 wins!</h2>
 			<h3>A - move left
 			<br>D - move right</h3>
