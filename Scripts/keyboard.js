@@ -9,6 +9,8 @@ var Key = {
   D: 68,
   S: 83,
   SPACE: 32,
+  O: 79,
+  L: 76,
   
   isDown: function(keyCode) {
     return this._pressed[keyCode];

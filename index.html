@@ -6,11 +6,22 @@
 		<link rel = "icon" href ="https://t4.ftcdn.net/jpg/02/20/13/43/360_F_220134346_nMzUgYdBN3fvZt69qaQzicha0CVBL73z.jpg" type = "image/x-icon">
 	</head>
 	
-	<body onload='setup();'>
+	<body onload='OnLoadPreparation()'>
 		<div id='gameCanvas'></div>
 		<script src='./Scripts/three.min.js'></script>
 		<script src='./Scripts/keyboard.js'></script>
 		<script src='./Scripts/game.js'></script>
+		<script src='./Scripts/globalData.js'></script>
+		<script src='./Scripts/gameInitialization.js'></script>
+		<script src='./Scripts/playerControl.js'></script>
+		<script src='./Scripts/tournamentLogic.js'></script>
+		<div>
+			<button id='StartGameVsBot' onclick='StartGameVsBot()'>Player VS Bot</button>
+			<button id='StartGameVsPlayer' onclick='StartGameVsPlayer()'>Player VS Player</button>
+			<button id='tournamentButton' onclick='startTournament()'>Start Tournament</button>
+			<button id='tournamentRestartButton' onclick='restartTournament()'>Restart Tournament</button>
+		</div>
+
 		<div id='scoreboard'>
 			<h1 id='scores'>0-0</h1>
 			<h1 id='title'>3D PONG</h1>
