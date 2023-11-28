@@ -2,6 +2,36 @@ function OnLoadPreparation()
 {
 
 }
+function createScene()
+{
+    var currentGameCanvas = document.getElementById("gameCanvas");
+    var WIDTH = 640,
+        HEIGHT = 360;
+    renderer = new THREE.WebGLRenderer();
+    scene = new THREE.Scene();
+    InitCamera(WIDTH, HEIGHT);
+    // start the renderer
+    renderer.setSize(WIDTH, HEIGHT);
+    // attach the render-supplied DOM element
+    currentGameCanvas.appendChild(renderer.domElement);
+    // set up the playing surface plane
+    var {planeWidth, planeHeight, planeQuality} = InitGameField();
+    InitGameTable(planeWidth, planeHeight, planeQuality);
+    InitBall();
+    paddle1 = InitPaddle((new THREE.MeshLambertMaterial(
+        {
+            color: 0x1B32C0
+        })))
+    paddle2 = InitPaddle((new THREE.MeshLambertMaterial(
+        {
+            color: 0xFF4045
+        })))
+    paddle1.position.x = -fieldWidth/2 + paddleWidth;
+    paddle2.position.x =  fieldWidth/2 - paddleWidth;
+    InitGround();
+    InitLight();
+    renderer.shadowMapEnabled = true;
+}
 
 function InitCamera(WIDTH, HEIGHT) {
     var VIEW_ANGLE = 50,
@@ -159,36 +189,4 @@ function InitGameTable(planeWidth, planeHeight, planeQuality) {
     table.position.z = -51;	// we sink the table into the ground by 50 units. The extra 1 is so the plane can be seen
     scene.add(table);
     table.receiveShadow = true;
-}
-
-function createScene()
-{
-    var gameCanvas = document.getElementById("gameCanvas");
-    // set the scene size 
-    var WIDTH = 640,
-        HEIGHT = 360;
-    renderer = new THREE.WebGLRenderer();
-    scene = new THREE.Scene();
-    InitCamera(WIDTH, HEIGHT);
-    // start the renderer
-    renderer.setSize(WIDTH, HEIGHT);
-    // attach the render-supplied DOM element
-    gameCanvas.appendChild(renderer.domElement);
-    // set up the playing surface plane
-    var {planeWidth, planeHeight, planeQuality} = InitGameField();
-    InitGameTable(planeWidth, planeHeight, planeQuality);
-    InitBall();
-    paddle1 = InitPaddle((new THREE.MeshLambertMaterial(
-        {
-            color: 0x1B32C0
-        })))
-    paddle2 = InitPaddle((new THREE.MeshLambertMaterial(
-        {
-            color: 0xFF4045
-        })))
-    paddle1.position.x = -fieldWidth/2 + paddleWidth;
-    paddle2.position.x =  fieldWidth/2 - paddleWidth;
-    InitGround();
-    InitLight();
-    renderer.shadowMapEnabled = true;
 }

@@ -5,17 +5,12 @@ function PrepareData() {
 	score2 = 0;
 }
 
-
 function ballPhysics()
 {
-	// if ball goes off the 'left' side (Player's side)
 	if (ball.position.x <= -fieldWidth/2)
 	{	
-		// CPU scores
 		score2++;
-		// update scoreboard HTML
 		document.getElementById("scores").innerHTML = score1 + "-" + score2;
-		// reset ball to center
 		resetBall(2);
 		matchScoreCheck();	
 	}
@@ -89,14 +84,12 @@ function paddlePhysics()
 			}
 		}
 	}
-	
-	// OPPONENT PADDLE LOGIC	
-	
+	// OPPONENT PADDLE LOGIC
 	// if ball is aligned with paddle2 on x plane
 	// remember the position is the CENTER of the object
 	// we only check between the front and the middle of the paddle (one-way collision)
-	if (ball.position.x <= paddle2.position.x + paddleWidth
-	&&  ball.position.x >= paddle2.position.x)
+	if (ball.position.x <= paddle2.position.x + paddleWidth/2
+	&&  ball.position.x >= paddle2.position.x - paddleWidth/2)
 	{
 		// and if ball is aligned with paddle2 on y plane
 		if (ball.position.y <= paddle2.position.y + paddleHeight/2
@@ -134,7 +127,6 @@ function resetBall(loser)
 	{
 		ballDirX = 1;
 	}
-	
 	// set the ball to move +ve in y plane (towards left from the camera)
 	ballDirY = 1;
 }

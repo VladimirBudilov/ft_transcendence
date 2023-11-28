@@ -1,3 +1,5 @@
+let startPlaying = false;
+
 var renderer, scene, camera, pointLight, spotLight;
 
 // field variables
@@ -9,7 +11,7 @@ let paddle1DirY = 0, paddle2DirY = 0, paddleSpeed = 3;
 
 // ball variables
 let ball, paddle1, paddle2;
-let ballDirX = 1, ballDirY = 1, ballSpeed = 2;
+let ballDirX = 1, ballDirY = 1, ballSpeed = 4;
 
 // game-related variables
 let score1 = 0, score2 = 0;
@@ -19,8 +21,9 @@ let maxScore = 7;
 // set opponent reflexes (0 - easiest, 1 - hardest)
 let difficulty = 0.2;
 
-//create structure with 3 variables (x, y, z)
+let stopGame = false;
 
+let animationId;
 
-let game = new gameType(false, false, false);
+let gameCanvas;
 
