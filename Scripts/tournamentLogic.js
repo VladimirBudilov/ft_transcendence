@@ -3,24 +3,19 @@ class Tournament
     tournamentInput = null;
     numberOfParticipants = 0;
     tournamentName = "";
-    status = "";
-    participants = [];
+    participants = [Player];
     winner = "";
-    counter = 0;
-    GetDataAboutTournament = function () {
+    StartTournament = function()
+    {
+        console.log("tournament started");
     }
-
-    CreateFields() {
-        for(let i = 0; i < this.numberOfParticipants; i++)
-        {
-            let newDiv = document.createElement("div");
-            newDiv.id = "tournamentParticipant" + i;
-            newDiv.className = "tournamentParticipant";
-            newDiv.innerHTML = (this.participants)[i];
-            document.getElementById("tournamentParticipants").appendChild(newDiv);
-        }
+    StartTournamentGame= function(player1, player2)
+    {
+        
     }
 }
+
+let tournament = new Tournament();
 
 function ChangeDivStateById(name, state){
     let tournamentInput = document.getElementById(name);
@@ -33,9 +28,9 @@ function ChangeDivStateById(name, state){
 function StartTournament()
 {
     ChangeDivStateById("tournament", true);
+    tournament.tournamentInput = document.getElementById("tournament");
 }
 
-let tournament = new Tournament();
 
 function generateError(errorMessageContainer, errorMessageContent) {
     const errorMessage = document.createElement("p");
@@ -48,7 +43,8 @@ function IsDigit(input) {
     return /^\d+$/.test(input);
 }
 function ReadInput() {
-    const userInput = document.getElementById("userInput").value;
+    var userInput = "";
+    userInput = document.getElementById("userInput").value;
     const errorMessageContainer = document.getElementById("tournament");
 
     if(document.getElementById("errorMessage") !== null)
@@ -71,14 +67,12 @@ function ReadInput() {
             tournament.numberOfParticipants = 0;
             generateError(errorMessageContainer, "Error: Input must be a number");
         }
-        console.log("number of players"+tournament.numberOfParticipants);
         return;
     }
     if(tournament.tournamentName === "")
     {
         tournament.tournamentName = userInput;
         document.getElementById("userInput").value = "";
-        console.log("tournament name"+tournament.tournamentName);
         return;
     }
     if (tournament.participants.length >= tournament.numberOfParticipants) {
@@ -86,10 +80,17 @@ function ReadInput() {
         successMessage.textContent = "Reached " + tournament.numberOfParticipants;
         successMessage.style.color = "green";
         errorMessageContainer.appendChild(successMessage);
-        //
+        //remove the input field and error message in 2 seconds
+        setTimeout(() => {
+            if(document.getElementById("errorMessage") !== null)
+                document.getElementById("errorMessage").remove();
+            document.getElementById("userInput").value = ""
+            ChangeDivStateById("tournament", false);
+        }, 2000);
+        tournament.StartTournament();
         return;
     }
-    tournament.participants.push(userInput);
+    var player = new Player(userInput, tournament.participants.length);
+    tournament.participants.push(player);
     document.getElementById("userInput").value = ""; // Clear the input field for the next input
-    console.log("participant name "+tournament.participants+" added");
 }

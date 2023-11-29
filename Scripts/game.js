@@ -3,6 +3,7 @@ function PrepareData() {
 	// now reset player and opponent scores
 	score1 = 0;
 	score2 = 0;
+	
 }
 
 function TurnOffById(input)
@@ -150,7 +151,7 @@ function matchScoreCheck()
 		// stop the ball
 		ballSpeed = 0;
 		// write to the banner
-		document.getElementById("scores").innerHTML = "Player wins!";		
+		document.getElementById("scores").innerHTML = player1 +" wins!";		
 		document.getElementById("winnerBoard").innerHTML = "Refresh to play again";
 		// make paddle bounce up and down
 		bounceTime++;
@@ -165,7 +166,7 @@ function matchScoreCheck()
 		// stop the ball
 		ballSpeed = 0;
 		// write to the banner
-		document.getElementById("scores").innerHTML = "CPU wins!";
+		document.getElementById("scores").innerHTML = player2 +" wins!";
 		document.getElementById("winnerBoard").innerHTML = "Refresh to play again";
 		// make paddle bounce up and down
 		bounceTime++;

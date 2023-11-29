@@ -26,4 +26,16 @@ let stopGame = false;
 let animationId;
 
 
+class Player {
+    playerName = "";
+    id = -1;
+    score = -1;
+    wonLastGame = false;
+    constructor(name,id) {
+        this.playerName = name;
+        this.score = 0;
+        this.id = id;
+        this.wonLastGame = false;
+    }
+}
 
