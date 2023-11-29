@@ -142,37 +142,43 @@ function resetBall(loser)
 }
 
 var bounceTime = 0;
+
+function WaitTime(method, time) {
+	setTimeout(method, time);
+}
+
+function ShowWinner(player) {
+	ballSpeed = 0;
+	// write to the banner
+	document.getElementById("scores").innerHTML = player + " wins!";
+	document.getElementById("winnerBoard").innerHTML = "Refresh to play again";
+	if(gameType.tournament) {
+		WaitTime(document.dispatchEvent(tournament.OnGameFinished), 3000);
+	}
+}
+
+function ChooseWinnerName(index) {
+	let playerName = index === 1 ? defaultPlayerName : defaultOpponentName;
+	if (gameType.tournament) {
+		playerName = tournament.currentPair[index].playerName;
+		tournament.winningParticipants.push(tournament.currentPair[index]);
+	}
+	return playerName;
+}
+
 // checks if either player or opponent has reached 7 points
 function matchScoreCheck()
 {
-	// if player has 7 points
+	let playerName = "";
 	if (score1 >= maxScore)
 	{
-		// stop the ball
-		ballSpeed = 0;
-		// write to the banner
-		document.getElementById("scores").innerHTML = player1 +" wins!";		
-		document.getElementById("winnerBoard").innerHTML = "Refresh to play again";
-		// make paddle bounce up and down
-		bounceTime++;
-		paddle1.position.z = Math.sin(bounceTime * 0.1) * 10;
-		// enlarge and squish paddle to emulate joy
-		paddle1.scale.z = 2 + Math.abs(Math.sin(bounceTime * 0.1)) * 10;
-		paddle1.scale.y = 2 + Math.abs(Math.sin(bounceTime * 0.05)) * 10;
+		playerName = ChooseWinnerName(1);
+		ShowWinner(playerName);
 	}
 	// else if opponent has 7 points
 	else if (score2 >= maxScore)
 	{
-		// stop the ball
-		ballSpeed = 0;
-		// write to the banner
-		document.getElementById("scores").innerHTML = player2 +" wins!";
-		document.getElementById("winnerBoard").innerHTML = "Refresh to play again";
-		// make paddle bounce up and down
-		bounceTime++;
-		paddle2.position.z = Math.sin(bounceTime * 0.1) * 10;
-		// enlarge and squish paddle to emulate joy
-		paddle2.scale.z = 2 + Math.abs(Math.sin(bounceTime * 0.1)) * 10;
-		paddle2.scale.y = 2 + Math.abs(Math.sin(bounceTime * 0.05)) * 10;
+		playerName = ChooseWinnerName(2);
+		ShowWinner(playerName);
 	}
 }
