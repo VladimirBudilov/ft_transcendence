@@ -1,13 +1,12 @@
 class Tournament
 {
     tournamentInput = null;
-    numberOfParticipants = 2;
+    numberOfParticipants = 0;
     tournamentName = "";
     status = "";
     participants = [];
     winner = "";
     counter = 0;
-    
     GetDataAboutTournament = function () {
     }
 
@@ -37,35 +36,60 @@ function StartTournament()
 }
 
 let tournament = new Tournament();
-function ReadInput()
-{
-    if(tournament.tournamentName === "") {
-        tournament.tournamentName = document.getElementById("userInput").value;
-        //print info about tournament
-        let newDiv = document.createElement("div");
-        //add new div as child to userInput
-        document.getElementById("userInput").appendChild(newDiv);
-        newDiv.id = "tournamentName";
-        newDiv.className = "tournamentName";
-        newDiv.innerHTML = tournament.tournamentName;
-        //remove after 2 seconds
-        setTimeout(function () {
-            document.getElementById("tournamentName").remove();
-        }, 2000);
-        //clear input
-        document.getElementById("userInput").value = "";
+
+function generateError(errorMessageContainer, errorMessageContent) {
+    const errorMessage = document.createElement("p");
+    errorMessage.id = "errorMessage";
+    errorMessage.textContent = errorMessageContent;
+    errorMessage.style.color = "red";
+    errorMessageContainer.appendChild(errorMessage);
+}
+function IsDigit(input) {
+    return /^\d+$/.test(input);
+}
+function ReadInput() {
+    const userInput = document.getElementById("userInput").value;
+    const errorMessageContainer = document.getElementById("tournament");
+
+    if(document.getElementById("errorMessage") !== null)
+        document.getElementById("errorMessage").remove();
+    if (userInput.trim() === "") {
+        generateError(errorMessageContainer, "Error: Input is empty");
+        return;
     }
-    tournament.participants[tournament.counter++] = document.getElementById("userInput").value;
-    let numberOfParticipants = document.getElementById("userInput").value;
-    let participants = [];
-    for(let i = 0; i < numberOfParticipants; i++)
+    if(tournament.numberOfParticipants === 0)
     {
-        participants.push(document.getElementById("participant" + i).value);
+        tournament.numberOfParticipants = userInput;
+        document.getElementById("userInput").value = "";
+        if(tournament.numberOfParticipants < 2)
+        {
+            tournament.numberOfParticipants = 0;
+            generateError(errorMessageContainer, "Error: Number of participants must be at least 2");
+        }
+        if(!IsDigit(tournament.numberOfParticipants))
+        {
+            tournament.numberOfParticipants = 0;
+            generateError(errorMessageContainer, "Error: Input must be a number");
+        }
+        console.log("number of players"+tournament.numberOfParticipants);
+        return;
     }
-    let tournamentData = new Tournament();
-    tournamentData.numberOfParticipants = numberOfParticipants;
-    tournamentData.tournamentName = tournamentName;
-    tournamentData.participants = participants;
-    tournamentData.CreateFields();
-    tournamentData.GetDataAboutTournament();
+    if(tournament.tournamentName === "")
+    {
+        tournament.tournamentName = userInput;
+        document.getElementById("userInput").value = "";
+        console.log("tournament name"+tournament.tournamentName);
+        return;
+    }
+    if (tournament.participants.length >= tournament.numberOfParticipants) {
+        const successMessage = document.createElement("p");
+        successMessage.textContent = "Reached " + tournament.numberOfParticipants;
+        successMessage.style.color = "green";
+        errorMessageContainer.appendChild(successMessage);
+        //
+        return;
+    }
+    tournament.participants.push(userInput);
+    document.getElementById("userInput").value = ""; // Clear the input field for the next input
+    console.log("participant name "+tournament.participants+" added");
 }

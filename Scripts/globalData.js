@@ -25,7 +25,5 @@ let stopGame = false;
 
 let animationId;
 
-let gameCanvas;
-
 
 
