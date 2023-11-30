@@ -3,18 +3,18 @@
 	<head>
 		<title>Game</title>
 		<link rel="stylesheet" href="style.css">
-		<link rel = "icon" href ="https://t4.ftcdn.net/jpg/02/20/13/43/360_F_220134346_nMzUgYdBN3fvZt69qaQzicha0CVBL73z.jpg" type = "image/x-icon">
 	</head>
-	<body>
+	<body onload='PrepareData()'>
 		<div id='gameCanvas'></div>
 		<script src='./Scripts/three.min.js'></script>
 		<script src='./Scripts/keyboard.js'></script>
-		<script src='./Scripts/game.js'></script>
+		<script src='Scripts/gameTools.js'></script>
 		<script src='./Scripts/globalData.js'></script>
 		<script src='./Scripts/gameInitialization.js'></script>
 		<script src='./Scripts/playerControl.js'></script>
 		<script src='./Scripts/tournamentLogic.js'></script>
-		<script src='./Scripts/gameTypeHandle.js'></script>
+		<script src='Scripts/gameStateHandle.js'></script>
+		<script src='./Scripts/objectsPhysics.js'></script>
 		<div id='tournament' style='display: none;'>
 			<label for="userInput">
 				<h1>Enter tournament name</h1>

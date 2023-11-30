@@ -1,9 +1,9 @@
 function StopGame()
 {
-    //reset player and opponent scores
     score1 = 0;
     score2 = 0;
     startPlaying = false;
+    stopGame = false;
     ballDirX = 1;
     ballDirY = 1;
     ballSpeed = 4;
@@ -38,17 +38,21 @@ function UpdateVsBot()
         return;
     }
     ballPhysics();
+    UpdateScore();
     paddlePhysics();
     playerPaddleMovement(paddle1, paddle1DirY, Key.W, Key.S);
     BotPaddleMovement();
     renderer.render(scene, camera);
+    if(IsGameFinished())
+    {
+        StopGame();
+        return;
+    }
     animationId = requestAnimationFrame(UpdateVsBot);
 }
 
 function StartGameVsPlayer()
 {
-    if(startPlaying)
-        return;
     ChangeDivStateById("StopGame", true);
     PrepareData();
     createScene();
@@ -58,15 +62,18 @@ function StartGameVsPlayer()
 
 function UpdateVsPlayer()
 {
-    if(stopGame) {
-        cancelAnimationFrame(animationId);
-        cancelIdleCallback(animationId);
+    ballPhysics();
+    UpdateScore();
+    paddlePhysics();
+    paddle1DirY = playerPaddleMovement(paddle1, paddle1DirY, Key.W, Key.S);
+    paddle2DirY = playerPaddleMovement(paddle2, paddle2DirY, Key.O, Key.L);
+    renderer.render(scene, camera);
+    if(IsGameFinished())
+    {
+        StopGame();
+        if(gameType.tournament)
+            document.dispatchEvent(tournament.OnGameFinished);
         return;
     }
-    ballPhysics();
-    paddlePhysics();
-    playerPaddleMovement(paddle1, paddle1DirY, Key.W, Key.S);
-    playerPaddleMovement(paddle2, paddle2DirY, Key.O, Key.L);
-    renderer.render(scene, camera);
     animationId = requestAnimationFrame(UpdateVsPlayer);
 }

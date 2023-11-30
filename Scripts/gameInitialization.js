@@ -1,3 +1,11 @@
+function PrepareData() {
+    document.getElementById("winnerBoard").innerHTML = "First to " + maxScore + " wins!";
+    // now reset player and opponent scores
+    score1 = 0;
+    score2 = 0;
+
+}
+
 function OnLoadPreparation()
 {
     tournament.tournamentInput = document.getElementById("userInput");

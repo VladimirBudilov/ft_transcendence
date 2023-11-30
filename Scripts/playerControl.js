@@ -2,6 +2,7 @@ function BotPaddleMovement()
 {
     // Lerp towards the ball on the y plane
     paddle2DirY = (ball.position.y - paddle2.position.y) * difficulty;
+    // TODO add random freesing.
 
     // in case the Lerp function produces a value above max paddle speed, we clamp it
     if (Math.abs(paddle2DirY) <= paddleSpeed)
@@ -22,7 +23,6 @@ function BotPaddleMovement()
             paddle2.position.y -= paddleSpeed;
         }
     }
-    paddle2.scale.y += (1 - paddle2.scale.y) * 0.2;
 }
 
 
@@ -45,7 +45,6 @@ function playerPaddleMovement(paddle, paddleDirY, leftKey, rightKey)
         else
         {
             paddleDir = 0;
-            paddle.scale.z += (10 - paddle.scale.z) * 0.2;
         }
     }
     // move right
@@ -62,7 +61,6 @@ function playerPaddleMovement(paddle, paddleDirY, leftKey, rightKey)
         else
         {
             paddleDir = 0;
-            paddle.scale.z += (10 - paddle.scale.z) * 0.2;
         }
     }
     // else don't move paddle
@@ -71,10 +69,8 @@ function playerPaddleMovement(paddle, paddleDirY, leftKey, rightKey)
         // stop the paddle
         paddleDir = 0;
     }
-
     paddle.scale.y += (1 - paddle.scale.y) * 0.2;
     paddle.scale.z += (1 - paddle.scale.z) * 0.2;
     paddle.position.y += paddleDir;
-
     return paddleDir;
 }

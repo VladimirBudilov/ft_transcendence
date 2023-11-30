@@ -5,45 +5,37 @@ class Tournament
     tournamentName = "";
     participants = [Player];
     currentParticipants = [Player];
-    winningParticipants = [Player];
     currentPair = [Player];
     winner = "";
     OnGameFinished = new CustomEvent("OnGameFinished");
-    constructor() {
-        this.tournamentInput = null;
-        this.numberOfParticipants = 0;
-        this.tournamentName = "";
-        this.winner = "";
-        this.OnGameFinished = new Event("OnGameFinished");
-        this.currentPair = [Player];
-    }
     StartTournament = () =>
     {
         gameType.tournament = true;
-        console.log("tournament started");
-        //if players number move last player on next round
-        console.log((this.participants.length - 1) % 2);
-        if((this.participants.length - 1) % 2 !== 0)
-        {
-            this.winningParticipants.push(this.participants[1]);
-            this.participants.splice(1, 1);
-        }
         this.currentParticipants = this.participants;
-        //find number of rounds
-        //add while loop until only one player left
-        //do games for each round(here will be a lot)
         document.addEventListener("OnGameFinished", this.StartMatch);
-        document.dispatchEvent(this.OnGameFinished);
+        this.StartMatch();
     }
-
     StopTournament = () =>{
         gameType.tournament = false;
+        this.RefreshData();
+    }
+
+    RefreshData() {
+        this.tournamentInput = null;
+        this.numberOfParticipants = 0;
+        this.tournamentName = "";
+        this.participants = [Player];
+        this.currentParticipants = [Player];
+        this.currentPair = [Player];
+        this.winner = "";
+        ChangeDivStateById("StopGame", false);
     }
     StartMatch = () =>
     {
-        if(!this.IsValidState())
+        if(!this.IsValidState()) {
+            this.StopTournament();
             return;
-        console.log("tournament game started");
+        }
         ChangeDivStateById("StopGame", true);
         PrepareData();
         createScene();
@@ -52,16 +44,13 @@ class Tournament
     }
 
     IsValidState() {
-        if (this.currentParticipants.length === 1) {
-            console.log("tournament finished");
+        if (this.currentParticipants.length === 2) {
             gameType.tournament = false;
             this.winner = this.currentParticipants[1].playerName;
             //TODO add winner on screen
             console.log(this.winner);
             return false;
         }
-        console.log("tournament game started");
-        console.log(this.currentParticipants.length);
         this.currentPair[1] = this.currentParticipants[1];
         this.currentPair[2] = this.currentParticipants[2];
         let player1 = this.currentPair[1];
@@ -90,7 +79,6 @@ function StartTournament()
     tournament.tournamentInput = document.getElementById("tournament");
 }
 
-
 function generateError(errorMessageContainer, errorMessageContent) {
     const errorMessage = document.createElement("p");
     errorMessage.id = "errorMessage";
@@ -98,9 +86,7 @@ function generateError(errorMessageContainer, errorMessageContent) {
     errorMessage.style.color = "red";
     errorMessageContainer.appendChild(errorMessage);
 }
-function IsDigit(input) {
-    return /^\d+$/.test(input);
-}
+
 function ReadInput() {
     let userInput = document.getElementById("userInput").value;
     const errorMessageContainer = document.getElementById("tournament");
@@ -141,7 +127,6 @@ function ReadInput() {
         successMessage.textContent = "Reached " + tournament.numberOfParticipants;
         successMessage.style.color = "green";
         errorMessageContainer.appendChild(successMessage);
-        //remove the input field and error message in 2 seconds
         setTimeout(() => {
             if(document.getElementById("errorMessage") !== null)
                 document.getElementById("errorMessage").remove();
