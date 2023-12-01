@@ -13,7 +13,15 @@ class Data{
     playerScore = 0;
     opponentScore = 0;
     maxScore = 2;
-    difficulty = 1;
+    difficulty = 0.5;
+}
+
+class Text{
+    playerNames = null;
+    opponentNames = null;
+    playerScore = null;
+    opponentScore = null;
+    maxScore = null;
 }
 
 class Lighting

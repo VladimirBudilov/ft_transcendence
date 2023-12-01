@@ -4,6 +4,17 @@ function PrepareData() {
     gameData.opponentScore = 0;
 }
 
+function initTextOnScreen() {
+    const textGeometry = new THREE.TextGeometry('Hello, Three.js!', {
+        font: 'helvetiker', // Replace 'helvetiker' with your loaded font
+        size: 0.5,
+        height: 0.1
+    });
+    const textMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+    const textMesh = new THREE.Mesh(textGeometry, textMaterial);
+    gameRender.gameScene.add(textMesh);
+}
+
 function createScene()
 {
     let currentCanvas = document.getElementById("gameCanvas");
@@ -13,6 +24,7 @@ function createScene()
     gameRender.renderer.setSize(gameRender.WIDTH, gameRender.HEIGHT);
     currentCanvas.appendChild(gameRender.renderer.domElement);
     gameRender.renderer.shadowMapEnabled = true;
+    initTextOnScreen();
     InitLight();
     InitGameField();
     InitGameTable();
