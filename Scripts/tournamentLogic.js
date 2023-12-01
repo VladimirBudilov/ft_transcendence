@@ -63,7 +63,6 @@ class Tournament
 }
 
 let tournament = new Tournament();
-let gameType = new GameType();
 
 function ChangeDivStateById(name, state){
     let tournamentInput = document.getElementById(name);

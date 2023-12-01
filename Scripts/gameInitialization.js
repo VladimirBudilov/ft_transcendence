@@ -1,123 +1,99 @@
 function PrepareData() {
-    document.getElementById("winnerBoard").innerHTML = "First to " + maxScore + " wins!";
-    // now reset player and opponent scores
-    score1 = 0;
-    score2 = 0;
-
+    document.getElementById("winnerBoard").innerHTML = "First to " + gameData.maxScore + " wins!";
+    gameData.playerScore = 0;
+    gameData.opponentScore = 0;
 }
 
-function OnLoadPreparation()
-{
-    tournament.tournamentInput = document.getElementById("userInput");
-    tournament.tournamentInput.style.display = "none";
-}
 function createScene()
 {
-    var currentGameCanvas = document.getElementById("gameCanvas");
-    var WIDTH = 640,
-        HEIGHT = 360;
-    renderer = new THREE.WebGLRenderer();
-    scene = new THREE.Scene();
-    InitCamera(WIDTH, HEIGHT);
-    // start the renderer
-    renderer.setSize(WIDTH, HEIGHT);
-    // attach the render-supplied DOM element
-    currentGameCanvas.appendChild(renderer.domElement);
-    // set up the playing surface plane
-    var {planeWidth, planeHeight, planeQuality} = InitGameField();
-    InitGameTable(planeWidth, planeHeight, planeQuality);
+    let currentCanvas = document.getElementById("gameCanvas");
+    gameRender.renderer = new THREE.WebGLRenderer();
+    gameRender.gameScene = new THREE.Scene();
+    InitCamera(gameRender.WIDTH, gameRender.HEIGHT);
+    gameRender.renderer.setSize(gameRender.WIDTH, gameRender.HEIGHT);
+    currentCanvas.appendChild(gameRender.renderer.domElement);
+    gameRender.renderer.shadowMapEnabled = true;
+    InitLight();
+    InitGameField();
+    InitGameTable();
     InitBall();
-    paddle1 = InitPaddle((new THREE.MeshLambertMaterial(
+    InitPaddle( playerPaddle, (new THREE.MeshLambertMaterial(
         {
             color: 0x1B32C0
         })))
-    paddle2 = InitPaddle((new THREE.MeshLambertMaterial(
+    InitPaddle(opponentPaddle, (new THREE.MeshLambertMaterial(
         {
             color: 0xFF4045
         })))
-    paddle1.position.x = -fieldWidth/2 + paddleWidth;
-    paddle2.position.x =  fieldWidth/2 - paddleWidth;
+    playerPaddle.Mesh.position.x = -gameRender.playerField.Width/2 + playerPaddle.Width;
+    opponentPaddle.Mesh.position.x =  gameRender.playerField.Width/2 - opponentPaddle.Width;
     InitGround();
     InitLight();
-    renderer.shadowMapEnabled = true;
 }
 
 function InitCamera(WIDTH, HEIGHT) {
-    var VIEW_ANGLE = 50,
+    let VIEW_ANGLE = 50,
         ASPECT = WIDTH / HEIGHT,
         NEAR = 0.1,
         FAR = 1000;
-    camera =
+    gameRender.gameCamera =
         new THREE.PerspectiveCamera(
             VIEW_ANGLE,
             ASPECT,
             NEAR,
             FAR);
-    // add the camera to the scene
-    scene.add(camera);
-    // set a default position for the camera
-    // not doing this somehow messes up shadow rendering
-    camera.position.z = 250;
-    camera.position.x = 0;
-    camera.position.y = -100;
-    camera.rotation.x = 30 * Math.PI / 360;
-    camera.rotation.y = 0;
-    camera.rotation.z = 0;
+    gameRender.gameScene.add(gameRender.gameCamera);
+    gameRender.gameCamera.position.z = 250;
+    gameRender.gameCamera.position.x = 0;
+    gameRender.gameCamera.position.y = -100;
+    gameRender.gameCamera.rotation.x = 30 * Math.PI / 360;
+    gameRender.gameCamera.rotation.y = 0;
+    gameRender.gameCamera.rotation.z = 0;
 }
 
 function InitBall() {
-    var radius = 7,
-        segments = 100,
-        rings = 100;
-    var sphereMaterial =
+    ball.Material =
         new THREE.MeshLambertMaterial(
             {
                 color: 0xD43001
             });
-    ball = new THREE.Mesh(
+    ball.Mesh = new THREE.Mesh(
         new THREE.SphereGeometry(
-            radius,
-            segments,
-            rings),
-        sphereMaterial);
-    scene.add(ball);
-    ball.position.x = 0;
-    ball.position.y = 0;
-    ball.position.z = radius/2;
-    ball.receiveShadow = true;
-    ball.castShadow = true;
+            ball.Radius,
+            ball.segments,
+            ball.rings),
+        ball.Material);
+    gameRender.gameScene.add(ball.Mesh);
+    ball.Mesh.position.x = 0;
+    ball.Mesh.position.y = 0;
+    ball.Mesh.position.z = ball.Radius;
+    ball.Mesh.receiveShadow = true;
+    ball.Mesh.castShadow = true;
 }
 
-function InitPaddle(paddle1Material) {
-    var paddle;
-    paddleWidth = 10;
-    paddleHeight = 30;
-    paddleDepth = 10;
-    paddleQuality = 10;
-    paddle = new THREE.Mesh(
+function InitPaddle(paddle, paddle1Material) {
+    paddle.Material= paddle1Material;
+    paddle.Mesh = new THREE.Mesh(
         new THREE.CubeGeometry(
-            paddleWidth,
-            paddleHeight,
-            paddleDepth,
-            paddleQuality,
-            paddleQuality,
-            paddleQuality),
-        paddle1Material);
-
-    // // add the sphere to the scene
-    scene.add(paddle);
-    paddle.receiveShadow = true;
-    paddle.castShadow = true;
-    return paddle;
+            paddle.Width,
+            paddle.Height,
+            paddle.Depth,
+            paddle.Quality,
+            paddle.Quality,
+            paddle.Quality),
+        paddle.Material);
+    gameRender.gameScene.add(paddle.Mesh);
+    paddle.Mesh.receiveShadow = true;
+    paddle.Mesh.castShadow = true;
 }
 
 function InitGround() {
-    var groundMaterial =
+    gameRender.ground.Material =
         new THREE.MeshLambertMaterial(
             {
                 color: 0x888888
             });
-    var ground = new THREE.Mesh(
+    gameRender.ground.Mesh = new THREE.Mesh(
         new THREE.CubeGeometry(
             1000,
             1000,
@@ -126,76 +102,70 @@ function InitGround() {
             1,
             1),
 
-        groundMaterial);
-    ground.position.z = -132;
-    ground.receiveShadow = true;
-    scene.add(ground);
+        gameRender.ground.Material);
+    gameRender.ground.Mesh.position.z = -132;
+    gameRender.ground.Mesh.receiveShadow = true;
+    gameRender.gameScene.add(gameRender.ground.Mesh);
 }
 
 function InitLight() {
-    pointLight =
+    lighting.pointLight =
         new THREE.PointLight(0xF8D898);
 
     // set its position
-    pointLight.position.x = -1000;
-    pointLight.position.y = 0;
-    pointLight.position.z = 1000;
-    pointLight.intensity = 2.9;
-    pointLight.distance = 10000;
+    lighting.pointLight.position.x = -1000;
+    lighting.pointLight.position.y = 0;
+    lighting.pointLight.position.z = 1000;
+    lighting.pointLight.intensity = 2.9;
+    lighting.pointLight.distance = 10000;
     // add to the scene
-    scene.add(pointLight);
+    gameRender.gameScene.add(lighting.pointLight);
 
-    // add a spot light
+    // add a spotlight
     // this is important for casting shadows
-    spotLight = new THREE.SpotLight(0xF8D898);
-    spotLight.position.set(0, 0, 460);
-    spotLight.intensity = 1.5;
-    spotLight.castShadow = true;
-    scene.add(spotLight);
+    lighting.spotLight = new THREE.SpotLight(0xF8D898);
+    lighting.spotLight.position.set(0, 0, 460);
+    lighting.spotLight.intensity = 1.5;
+    lighting.spotLight.castShadow = true;
+    gameRender.gameScene.add(lighting.spotLight);
 }
 
 function InitGameField() {
-    var planeWidth = fieldWidth,
-        planeHeight = fieldHeight,
-        planeQuality = 10;
-    var planeMaterial =
-        new THREE.MeshLambertMaterial(
+        gameRender.playerField.Width = 400;
+        gameRender.playerField.Height = 200;
+        gameRender.playerField.Quality = 10;
+        gameRender.playerField.Material = new THREE.MeshLambertMaterial(
             {
                 color: 0x4BD121
             });
-    var pillarMaterial =
-        new THREE.MeshLambertMaterial(
-            {
-                color: 0x534d0d
-            });
-    var plane = new THREE.Mesh(
+    gameRender.playerField.Mesh = new THREE.Mesh(
         new THREE.PlaneGeometry(
-            planeWidth * 0.95,	// 95% of table width, since we want to show where the ball goes out-of-bounds
-            planeHeight,
-            planeQuality,
-            planeQuality),
-        planeMaterial);
-    scene.add(plane);
-    plane.receiveShadow = true;
-    return {planeWidth, planeHeight, planeQuality};
+            gameRender.playerField.Width * 0.95,	
+            gameRender.playerField.Height,
+            gameRender.playerField.Quality,
+            gameRender.playerField.Quality,),
+            gameRender.playerField.Material);
+    gameRender.gameScene.add(gameRender.playerField.Mesh);
+    gameRender.playerField.Mesh.receiveShadow = true;
 }
 
-function InitGameTable(planeWidth, planeHeight, planeQuality) {
-    var tableMaterial =
+function InitGameTable() {
+    gameRender.table = gameRender.playerField;
+    gameRender.table.Material =
         new THREE.MeshLambertMaterial(
             {
                 color: 0x111111
             });
-    var table = new THREE.Mesh(
+    gameRender.table.Mesh = new THREE.Mesh(
         new THREE.CubeGeometry(
-            planeWidth * 1.05,	// this creates the feel of a billiards table, with a lining
-            planeHeight * 1.03,
+            gameRender.table.Width * 1.05,	// this creates the feel of a billiards table, with a lining
+            gameRender.table.Height * 1.03,
             100,				// an arbitrary depth, the camera can't see much of it anyway
-            planeQuality,
-            planeQuality,
+            gameRender.table.Quality,
+            gameRender.table.Quality,
             1),
-        tableMaterial);
-    table.position.z = -51;	// we sink the table into the ground by 50 units. The extra 1 is so the plane can be seen
-    scene.add(table);
-    table.receiveShadow = true;
+        gameRender.table.Material);
+    gameRender.table.Mesh.position.z = -51;	// we sink the table into the ground by 50 units. The extra 1 is so the plane can be seen
+    gameRender.gameScene.add(gameRender.table.Mesh);
+    gameRender.table.Mesh.receiveShadow = true;
 }

@@ -1,31 +1,57 @@
-let startPlaying = false;
+class GameRender{
+    WIDTH = 640;
+    HEIGHT = 360;
+    renderer;
+    gameScene;
+    gameCamera;
+    playerField = new Rectangular();
+    table = new Rectangular();
+    ground = new Rectangular();
+    currentGameCanvas;
+}
 
-var renderer, scene, camera, pointLight, spotLight;
+class Data{
+    playerScore = 0;
+    opponentScore = 0;
+    maxScore = 2;
+    difficulty = 0.2;
+}
 
-// field variables
-let fieldWidth = 400, fieldHeight = 200;
+class Lighting
+{
+    spotLight;
+    pointLight;
+}
+class Paddle {
+    Mesh;
+    Width = 10;
+    Height = 30;
+    Depth = 10;
+    Quality = 10;
+    DirectionY = 0;
+    Speed = 6;
+    Material;
 
-// paddle variables
-let paddleWidth, paddleHeight, paddleDepth, paddleQuality;
-let paddle1DirY = 0, paddle2DirY = 0, paddleSpeed = 6;
+}
 
-// ball variables
-let ball, paddle1, paddle2;
-let ballDirX = 1, ballDirY = 1, ballSpeed = 5;
+class Ball {
+    DirX = 1;
+    DirY = 1;
+    Speed = 5;
+    Radius = 7;
+    segments = 100;
+    rings = 100;
+    Mesh;
+    Material;
+}
 
-// game-related variables
-let score1 = 0, score2 = 0;
-// you can change this to any positive whole number
-let maxScore = 2;
-
-// set opponent reflexes (0 - easiest, 1 - hardest)
-let difficulty = 0.2;
-
-let stopGame = false;
-
-let defaultPlayerName = "Player", defaultOpponentName = "Opponent";
-
-let animationId;
+class Rectangular{
+    Width;
+    Height;
+    Quality;
+    Material;
+    Mesh;
+}
 
 class GameType {
     static vsBot = false;
@@ -33,16 +59,29 @@ class GameType {
     static tournament = false;
 }
 
-class Player { 
+class Player {
+    defaultPlayerName = "Player";
+    defaultOpponentName = "Opponent";
     playerName = "";
     id = -1;
-    score = -1;
-    wonLastGame = false;
-    constructor(name,id) {
+    score = 0;
+    constructor(name, id) {
         this.playerName = name;
-        this.score = 0;
-        this.id = id;
-        this.wonLastGame = false;
+        this.id = id; 
     }
 }
+let lighting = new Lighting();
+let gameType = new GameType();
+let player = new Player();
+let opponent = new Player();
+let startPlaying = false;
+let gameRender = new GameRender();
+let gameData = new Data();
+let playerPaddle = new Paddle();
+let opponentPaddle = new Paddle();
+let ball = new Ball();
+let stopGame = false;
+let animationId;
+
+
 

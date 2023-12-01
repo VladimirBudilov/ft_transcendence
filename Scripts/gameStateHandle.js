@@ -1,18 +1,15 @@
 function StopGame()
 {
-    score1 = 0;
-    score2 = 0;
+    gameData.playerScore = 0;
+    gameData.opponentScore = 0;
     startPlaying = false;
     stopGame = false;
-    ballDirX = 1;
-    ballDirY = 1;
-    ballSpeed = 4;
-    paddle1DirY = 0;
-    paddle2DirY = 0;
-    paddleSpeed = 3;
-    difficulty = 0.2;
+    ball.DirX = 1;
+    ball.DirY = 1;
+    ball.Speed = 4;
+    gameData.difficulty = 0.2;
     let gameCanvas = document.getElementById("gameCanvas");
-    gameCanvas.removeChild(renderer.domElement);
+    gameCanvas.removeChild(gameRender.renderer.domElement);
     cancelAnimationFrame(animationId);
     cancelIdleCallback(animationId);
     printScore();
@@ -40,9 +37,9 @@ function UpdateVsBot()
     ballPhysics();
     UpdateScore();
     paddlePhysics();
-    playerPaddleMovement(paddle1, paddle1DirY, Key.W, Key.S);
+    playerPaddleMovement(playerPaddle,Key.W, Key.S);
     BotPaddleMovement();
-    renderer.render(scene, camera);
+    gameRender.renderer.render(gameRender.gameScene, gameRender.gameCamera);
     if(IsGameFinished())
     {
         StopGame();
@@ -65,9 +62,9 @@ function UpdateVsPlayer()
     ballPhysics();
     UpdateScore();
     paddlePhysics();
-    paddle1DirY = playerPaddleMovement(paddle1, paddle1DirY, Key.W, Key.S);
-    paddle2DirY = playerPaddleMovement(paddle2, paddle2DirY, Key.O, Key.L);
-    renderer.render(scene, camera);
+    playerPaddleMovement(playerPaddle, Key.W, Key.S);
+    playerPaddleMovement(opponentPaddle, Key.O, Key.L);
+    gameRender.renderer.render(gameRender.gameScene, gameRender.gameCamera);
     if(IsGameFinished())
     {
         StopGame();

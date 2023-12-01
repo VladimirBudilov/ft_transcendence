@@ -6,7 +6,8 @@ function TurnOffById(input)
 }
 
 function printScore() {
-	document.getElementById("scores").innerHTML = score1 + "-" + score2;
+	//TODO add proper score
+	document.getElementById("scores").innerHTML = gameData.playerScore + "-" + gameData.opponentScore;
 }
 
 var bounceTime = 0;
@@ -16,14 +17,13 @@ function WaitTime(method, time) {
 }
 
 function ShowWinner(player) {
-	ballSpeed = 0;
-	document.getElementById("scores").innerHTML = player + " wins!";
+	document.getElementById("scores").innerHTML = player.playerName + " wins!";
 	document.getElementById("winnerBoard").innerHTML = "Refresh to play again";
 	
 }
 
 function ChooseWinnerName(index) {
-	let playerName = index === 1 ? defaultPlayerName : defaultOpponentName;
+	let playerName = index === 1 ? player.defaultPlayerName : player.defaultOpponentName;
 	if (gameType.tournament) {
 		playerName = tournament.currentPair[index].playerName;
 		tournament.participants.push(tournament.currentPair[index]);
@@ -35,16 +35,16 @@ function ChooseWinnerName(index) {
 function IsGameFinished()
 {
 	let playerName = "";
-	if (score1 >= maxScore)
+	if (gameData.playerScore >= gameData.maxScore)
 	{
-		console.log("score1 >= maxScore" + score1 + " " + maxScore);
+		console.log("score1 >= maxScore" + gameData.playerScore + " " + gameData.maxScore);
 		playerName = ChooseWinnerName(1);
 		return true;
 	}
-	else if (score2 >= maxScore)
+	else if (gameData.opponentScore >= gameData.maxScore)
 	{
-		console.log("score1 >= maxScore" + score2 + " " + maxScore);
-		playerName = ChooseWinnerName(2);
+		console.log("score1 >= maxScore" + gameData.opponentScore + " " + gameData.maxScore);
+		ChooseWinnerName(2);
 		return true;
 	}
 	return false;
