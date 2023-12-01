@@ -1,26 +1,25 @@
 class GameRender{
     WIDTH = 640;
     HEIGHT = 360;
-    renderer;
-    gameScene;
-    gameCamera;
+    renderer =null;
+    gameScene =null;
+    gameCamera =null;
     playerField = new Rectangular();
     table = new Rectangular();
     ground = new Rectangular();
-    currentGameCanvas;
 }
 
 class Data{
     playerScore = 0;
     opponentScore = 0;
     maxScore = 2;
-    difficulty = 0.2;
+    difficulty = 1;
 }
 
 class Lighting
 {
-    spotLight;
-    pointLight;
+    spotLight =null;
+    pointLight =null;
 }
 class Paddle {
     Mesh;
@@ -30,27 +29,30 @@ class Paddle {
     Quality = 10;
     DirectionY = 0;
     Speed = 6;
-    Material;
-
+    Material = null;
+    isPlayer = false;
+    constructor(type) {
+        this.isPlayer = type;
+    }
 }
 
 class Ball {
     DirX = 1;
     DirY = 1;
-    Speed = 5;
+    Speed = 3;
     Radius = 7;
     segments = 100;
     rings = 100;
-    Mesh;
-    Material;
+    Mesh =null;
+    Material=null;
 }
 
 class Rectangular{
-    Width;
-    Height;
-    Quality;
-    Material;
-    Mesh;
+    Width=0;
+    Height=0;
+    Quality=0;
+    Material=null;
+    Mesh = null;
 }
 
 class GameType {
@@ -77,8 +79,8 @@ let opponent = new Player();
 let startPlaying = false;
 let gameRender = new GameRender();
 let gameData = new Data();
-let playerPaddle = new Paddle();
-let opponentPaddle = new Paddle();
+let playerPaddle = new Paddle(true);
+let opponentPaddle = new Paddle(false);
 let ball = new Ball();
 let stopGame = false;
 let animationId;

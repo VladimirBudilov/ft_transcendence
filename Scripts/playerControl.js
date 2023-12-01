@@ -25,47 +25,32 @@ function BotPaddleMovement()
     }
 }
 
-
-// Handles player's paddle movement
 function playerPaddleMovement(paddle, leftKey, rightKey)
 {
-    
-    // move left
     if (Key.isDown(leftKey))
     {
-        // if paddle is not touching the side of table
-        // we move
         if (paddle.Mesh.position.y < gameRender.playerField.Height * 0.45)
         {
             paddle.DirectionY = paddle.Speed * 0.5;
         }
-            // else we don't move and stretch the paddle
-        // to indicate we can't move
         else
         {
             paddle.DirectionY = 0;
         }
     }
-    // move right
     else if (Key.isDown(rightKey))
     {
-        // if paddle is not touching the side of table
-        // we move
         if (paddle.Mesh.position.y > -gameRender.playerField.Height * 0.45)
         {
             paddle.DirectionY = -paddle.Speed * 0.5;
         }
-            // else we don't move and stretch the paddle
-        // to indicate we can't move
         else
         {
             paddle.DirectionY = 0;
         }
     }
-    // else don't move paddle
     else
     {
-        // stop the paddle
         paddle.DirectionY = 0;
     }
     paddle.Mesh.position.y += paddle.DirectionY;

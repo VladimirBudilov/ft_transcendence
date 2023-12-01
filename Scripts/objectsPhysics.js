@@ -1,13 +1,13 @@
 function UpdateScore() {
     printScore();
-    if (ball.Mesh.position.x <= -gameRender.playerField.Width / 2) {
-        player.score++;
+    if (ball.Mesh.position.x <= -gameRender.playerField.Width / 1.5) {
+        gameData.opponentScore++;
         printScore();
         resetBall(2);
     }
 
-    if (ball.Mesh.position.x >= gameRender.playerField.Width/ 2) {
-        opponent.score++;
+    if (ball.Mesh.position.x >= gameRender.playerField.Width/ 1.5) {
+        gameData.playerScore++;
         printScore();
         resetBall(1);
     }
@@ -25,35 +25,43 @@ function ballPhysics()
     }
     ball.Mesh.position.x += ball.DirX * ball.Speed;
     ball.Mesh.position.y += ball.DirY * ball.Speed;
-    if (ball.DirY > ball.Speed * 2)
+    if (ball.DirY > ball.Speed)
     {
-        ball.DirY = ball.Speed * 2;
+        ball.DirY = ball.Speed;
     }
-    else if (ball.DirY < -ball.Speed * 2)
+    else if (ball.DirY < -ball.Speed)
     {
-        ball.DirY = -ball.Speed * 2;
+        ball.DirY = -ball.Speed;
     }
 }
 
-function HandlePaddleMovement(paddle) {
-    if (ball.Mesh.position.x <= paddle.Mesh.position.x + paddle.Width / 2
-        && ball.Mesh.position.x >= paddle.Mesh.position.x - paddle.Width / 2) {
-        if (ball.Mesh.position.y <= paddle.Mesh.position.y + paddle.Height / 2
-            && ball.Mesh.position.y >= paddle.Mesh.position.y - paddle.Height / 2) {
-            if (ball.DirX < 0) {
-                paddle.Mesh.scale.y = 15;
-                ball.DirX = -ball.DirX;
-                ball.DirY -= paddle.DirY * 0.7;
-            }
-        }
+function CheckThatBallTouchedPaddle(paddle) {
+    if (ball.Mesh.position.y <= paddle.Mesh.position.y + paddle.Height / 1.5
+        && ball.Mesh.position.y >= paddle.Mesh.position.y - paddle.Height / 1.5) {
+        ball.DirX = -ball.DirX;
+        ball.DirY -= paddle.DirectionY * 0.7;
     }
 }
+
+function HandlePlayerPaddleMovement(paddle) {
+    
+    //TODO check that ball touched paddle
+    if (Math.abs(ball.Mesh.position.x - paddle.Mesh.position.x) > 1)
+        return;        
+    if(paddle.isPlayer) {
+        CheckThatBallTouchedPaddle(paddle);
+    }
+    else {
+        CheckThatBallTouchedPaddle(paddle);
+    }
+}
+
 
 function paddlePhysics()
 {
     //TODO add ball radius
-    HandlePaddleMovement(playerPaddle);
-    HandlePaddleMovement(opponentPaddle);
+    HandlePlayerPaddleMovement(playerPaddle);
+    HandlePlayerPaddleMovement(opponentPaddle);
 }
 
 function resetBall(loser)

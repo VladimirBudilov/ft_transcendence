@@ -6,7 +6,7 @@ function StopGame()
     stopGame = false;
     ball.DirX = 1;
     ball.DirY = 1;
-    ball.Speed = 4;
+    ball.Speed = 3;
     gameData.difficulty = 0.2;
     let gameCanvas = document.getElementById("gameCanvas");
     gameCanvas.removeChild(gameRender.renderer.domElement);
