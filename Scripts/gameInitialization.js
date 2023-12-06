@@ -17,9 +17,10 @@ function initTextOnScreen() {
         function (font) {
             let textGeometry = new THREE.TextGeometry('Hello, Three.js!', {
                 font: font,
-                size: 10,
-                height: 3
-            });
+                size: 100,
+                height: 3,
+                curveSegments: 50,
+            }); 
 
             let textMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
             let textMesh = new THREE.Mesh(textGeometry, textMaterial);
@@ -68,13 +69,12 @@ function InitCamera(WIDTH, HEIGHT) {
             NEAR,
             FAR);
     gameRender.gameScene.add(gameRender.gameCamera);
-    gameRender.gameCamera.position.set(0,0,5);
-/*      gameRender.gameCamera.position.z = 250;
+      gameRender.gameCamera.position.z = 250;
         gameRender.gameCamera.position.x = 0;
         gameRender.gameCamera.position.y = -100;
         gameRender.gameCamera.rotation.x = 30 * Math.PI / 360;
         gameRender.gameCamera.rotation.y = 0;
-        gameRender.gameCamera.rotation.z = 0;*/
+        gameRender.gameCamera.rotation.z = 0;
 }
 
 function InitBall() {

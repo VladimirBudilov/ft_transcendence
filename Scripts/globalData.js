@@ -1,6 +1,6 @@
 class GameRender{
-    WIDTH = window.innerWidth;
-    HEIGHT = window.innerHeight;
+    WIDTH = 640;
+    HEIGHT = 480;
     renderer =null;
     gameScene =null;
     gameCamera =null;
