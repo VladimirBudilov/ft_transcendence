@@ -5,14 +5,28 @@ function PrepareData() {
 }
 
 function initTextOnScreen() {
-    const textGeometry = new THREE.TextGeometry('Hello, Three.js!', {
-        font: 'helvetiker', // Replace 'helvetiker' with your loaded font
-        size: 0.5,
-        height: 0.1
-    });
-    const textMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
-    const textMesh = new THREE.Mesh(textGeometry, textMaterial);
-    gameRender.gameScene.add(textMesh);
+    var renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    document.body.appendChild(renderer.domElement);
+
+    var scene = new THREE.Scene(); // Create a Three.js scene
+
+    // Create text geometry
+    let loader = new THREE.FontLoader();
+    loader.load('https://cdn.jsdelivr.net/npm/three/examples/fonts/helvetiker_regular.typeface.json',
+        function (font) {
+            let textGeometry = new THREE.TextGeometry('Hello, Three.js!', {
+                font: font,
+                size: 10,
+                height: 3
+            });
+
+            let textMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
+            let textMesh = new THREE.Mesh(textGeometry, textMaterial);
+            gameRender.gameScene.add(textMesh); // Add text mesh to the scene
+            textMesh.position.set(-2, 0, -500); // Position adjusted to be in the center and more visible
+    }
+    );
 }
 
 function createScene()
@@ -23,9 +37,9 @@ function createScene()
     InitCamera(gameRender.WIDTH, gameRender.HEIGHT);
     gameRender.renderer.setSize(gameRender.WIDTH, gameRender.HEIGHT);
     currentCanvas.appendChild(gameRender.renderer.domElement);
-    gameRender.renderer.shadowMapEnabled = true;
+    //gameRender.renderer.shadowMapEnabled = true;
     initTextOnScreen();
-    InitLight();
+    /*InitLight();
     InitGameField();
     InitGameTable();
     InitBall();
@@ -39,8 +53,7 @@ function createScene()
         })))
     playerPaddle.Mesh.position.x = -gameRender.playerField.Width/2 + playerPaddle.Width;
     opponentPaddle.Mesh.position.x =  gameRender.playerField.Width/2 - opponentPaddle.Width;
-    InitGround();
-    InitLight();
+    InitGround();*/
 }
 
 function InitCamera(WIDTH, HEIGHT) {
@@ -55,12 +68,13 @@ function InitCamera(WIDTH, HEIGHT) {
             NEAR,
             FAR);
     gameRender.gameScene.add(gameRender.gameCamera);
-    gameRender.gameCamera.position.z = 250;
-    gameRender.gameCamera.position.x = 0;
-    gameRender.gameCamera.position.y = -100;
-    gameRender.gameCamera.rotation.x = 30 * Math.PI / 360;
-    gameRender.gameCamera.rotation.y = 0;
-    gameRender.gameCamera.rotation.z = 0;
+    gameRender.gameCamera.position.set(0,0,5);
+/*      gameRender.gameCamera.position.z = 250;
+        gameRender.gameCamera.position.x = 0;
+        gameRender.gameCamera.position.y = -100;
+        gameRender.gameCamera.rotation.x = 30 * Math.PI / 360;
+        gameRender.gameCamera.rotation.y = 0;
+        gameRender.gameCamera.rotation.z = 0;*/
 }
 
 function InitBall() {

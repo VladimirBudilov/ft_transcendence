@@ -29,7 +29,7 @@ function StartGameVsBot()
 
 function UpdateVsBot()
 {
-    if(stopGame) {
+   /* if(stopGame) {
         cancelAnimationFrame(animationId);
         cancelIdleCallback(animationId);
         return;
@@ -38,13 +38,13 @@ function UpdateVsBot()
     UpdateScore();
     paddlePhysics();
     playerPaddleMovement(playerPaddle,Key.W, Key.S);
-    BotPaddleMovement();
-    gameRender.renderer.render(gameRender.gameScene, gameRender.gameCamera);
-    if(IsGameFinished())
+    BotPaddleMovement();*/
+/*    if(IsGameFinished())
     {
         StopGame();
         return;
-    }
+    }*/
+    gameRender.renderer.render(gameRender.gameScene, gameRender.gameCamera);
     animationId = requestAnimationFrame(UpdateVsBot);
 }
 
