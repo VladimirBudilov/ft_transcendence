@@ -1,9 +1,7 @@
+
 function initTextOnScreen() {
-    let renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
-    let loader = new THREE.FontLoader();
-    loader.load('https://cdn.jsdelivr.net/npm/three/examples/fonts/helvetiker_regular.typeface.json',
+    let loader = new THREE_ADDONS.FontLoader();
+    loader.load('/Users/vbudilov/Desktop/transuha/ft_transcendence/Scripts/three/examples/fonts/gentilis_bold.typeface.json',
         function (font) {
             let textGeometry = new THREE.TextGeometry('Hello, Three.js!', {
                 font: font,

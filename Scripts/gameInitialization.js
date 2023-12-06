@@ -12,7 +12,7 @@ function createScene()
     InitCamera(gameRender.WIDTH, gameRender.HEIGHT);
     gameRender.renderer.setSize(gameRender.WIDTH, gameRender.HEIGHT);
     currentCanvas.appendChild(gameRender.renderer.domElement);
-    initTextOnScreen();
+    //initTextOnScreen();
     InitLight();
     InitGameField();
     InitGameTable();
