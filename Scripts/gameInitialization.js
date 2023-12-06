@@ -38,12 +38,12 @@ function createScene()
     InitCamera(gameRender.WIDTH, gameRender.HEIGHT);
     gameRender.renderer.setSize(gameRender.WIDTH, gameRender.HEIGHT);
     currentCanvas.appendChild(gameRender.renderer.domElement);
-    //gameRender.renderer.shadowMapEnabled = true;
+    gameRender.renderer.shadowMapEnabled = true;
     initTextOnScreen();
-    /*InitLight();
+    InitLight();
     InitGameField();
     InitGameTable();
-    InitBall();
+    /*InitBall();
     InitPaddle( playerPaddle, (new THREE.MeshLambertMaterial(
         {
             color: 0x1B32C0
@@ -159,7 +159,7 @@ function InitLight() {
 function InitGameField() {
         gameRender.playerField.Width = 400;
         gameRender.playerField.Height = 200;
-        gameRender.playerField.Quality = 10;
+        gameRender.playerField.Quality = 100;
         gameRender.playerField.Material = new THREE.MeshLambertMaterial(
             {
                 color: 0x4BD121
@@ -173,6 +173,7 @@ function InitGameField() {
             gameRender.playerField.Material);
     gameRender.gameScene.add(gameRender.playerField.Mesh);
     gameRender.playerField.Mesh.receiveShadow = true;
+    gameRender.playerField.Mesh.position.set(0, 0, -500);
 }
 
 function InitGameTable() {
@@ -183,15 +184,13 @@ function InitGameTable() {
                 color: 0x111111
             });
     gameRender.table.Mesh = new THREE.Mesh(
-        new THREE.CubeGeometry(
+        new THREE.PlaneGeometry(
             gameRender.table.Width * 1.05,	// this creates the feel of a billiards table, with a lining
             gameRender.table.Height * 1.03,
-            100,				// an arbitrary depth, the camera can't see much of it anyway
-            gameRender.table.Quality,
-            gameRender.table.Quality,
-            1),
-        gameRender.table.Material);
-    gameRender.table.Mesh.position.z = -51;	// we sink the table into the ground by 50 units. The extra 1 is so the plane can be seen
+            gameRender.playerField.Quality,
+            gameRender.playerField.Quality,
+            gameRender.table.Material));
     gameRender.gameScene.add(gameRender.table.Mesh);
     gameRender.table.Mesh.receiveShadow = true;
+    gameRender.playerField.Mesh.position.set(0, 0, -501);
 }
