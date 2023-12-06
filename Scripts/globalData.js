@@ -1,6 +1,6 @@
 class GameRender{
     WIDTH = 640;
-    HEIGHT = 480;
+    HEIGHT = 360;
     renderer =null;
     gameScene =null;
     gameCamera =null;

@@ -43,7 +43,7 @@ function createScene()
     InitLight();
     InitGameField();
     InitGameTable();
-    /*InitBall();
+    InitBall();
     InitPaddle( playerPaddle, (new THREE.MeshLambertMaterial(
         {
             color: 0x1B32C0
@@ -54,7 +54,7 @@ function createScene()
         })))
     playerPaddle.Mesh.position.x = -gameRender.playerField.Width/2 + playerPaddle.Width;
     opponentPaddle.Mesh.position.x =  gameRender.playerField.Width/2 - opponentPaddle.Width;
-    InitGround();*/
+    InitGround();
 }
 
 function InitCamera(WIDTH, HEIGHT) {
@@ -120,16 +120,15 @@ function InitGround() {
                 color: 0x888888
             });
     gameRender.ground.Mesh = new THREE.Mesh(
-        new THREE.CubeGeometry(
+        new THREE.PlaneGeometry(
             1000,
             1000,
             3,
             1,
-            1,
-            1),
+        ),
 
         gameRender.ground.Material);
-    gameRender.ground.Mesh.position.z = -132;
+    gameRender.ground.Mesh.position.z = -800;
     gameRender.ground.Mesh.receiveShadow = true;
     gameRender.gameScene.add(gameRender.ground.Mesh);
 }
