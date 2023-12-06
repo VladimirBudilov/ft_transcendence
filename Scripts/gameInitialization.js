@@ -4,32 +4,6 @@ function PrepareData() {
     gameData.opponentScore = 0;
 }
 
-function initTextOnScreen() {
-    var renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
-
-    var scene = new THREE.Scene(); // Create a Three.js scene
-
-    // Create text geometry
-    let loader = new THREE.FontLoader();
-    loader.load('https://cdn.jsdelivr.net/npm/three/examples/fonts/helvetiker_regular.typeface.json',
-        function (font) {
-            let textGeometry = new THREE.TextGeometry('Hello, Three.js!', {
-                font: font,
-                size: 100,
-                height: 3,
-                curveSegments: 50,
-            }); 
-
-            let textMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
-            let textMesh = new THREE.Mesh(textGeometry, textMaterial);
-            gameRender.gameScene.add(textMesh); // Add text mesh to the scene
-            textMesh.position.set(-2, 0, -500); // Position adjusted to be in the center and more visible
-    }
-    );
-}
-
 function createScene()
 {
     let currentCanvas = document.getElementById("gameCanvas");
