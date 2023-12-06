@@ -38,11 +38,11 @@ function createScene()
     InitCamera(gameRender.WIDTH, gameRender.HEIGHT);
     gameRender.renderer.setSize(gameRender.WIDTH, gameRender.HEIGHT);
     currentCanvas.appendChild(gameRender.renderer.domElement);
-    gameRender.renderer.shadowMapEnabled = true;
     initTextOnScreen();
     InitLight();
     InitGameField();
     InitGameTable();
+    InitGround();
     InitBall();
     InitPaddle( playerPaddle, (new THREE.MeshLambertMaterial(
         {
@@ -54,7 +54,7 @@ function createScene()
         })))
     playerPaddle.Mesh.position.x = -gameRender.playerField.Width/2 + playerPaddle.Width;
     opponentPaddle.Mesh.position.x =  gameRender.playerField.Width/2 - opponentPaddle.Width;
-    InitGround();
+    gameRender.renderer.shadowMapEnabled = true;
 }
 
 function InitCamera(WIDTH, HEIGHT) {
