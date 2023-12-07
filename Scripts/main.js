@@ -1,2 +1,2 @@
-import * as THREE from '/three/build/three.module.js';
-import * as THREE_ADDONS from '/three-addons/build/three-addons.min.js';
+import * as THREE from '../three/build/three.min.js';
+import {FontLoader} from '../three-addons/three/src/loaders/FontLoader.js'

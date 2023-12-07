@@ -1,7 +1,7 @@
 
 function initTextOnScreen() {
-    let loader = new THREE_ADDONS.FontLoader();
-    loader.load('/Users/vbudilov/Desktop/transuha/ft_transcendence/Scripts/three/examples/fonts/gentilis_bold.typeface.json',
+    var loader = new FontLoader();
+    loader.load('/Users/vbudilov/Desktop/transuha/ft_transcendence/three-addons/three/examples/fonts/gentilis_bold.typeface.json',
         function (font) {
             let textGeometry = new THREE.TextGeometry('Hello, Three.js!', {
                 font: font,
