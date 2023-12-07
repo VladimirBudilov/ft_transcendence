@@ -1,0 +1,117 @@
+{
+	"compiler": {
+		"version": "0.8.22+commit.4fc1097e"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "playerName",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "nameTournament",
+						"type": "string"
+					}
+				],
+				"name": "getResultPlayer",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "nameTournament",
+						"type": "string"
+					}
+				],
+				"name": "getResultTournament",
+				"outputs": [
+					{
+						"internalType": "string[]",
+						"name": "",
+						"type": "string[]"
+					},
+					{
+						"internalType": "uint256[]",
+						"name": "",
+						"type": "uint256[]"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "newPlayer",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "newResult",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "nameTournament",
+						"type": "string"
+					}
+				],
+				"name": "setResult",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"main.sol": "Demo"
+		},
+		"evmVersion": "shanghai",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"main.sol": {
+			"keccak256": "0xf25ffb984ade0b014a369cca4f7b37999a6ae238c9d02419404ac11e04c31e5d",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://2631d18aabe9899f683f86527028fdbe491e14c331ab2d9d4a4dffe478248b46",
+				"dweb:/ipfs/QmdW65pPM4597gXV86m1k5Vz2fPdgyZUjhynv6F6sdKgri"
+			]
+		}
+	},
+	"version": 1
+}
