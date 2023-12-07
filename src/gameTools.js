@@ -1,4 +1,4 @@
-
+import {gameData, gameType} from "./globalData.js";
 
 function TurnOffById(input)
 {
@@ -53,3 +53,5 @@ function IsGameFinished()
 function IsDigit(input) {
 	return /^\d+$/.test(input);
 }
+
+export {TurnOffById, printScore, WaitTime, ShowWinner, bounceTime, IsGameFinished, IsDigit};

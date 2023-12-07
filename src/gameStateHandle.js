@@ -1,3 +1,5 @@
+import {gameData, ball, playerPaddle, opponentPaddle, gameRender, gameType} from "./globalData.js";
+
 function StopGame()
 {
     gameData.playerScore = 0;
@@ -74,3 +76,5 @@ function UpdateVsPlayer()
     }
     animationId = requestAnimationFrame(UpdateVsPlayer);
 }
+
+export {StartGameVsBot, StartGameVsPlayer, StopGame, UpdateVsBot, UpdateVsPlayer};

@@ -1,3 +1,7 @@
+import * as THREE from 'three';
+import {gameData, gameRender, playerPaddle, opponentPaddle, ball} from "./globalData.js";
+
+
 function PrepareData() {
     document.getElementById("winnerBoard").innerHTML = "First to " + gameData.maxScore + " wins!";
     gameData.playerScore = 0;
@@ -12,7 +16,7 @@ function createScene()
     InitCamera(gameRender.WIDTH, gameRender.HEIGHT);
     gameRender.renderer.setSize(gameRender.WIDTH, gameRender.HEIGHT);
     currentCanvas.appendChild(gameRender.renderer.domElement);
-    initTextOnScreen();
+    //initTextOnScreen();
     InitLight();
     InitGameField();
     InitGameTable();
@@ -167,3 +171,5 @@ function InitGameTable() {
     gameRender.table.Mesh.receiveShadow = true;
     gameRender.playerField.Mesh.position.set(0, 0, -501);
 }
+
+export {createScene, PrepareData};

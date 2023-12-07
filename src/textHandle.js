@@ -2,24 +2,10 @@ import {FontLoader} from "three/src/loaders/FontLoader";
 import * as THREE from "three";
 
 function initTextOnScreen() {
-    var loader = new FontLoader();
-    loader.load('/Users/vbudilov/Desktop/transuha/ft_transcendence/three-addons/three/examples/fonts/gentilis_bold.typeface.json',
-        function (font) {
-            let textGeometry = new THREE.TextGeometry('Hello, Three.js!', {
-                font: font,
-                size: 100,
-                height: 3,
-                curveSegments: 50,
-            });
-            let textMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff });
-            let textMesh = new THREE.Mesh(textGeometry, textMaterial);
-            gameRender.gameScene.add(textMesh); // Add text mesh to the scene
-            textMesh.position.set(-2, 0, -500); // Position adjusted to be in the center and more visible
-        }
-    );
+
 }
 
-function printText(text, position) {
+function printText(text, position, scene) {
     const loader = new FontLoader();
     loader.load('https://cdn.jsdelivr.net/npm/three@0.130.1/examples/fonts/helvetiker_regular.typeface.json', function (font) {
         const textOptions = {
@@ -43,3 +29,4 @@ function printText(text, position) {
         scene.add(textMesh);
     });
 }
+export {printText};

@@ -1,7 +1,3 @@
-import * as THREE from 'three';
-import * as THREE_ADDONS from 'three-addons';
-
-
 class GameRender{
     WIDTH = 640;
     HEIGHT = 360;
@@ -97,5 +93,4 @@ let ball = new Ball();
 let stopGame = false;
 let animationId;
 
-
-
+export { gameRender, gameData, playerPaddle, opponentPaddle, ball, stopGame, animationId, player, opponent, startPlaying, gameType};
