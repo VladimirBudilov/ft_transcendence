@@ -1,9 +1,8 @@
 import * as THREE from 'three';
 import {gameData, gameRender, playerPaddle, opponentPaddle, ball} from "./globalData.js";
 
-
 function PrepareData() {
-    document.getElementById("winnerBoard").innerHTML = "First to " + gameData.maxScore + " wins!";
+    //document.getElementById("winnerBoard").innerHTML = "First to " + gameData.maxScore + " wins!";
     gameData.playerScore = 0;
     gameData.opponentScore = 0;
 }
@@ -17,7 +16,7 @@ function createScene()
     gameRender.renderer.setSize(gameRender.WIDTH, gameRender.HEIGHT);
     currentCanvas.appendChild(gameRender.renderer.domElement);
     //initTextOnScreen();
-    InitLight();
+    //InitLight();
     InitGameField();
     InitGameTable();
     InitGround();
@@ -78,7 +77,7 @@ function InitBall() {
 function InitPaddle(paddle, paddle1Material) {
     paddle.Material= paddle1Material;
     paddle.Mesh = new THREE.Mesh(
-        new THREE.CubeGeometry(
+        new THREE.BoxGeometry(
             paddle.Width,
             paddle.Height,
             paddle.Depth,

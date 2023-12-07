@@ -1,4 +1,4 @@
-import {FontLoader} from "three/src/loaders/FontLoader";
+import {FontLoader} from "three/src/loaders/FontLoader.js";
 import * as THREE from "three";
 
 function initTextOnScreen() {

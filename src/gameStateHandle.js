@@ -1,11 +1,13 @@
-import {gameData, ball, playerPaddle, opponentPaddle, gameRender, gameType} from "./globalData.js";
+import {gameData, ball, playerPaddle, opponentPaddle, gameRender, gameType, startPlaying, SetStartPlaying, SetStopGame, SetAnimationId} from "./globalData.js";
+import {ChangeDivStateById} from "./gameTools";
+import {PrepareData, createScene} from "./gameInitialization.js";
 
 function StopGame()
 {
     gameData.playerScore = 0;
     gameData.opponentScore = 0;
-    startPlaying = false;
-    stopGame = false;
+    SetStartPlaying(false);
+    SetStopGame(false);
     ball.DirX = 1;
     ball.DirY = 1;
     ball.Speed = 3;
@@ -14,7 +16,7 @@ function StopGame()
     gameCanvas.removeChild(gameRender.renderer.domElement);
     cancelAnimationFrame(animationId);
     cancelIdleCallback(animationId);
-    printScore();
+    //printScore();
     ChangeDivStateById("StopGame", false);
 }
 
@@ -22,7 +24,7 @@ function StartGameVsBot()
 {
     if(startPlaying)
         return;
-    startPlaying = true;
+    SetStartPlaying(true);
     ChangeDivStateById("StopGame", true);
     PrepareData();
     createScene();
@@ -47,7 +49,7 @@ function UpdateVsBot()
         return;
     }
     gameRender.renderer.render(gameRender.gameScene, gameRender.gameCamera);
-    animationId = requestAnimationFrame(UpdateVsBot);
+    SetAnimationId(requestAnimationFrame(UpdateVsBot));
 }
 
 function StartGameVsPlayer()
@@ -56,7 +58,7 @@ function StartGameVsPlayer()
     PrepareData();
     createScene();
     UpdateVsPlayer();
-    startPlaying = true;
+    SetStartPlaying(true);
 }
 
 function UpdateVsPlayer()
@@ -74,7 +76,7 @@ function UpdateVsPlayer()
             document.dispatchEvent(tournament.OnGameFinished);
         return;
     }
-    animationId = requestAnimationFrame(UpdateVsPlayer);
+    SetAnimationId(requestAnimationFrame(UpdateVsPlayer));
 }
 
 export {StartGameVsBot, StartGameVsPlayer, StopGame, UpdateVsBot, UpdateVsPlayer};

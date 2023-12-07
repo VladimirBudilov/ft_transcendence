@@ -54,4 +54,12 @@ function IsDigit(input) {
 	return /^\d+$/.test(input);
 }
 
-export {TurnOffById, printScore, WaitTime, ShowWinner, bounceTime, IsGameFinished, IsDigit};
+function ChangeDivStateById(name, state){
+	let tournamentInput = document.getElementById(name);
+	if(state)
+		tournamentInput.style.display = "block";
+	else
+		tournamentInput.style.display = "none";
+}
+
+export {TurnOffById, printScore, WaitTime, ShowWinner, bounceTime, IsGameFinished, IsDigit, ChangeDivStateById};

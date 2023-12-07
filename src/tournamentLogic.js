@@ -64,14 +64,6 @@ class Tournament
 
 let tournament = new Tournament();
 
-function ChangeDivStateById(name, state){
-    let tournamentInput = document.getElementById(name);
-    if(state)
-        tournamentInput.style.display = "block";
-    else
-        tournamentInput.style.display = "none";
-}
-
 function StartTournament()
 {
     ChangeDivStateById("tournament", true);

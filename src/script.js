@@ -10,7 +10,7 @@ function AddButtonEventListenerById(id, func) {
 }
 
 function startGame () {
-    AddButtonEventListenerById("startGame", StartGameVsBot);
+    AddButtonEventListenerById("StartGame", StartGameVsBot);
 }
 
 startGame();

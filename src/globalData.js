@@ -1,3 +1,5 @@
+
+
 class GameRender{
     WIDTH = 640;
     HEIGHT = 360;
@@ -85,6 +87,9 @@ let gameType = new GameType();
 let player = new Player();
 let opponent = new Player();
 let startPlaying = false;
+//setter for startPlaying
+
+
 let gameRender = new GameRender();
 let gameData = new Data();
 let playerPaddle = new Paddle(true);
@@ -93,4 +98,17 @@ let ball = new Ball();
 let stopGame = false;
 let animationId;
 
-export { gameRender, gameData, playerPaddle, opponentPaddle, ball, stopGame, animationId, player, opponent, startPlaying, gameType};
+function SetAnimationId(value) {
+    animationId = value;
+
+}
+
+function SetStopGame(value) {
+    stopGame = value;
+}
+
+function SetStartPlaying(value) {
+    startPlaying = value;
+}
+
+export { gameRender, gameData, playerPaddle, opponentPaddle, ball, stopGame, animationId, player, opponent, startPlaying, gameType, SetStartPlaying, SetStopGame, SetAnimationId};
