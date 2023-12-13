@@ -45,7 +45,6 @@ function CheckThatBallTouchedPaddle(paddle) {
 
 function HandlePlayerPaddleMovement(paddle) {
     
-    //TODO check that ball touched paddle
     if (Math.abs(ball.Mesh.position.x - paddle.Mesh.position.x) > 1)
         return;        
     if(paddle.isPlayer) {
@@ -59,7 +58,6 @@ function HandlePlayerPaddleMovement(paddle) {
 
 function paddlePhysics()
 {
-    //TODO add ball radius
     HandlePlayerPaddleMovement(playerPaddle);
     HandlePlayerPaddleMovement(opponentPaddle);
 }
@@ -77,6 +75,5 @@ function resetBall(loser)
     {
         ball.DirX = 1;
     }
-    // set the ball to move +ve in y plane (towards left from the camera)
     ball.DirY = 1;
 }
