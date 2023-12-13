@@ -53,7 +53,7 @@ function InitCamera(WIDTH, HEIGHT) {
 
 function InitBall() {
     ball.Material =
-        new THREE.MeshLambertMaterial(
+        new THREE.MeshPhongMaterial(
             {
                 color: 0xD43001
             });
@@ -85,6 +85,15 @@ function InitPaddle(paddle, paddle1Material) {
     gameRender.gameScene.add(paddle.Mesh);
     paddle.Mesh.receiveShadow = true;
     paddle.Mesh.castShadow = true;
+
+    paddle.Spell = new THREE.SphereGeometry(
+        paddle.Width * 0.75,
+        paddle.Quality,
+        paddle.Quality);
+    paddle.SpellMesh = new THREE.Mesh(
+        paddle.Spell,
+        paddle.Material);
+    paddle.SpellMesh.visible = false;
 }
 
 function InitGround() {

@@ -23,6 +23,8 @@ class Lighting
 }
 class Paddle {
     Mesh;
+    Spell;
+    SpellMesh;
     Width = 10;
     Height = 30;
     Depth = 10;
