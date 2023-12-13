@@ -19,7 +19,23 @@ function BotPaddleMovement()
     }
 }
 
-function playerPaddleMovement(paddle, leftKey, rightKey)
+const CanActiveSpell = (paddle) => {
+    if(paddle.isSpellActive && !IsBallOnPaddle(paddle)) return false;
+    return Math.abs(ball.Mesh.position.x - paddle.Mesh.position.x) < 60
+};
+
+function ActivateSpell(paddle) {
+    document.dispatchEvent(SpellEvent);
+    paddle.isSpellActive = true;
+    paddle.SpellMesh.visible = true;
+    paddle.SpellMesh.position = paddle.Mesh.position;
+    setTimeout(() => {
+        paddle.isSpellActive = false;
+        paddle.SpellMesh.visible = false;
+    }, 2000);
+}
+
+function playerPaddleMovement(paddle, leftKey, rightKey, spellKey)
 {
     if (Key.isDown(leftKey))
     {
@@ -48,4 +64,12 @@ function playerPaddleMovement(paddle, leftKey, rightKey)
         paddle.DirectionY = 0;
     }
     paddle.Mesh.position.y += paddle.DirectionY;
+    if (Key.isDown(spellKey))
+    {
+        if(CanActiveSpell(paddle))
+        {
+            ActivateSpell(paddle);
+            console.log("Spell activated");
+        }
+    }
 }

@@ -24,6 +24,7 @@ class Lighting
 class Paddle {
     Mesh;
     Spell;
+    isSpellActive = false;
     SpellMesh;
     Width = 10;
     Height = 30;
@@ -86,6 +87,7 @@ let opponentPaddle = new Paddle(false);
 let ball = new Ball();
 let stopGame = false;
 let animationId;
+let SpellEvent = new Event("SpellEvent");
 
 
 
