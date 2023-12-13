@@ -1,7 +1,6 @@
 function BotPaddleMovement()
 {
     opponentPaddle.DirectionY = (ball.Mesh.position.y - opponentPaddle.Mesh.position.y) * gameData.difficulty;
-    // TODO add random freezing.
     if (Math.abs(opponentPaddle.DirectionY) <= opponentPaddle.Speed)
     {
         opponentPaddle.Mesh.position.y += opponentPaddle.DirectionY;
@@ -21,7 +20,7 @@ function BotPaddleMovement()
 
 const CanActiveSpell = (paddle) => {
     if(paddle.isSpellActive && !IsBallOnPaddle(paddle)) return false;
-    return Math.abs(ball.Mesh.position.x - paddle.Mesh.position.x) < 60
+    return Math.abs(ball.Mesh.position.x - paddle.Mesh.position.x) < 50
 };
 
 function ActivateSpell(paddle) {
@@ -32,8 +31,8 @@ function ActivateSpell(paddle) {
     setTimeout(() => {
         paddle.isSpellActive = false;
         paddle.SpellMesh.visible = false;
-    }, 2000);
-}
+    }, 1000);
+}s
 
 function playerPaddleMovement(paddle, leftKey, rightKey, spellKey)
 {

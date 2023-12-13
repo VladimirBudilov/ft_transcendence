@@ -42,7 +42,7 @@ class Paddle {
 class Ball {
     DirX = 1;
     DirY = 1;
-    Speed = 3;
+    Speed = 2;
     Radius = 7;
     segments = 100;
     rings = 100;

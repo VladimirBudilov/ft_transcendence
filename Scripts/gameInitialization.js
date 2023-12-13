@@ -87,13 +87,19 @@ function InitPaddle(paddle, paddle1Material) {
     paddle.Mesh.castShadow = true;
 
     paddle.Spell = new THREE.SphereGeometry(
-        paddle.Width * 0.75,
+        paddle.Width * 1.6,
         paddle.Quality,
         paddle.Quality);
     paddle.SpellMesh = new THREE.Mesh(
         paddle.Spell,
-        paddle.Material);
+        new THREE.MeshPhongMaterial(
+            {
+                color: 0xD43001
+            }));
     paddle.SpellMesh.visible = false;
+    gameRender.gameScene.add(paddle.SpellMesh);
+    paddle.SpellMesh.receiveShadow = true;
+    paddle.SpellMesh.castShadow = true;
 }
 
 function InitGround() {

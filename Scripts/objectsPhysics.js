@@ -21,14 +21,12 @@ function ballPhysics()
 {
     if (ball.Mesh.position.y <= -gameRender.playerField.Height/2)
     {
-        ball.DirY = -ball.DirY;
+        ball.DirY =  -ball.DirY;
     }
     if (ball.Mesh.position.y >= gameRender.playerField.Height/2)
     {
         ball.DirY = -ball.DirY;
     }
-    ball.Mesh.position.x += ball.DirX * ball.Speed;
-    ball.Mesh.position.y += ball.DirY * ball.Speed;
     if (ball.DirY > ball.Speed)
     {
         ball.DirY = ball.Speed;
@@ -37,6 +35,8 @@ function ballPhysics()
     {
         ball.DirY = -ball.Speed;
     }
+    ball.Mesh.position.x += ball.DirX * ball.Speed;
+    ball.Mesh.position.y += ball.DirY * ball.Speed;
 }
 
 function IsBallOnPaddle(paddle) {
@@ -53,7 +53,7 @@ function ChangeBallDirection(paddle) {
 
 function HandlePlayerPaddleMovement(paddle) {
     
-    if (Math.abs(ball.Mesh.position.x - paddle.Mesh.position.x) > 1)
+    if (Math.abs(ball.Mesh.position.x - paddle.Mesh.position.x) > 5)
         return;        
     if(paddle.isPlayer) {
         ChangeBallDirection(paddle);
@@ -88,11 +88,12 @@ function resetBall(loser)
 }
 
 function IncreaseBallSpeed() {
-        ball.Speed += 0.2;
+        ball.Speed += 0.1;
 }
 
 function ChangeBallColor() {
     let color = Math.floor(Math.random() * 16777215).toString(16);
+    ball.Material.color.setHex(color);
 }
 
 document.addEventListener("SpellEvent", IncreaseBallSpeed);
