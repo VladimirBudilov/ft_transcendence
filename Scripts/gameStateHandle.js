@@ -27,6 +27,7 @@ function StartGameVsBot()
     UpdateVsBot();
 }
 
+
 function UpdateVsBot()
 {
     if(stopGame) {
@@ -37,7 +38,7 @@ function UpdateVsBot()
     ballPhysics();
     UpdateScore();
     paddlePhysics();
-    playerPaddleMovement(playerPaddle,Key.W, Key.S);
+    playerPaddleMovement(playerPaddle,Key.W, Key.S, Key.A);
     BotPaddleMovement();
     gameRender.renderer.render(gameRender.gameScene, gameRender.gameCamera);
     if(IsGameFinished())
@@ -62,8 +63,8 @@ function UpdateVsPlayer()
     ballPhysics();
     UpdateScore();
     paddlePhysics();
-    playerPaddleMovement(playerPaddle, Key.W, Key.S);
-    playerPaddleMovement(opponentPaddle, Key.O, Key.L);
+    playerPaddleMovement(playerPaddle, Key.W, Key.S, Key.A);
+    playerPaddleMovement(opponentPaddle, Key.I, Key.K, Key.L);
     gameRender.renderer.render(gameRender.gameScene, gameRender.gameCamera);
     if(IsGameFinished())
     {

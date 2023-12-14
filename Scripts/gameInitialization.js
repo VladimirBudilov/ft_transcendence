@@ -53,7 +53,7 @@ function InitCamera(WIDTH, HEIGHT) {
 
 function InitBall() {
     ball.Material =
-        new THREE.MeshLambertMaterial(
+        new THREE.MeshPhongMaterial(
             {
                 color: 0xD43001
             });
@@ -85,6 +85,21 @@ function InitPaddle(paddle, paddle1Material) {
     gameRender.gameScene.add(paddle.Mesh);
     paddle.Mesh.receiveShadow = true;
     paddle.Mesh.castShadow = true;
+
+    paddle.Spell = new THREE.SphereGeometry(
+        paddle.Width * 1.6,
+        paddle.Quality,
+        paddle.Quality);
+    paddle.SpellMesh = new THREE.Mesh(
+        paddle.Spell,
+        new THREE.MeshPhongMaterial(
+            {
+                color: 0xD43001
+            }));
+    paddle.SpellMesh.visible = false;
+    gameRender.gameScene.add(paddle.SpellMesh);
+    paddle.SpellMesh.receiveShadow = true;
+    paddle.SpellMesh.castShadow = true;
 }
 
 function InitGround() {
@@ -101,7 +116,6 @@ function InitGround() {
             1,
             1,
             1),
-
         gameRender.ground.Material);
     gameRender.ground.Mesh.position.z = -132;
     gameRender.ground.Mesh.receiveShadow = true;
@@ -111,18 +125,13 @@ function InitGround() {
 function InitLight() {
     lighting.pointLight =
         new THREE.PointLight(0xF8D898);
-
-    // set its position
     lighting.pointLight.position.x = -1000;
     lighting.pointLight.position.y = 0;
     lighting.pointLight.position.z = 1000;
     lighting.pointLight.intensity = 2.9;
     lighting.pointLight.distance = 10000;
-    // add to the scene
     gameRender.gameScene.add(lighting.pointLight);
 
-    // add a spotlight
-    // this is important for casting shadows
     lighting.spotLight = new THREE.SpotLight(0xF8D898);
     lighting.spotLight.position.set(0, 0, 460);
     lighting.spotLight.intensity = 1.5;
@@ -158,14 +167,14 @@ function InitGameTable() {
             });
     gameRender.table.Mesh = new THREE.Mesh(
         new THREE.CubeGeometry(
-            gameRender.table.Width * 1.05,	// this creates the feel of a billiards table, with a lining
+            gameRender.table.Width * 1.05,
             gameRender.table.Height * 1.03,
-            100,				// an arbitrary depth, the camera can't see much of it anyway
+            100,
             gameRender.table.Quality,
             gameRender.table.Quality,
             1),
         gameRender.table.Material);
-    gameRender.table.Mesh.position.z = -51;	// we sink the table into the ground by 50 units. The extra 1 is so the plane can be seen
+    gameRender.table.Mesh.position.z = -51;
     gameRender.gameScene.add(gameRender.table.Mesh);
     gameRender.table.Mesh.receiveShadow = true;
 }

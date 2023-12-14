@@ -1,5 +1,3 @@
-
-
 function TurnOffById(input)
 {
 	document.getElementById(input).style.display = "none";
@@ -9,9 +7,6 @@ function printScore() {
 	//TODO add proper score
 	document.getElementById("scores").innerHTML = gameData.playerScore + "-" + gameData.opponentScore;
 }
-
-var bounceTime = 0;
-
 function WaitTime(method, time) {
 	setTimeout(method, time);
 }
@@ -31,7 +26,6 @@ function ChooseWinnerName(index) {
 	return playerName;
 }
 
-// checks if either player or opponent has reached 7 points
 function IsGameFinished()
 {
 	let playerName = "";

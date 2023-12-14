@@ -5,7 +5,6 @@ function UpdateScore() {
         printScore();
         resetBall(2);
     }
-
     if (ball.Mesh.position.x >= gameRender.playerField.Width/ 1.5) {
         gameData.playerScore++;
         printScore();
@@ -13,18 +12,20 @@ function UpdateScore() {
     }
 }
 
+function updateSpellPosition(paddle) {
+    paddle.SpellMesh.position = paddle.Mesh.position;
+}
+
 function ballPhysics()
 {
     if (ball.Mesh.position.y <= -gameRender.playerField.Height/2)
     {
-        ball.DirY = -ball.DirY;
+        ball.DirY =  -ball.DirY;
     }
     if (ball.Mesh.position.y >= gameRender.playerField.Height/2)
     {
         ball.DirY = -ball.DirY;
     }
-    ball.Mesh.position.x += ball.DirX * ball.Speed;
-    ball.Mesh.position.y += ball.DirY * ball.Speed;
     if (ball.DirY > ball.Speed)
     {
         ball.DirY = ball.Speed;
@@ -33,40 +34,63 @@ function ballPhysics()
     {
         ball.DirY = -ball.Speed;
     }
+    ball.Mesh.position.x += ball.DirX * ball.Speed;
+    ball.Mesh.position.y += ball.DirY * ball.Speed;
 }
 
-function CheckThatBallTouchedPaddle(paddle) {
-    if (ball.Mesh.position.y <= paddle.Mesh.position.y + paddle.Height / 1.5
-        && ball.Mesh.position.y >= paddle.Mesh.position.y - paddle.Height / 1.5) {
+function IsBallOnPaddleWidth(paddle) {
+        return ball.Mesh.position.y <= paddle.Mesh.position.y + paddle.Height / 1.5
+            && ball.Mesh.position.y >= paddle.Mesh.position.y - paddle.Height / 1.5;
+}
+
+function ChangeBallDirection(paddle) {
+    if(paddle.ballDirectionChanged) return;
+    if (IsBallOnPaddleWidth(paddle)) {
+        paddle.ballDirectionChanged = true;
         ball.DirX = -ball.DirX;
-        ball.DirY -= paddle.DirectionY * 0.7;
+        ball.DirY = paddle.DirectionY > 0 ? ball.DirY : -ball.DirY;
+        setTimeout(() => {
+            paddle.ballDirectionChanged = false;
+        }, 100);
     }
+}
+
+function IsBallNearPaddle(paddle, offset = 0) {
+    let isNear = false;
+    if (paddle.isPlayer) {
+        isNear = ball.Mesh.position.x - ball.Radius + offset <= paddle.Mesh.position.x + paddle.Width
+            && ball.Mesh.position.x - ball.Radius + offset >= paddle.Mesh.position.x - paddle.Width/2;
+    }
+    else {
+        isNear = ball.Mesh.position.x + ball.Radius - offset <= paddle.Mesh.position.x + paddle.Width * 1.5
+            && ball.Mesh.position.x + ball.Radius - offset >= paddle.Mesh.position.x - paddle.Width/2;
+        if(isNear) console.log("Ball near bot paddle");
+    }
+    return isNear;
 }
 
 function HandlePlayerPaddleMovement(paddle) {
     
-    //TODO check that ball touched paddle
-    if (Math.abs(ball.Mesh.position.x - paddle.Mesh.position.x) > 1)
+    if (!IsBallNearPaddle(paddle))
         return;        
     if(paddle.isPlayer) {
-        CheckThatBallTouchedPaddle(paddle);
+        ChangeBallDirection(paddle);
     }
     else {
-        CheckThatBallTouchedPaddle(paddle);
+        ChangeBallDirection(paddle);
     }
+    updateSpellPosition(paddle);
 }
 
 
 function paddlePhysics()
 {
-    //TODO add ball radius
     HandlePlayerPaddleMovement(playerPaddle);
     HandlePlayerPaddleMovement(opponentPaddle);
 }
 
 function resetBall(loser)
 {
-    // position the ball in the center of the table
     ball.Mesh.position.x = 0;
     ball.Mesh.position.y = 0;
     if (loser === 1)
@@ -77,6 +101,17 @@ function resetBall(loser)
     {
         ball.DirX = 1;
     }
-    // set the ball to move +ve in y plane (towards left from the camera)
     ball.DirY = 1;
 }
+
+function IncreaseBallSpeed() {
+        ball.Speed += 0;
+}
+
+function ChangeBallColor() {
+    let color = Math.floor(Math.random() * 16777215).toString(16);
+    ball.Material.color.setHex(color);
+}
+
+document.addEventListener("SpellEvent", IncreaseBallSpeed);
+document.addEventListener("SpellEvent", ChangeBallColor);

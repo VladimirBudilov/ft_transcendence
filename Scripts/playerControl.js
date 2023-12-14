@@ -1,37 +1,127 @@
-function BotPaddleMovement()
-{
-    // Lerp towards the ball on the y plane
-    opponentPaddle.DirectionY = (ball.Mesh.position.y - opponentPaddle.Mesh.position.y) * gameData.difficulty;
-    // TODO add random freezing.
-
-    // in case the Lerp function produces a value above max paddle speed, we clamp it
-    if (Math.abs(opponentPaddle.DirectionY) <= opponentPaddle.Speed)
+function MovePaddleInCenter(opponentPaddle) {
+    let center = gameRender.playerField.Mesh.position.y;
+    let gap = 10;
+    if (opponentPaddle.Mesh.position.y > center + gap)
     {
-        opponentPaddle.Mesh.position.y += opponentPaddle.DirectionY;
+        opponentPaddle.DirectionY = -ball.Speed/4;
     }
-    // if the lerp value is too high, we have to limit speed to paddleSpeed
+    else if (opponentPaddle.Mesh.position.y < center - gap)
+    {
+        opponentPaddle.DirectionY = ball.Speed/4;
+    }
     else
     {
-        // if paddle is lerping in +ve direction
-        if (opponentPaddle.DirectionY > opponentPaddle.Speed)
-        {
-            opponentPaddle.Mesh.position.y += opponentPaddle.Speed;
-        }
-        // if paddle is lerping in -ve direction
-        else if (opponentPaddle.DirectionY < -opponentPaddle.Speed)
-        {
-            opponentPaddle.Mesh.position.y -= opponentPaddle.Speed;
+        opponentPaddle.DirectionY = 0;
+    }
+    opponentPaddle.Mesh.position.y += opponentPaddle.DirectionY;
+}
+
+function CalculateBotPaddleSpeed(speed, difficulty) {
+    opponentPaddle.DirectionY = (ball.Mesh.position.y - opponentPaddle.Mesh.position.y) * difficulty;
+    if (Math.abs(opponentPaddle.DirectionY) <= speed) {
+        opponentPaddle.Mesh.position.y += opponentPaddle.DirectionY;
+    } else {
+        if (opponentPaddle.DirectionY > speed) {
+            opponentPaddle.Mesh.position.y += speed;
+        } else if (opponentPaddle.DirectionY < -speed) {
+            opponentPaddle.Mesh.position.y -= speed;
         }
     }
 }
 
-function playerPaddleMovement(paddle, leftKey, rightKey)
+function RandomSpellCast() {
+    switch (botCollisionCounter) {
+        case 0:
+            if (Math.random() <= 1) {
+                ActivateSpell(opponentPaddle);
+                botCollisionCounter = 0;
+            }
+            break;
+        case 1:
+            if (Math.random() <= 1) {
+                ActivateSpell(opponentPaddle);
+                botCollisionCounter = 0;
+
+            }
+            break;
+        case 2:
+            if (Math.random() <= 1) {
+                ActivateSpell(opponentPaddle);
+                botCollisionCounter = 0;
+
+            }
+            break;
+        case 3:
+            if (Math.random() <= 1) {
+                ActivateSpell(opponentPaddle);
+                botCollisionCounter = 0;
+
+            }
+            break;
+        case 4:
+            if (Math.random() <= 1) {
+                ActivateSpell(opponentPaddle);
+                botCollisionCounter = 0;
+            }
+            break;
+        default:
+            break;
+    }
+}
+
+function BotPaddleMovement()
+{
+    if(ball.DirX < 0)
+    {
+        MovePaddleInCenter(opponentPaddle);
+        return;
+    }
+    if(ball.Mesh.position.x < gameRender.playerField.Mesh.position.x)
+    {
+        CalculateBotPaddleSpeed(ball.Speed, 0.03);
+        return;
+    }
+    if(ball.Mesh.position.x < gameRender.playerField.Mesh.position.x + gameRender.playerField.Width/2)
+    {
+        CalculateBotPaddleSpeed(ball.Speed, 0.3);
+        return;
+    }
+    CalculateBotPaddleSpeed(opponentPaddle.Speed, gameData.difficulty);
+    if(CanActiveSpell(opponentPaddle))
+    {
+        botCollisionCounter++;
+        RandomSpellCast();
+        console.log("Spell try activated");
+    }
+}
+
+const CanActiveSpell = (paddle) => {
+    if(paddle.isSpellActive) console.log("Spell already activated");
+    if(!IsBallOnPaddleWidth(paddle)) console.log("Ball not on paddle width");
+    
+    if(paddle.isSpellActive && !IsBallOnPaddleWidth(paddle)) return false;
+    if(!paddle.isPlayer) console.log("Bot ready to cast spell");
+    return IsBallNearPaddle(paddle, paddle.Width * 3);
+};
+
+function ActivateSpell(paddle) {
+    document.dispatchEvent(SpellEvent);
+    paddle.isSpellActive = true;
+    paddle.SpellMesh.visible = true;
+    paddle.SpellMesh.position = paddle.Mesh.position;
+    setTimeout(() => {
+        paddle.isSpellActive = false;
+        paddle.SpellMesh.visible = false;
+    }, 1000);
+}
+
+function playerPaddleMovement(paddle, leftKey, rightKey, spellKey)
 {
     if (Key.isDown(leftKey))
     {
         if (paddle.Mesh.position.y < gameRender.playerField.Height * 0.45)
         {
-            paddle.DirectionY = paddle.Speed * 0.5;
+            paddle.DirectionY = paddle.Speed;
         }
         else
         {
@@ -42,7 +132,7 @@ function playerPaddleMovement(paddle, leftKey, rightKey)
     {
         if (paddle.Mesh.position.y > -gameRender.playerField.Height * 0.45)
         {
-            paddle.DirectionY = -paddle.Speed * 0.5;
+            paddle.DirectionY = -paddle.Speed;
         }
         else
         {
@@ -54,4 +144,12 @@ function playerPaddleMovement(paddle, leftKey, rightKey)
         paddle.DirectionY = 0;
     }
     paddle.Mesh.position.y += paddle.DirectionY;
+    if (Key.isDown(spellKey))
+    {
+        if(CanActiveSpell(paddle))
+        {
+            //ActivateSpell(paddle);
+            console.log("Spell activated");
+        }
+    }
 }

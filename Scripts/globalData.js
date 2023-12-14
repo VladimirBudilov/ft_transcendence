@@ -13,7 +13,7 @@ class Data{
     playerScore = 0;
     opponentScore = 0;
     maxScore = 2;
-    difficulty = 1;
+    difficulty = 0.6;
 }
 
 class Lighting
@@ -23,6 +23,9 @@ class Lighting
 }
 class Paddle {
     Mesh;
+    Spell;
+    isSpellActive = false;
+    SpellMesh;
     Width = 10;
     Height = 30;
     Depth = 10;
@@ -31,6 +34,7 @@ class Paddle {
     Speed = 6;
     Material = null;
     isPlayer = false;
+    ballDirectionChanged = false;
     constructor(type) {
         this.isPlayer = type;
     }
@@ -39,7 +43,7 @@ class Paddle {
 class Ball {
     DirX = 1;
     DirY = 1;
-    Speed = 3;
+    Speed = 2;
     Radius = 7;
     segments = 100;
     rings = 100;
@@ -84,6 +88,8 @@ let opponentPaddle = new Paddle(false);
 let ball = new Ball();
 let stopGame = false;
 let animationId;
+let SpellEvent = new Event("SpellEvent");
+let botCollisionCounter = 0;
 
 
 
