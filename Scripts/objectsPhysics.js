@@ -5,7 +5,6 @@ function UpdateScore() {
         printScore();
         resetBall(2);
     }
-
     if (ball.Mesh.position.x >= gameRender.playerField.Width/ 1.5) {
         gameData.playerScore++;
         printScore();
@@ -39,21 +38,40 @@ function ballPhysics()
     ball.Mesh.position.y += ball.DirY * ball.Speed;
 }
 
-function IsBallOnPaddle(paddle) {
-    return ball.Mesh.position.y <= paddle.Mesh.position.y + paddle.Height / 1.5
-        && ball.Mesh.position.y >= paddle.Mesh.position.y - paddle.Height / 1.5;
+function IsBallOnPaddleWidth(paddle) {
+        return ball.Mesh.position.y <= paddle.Mesh.position.y + paddle.Height / 1.5
+            && ball.Mesh.position.y >= paddle.Mesh.position.y - paddle.Height / 1.5;
 }
 
 function ChangeBallDirection(paddle) {
-    if (IsBallOnPaddle(paddle)) {
+    if(paddle.ballDirectionChanged) return;
+    if (IsBallOnPaddleWidth(paddle)) {
+        paddle.ballDirectionChanged = true;
         ball.DirX = -ball.DirX;
-        ball.DirY -= paddle.DirectionY * 0.7;
+        ball.DirY = paddle.DirectionY > 0 ? ball.DirY : -ball.DirY;
+        setTimeout(() => {
+            paddle.ballDirectionChanged = false;
+        }, 100);
     }
+}
+
+function IsBallNearPaddle(paddle, offset = 0) {
+    let isNear = false;
+    if (paddle.isPlayer) {
+        isNear = ball.Mesh.position.x - ball.Radius + offset <= paddle.Mesh.position.x + paddle.Width
+            && ball.Mesh.position.x - ball.Radius + offset >= paddle.Mesh.position.x - paddle.Width/2;
+    }
+    else {
+        isNear = ball.Mesh.position.x + ball.Radius - offset <= paddle.Mesh.position.x + paddle.Width * 1.5
+            && ball.Mesh.position.x + ball.Radius - offset >= paddle.Mesh.position.x - paddle.Width/2;
+        if(isNear) console.log("Ball near bot paddle");
+    }
+    return isNear;
 }
 
 function HandlePlayerPaddleMovement(paddle) {
     
-    if (Math.abs(ball.Mesh.position.x - paddle.Mesh.position.x) > 5)
+    if (!IsBallNearPaddle(paddle))
         return;        
     if(paddle.isPlayer) {
         ChangeBallDirection(paddle);
@@ -73,7 +91,6 @@ function paddlePhysics()
 
 function resetBall(loser)
 {
-    // position the ball in the center of the table
     ball.Mesh.position.x = 0;
     ball.Mesh.position.y = 0;
     if (loser === 1)
@@ -88,7 +105,7 @@ function resetBall(loser)
 }
 
 function IncreaseBallSpeed() {
-        ball.Speed += 0.1;
+        ball.Speed += 0;
 }
 
 function ChangeBallColor() {

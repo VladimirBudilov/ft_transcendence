@@ -13,7 +13,7 @@ class Data{
     playerScore = 0;
     opponentScore = 0;
     maxScore = 2;
-    difficulty = 1;
+    difficulty = 0.6;
 }
 
 class Lighting
@@ -34,6 +34,7 @@ class Paddle {
     Speed = 6;
     Material = null;
     isPlayer = false;
+    ballDirectionChanged = false;
     constructor(type) {
         this.isPlayer = type;
     }
@@ -88,6 +89,7 @@ let ball = new Ball();
 let stopGame = false;
 let animationId;
 let SpellEvent = new Event("SpellEvent");
+let botCollisionCounter = 0;
 
 
 

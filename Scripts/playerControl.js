@@ -1,26 +1,107 @@
-function BotPaddleMovement()
-{
-    opponentPaddle.DirectionY = (ball.Mesh.position.y - opponentPaddle.Mesh.position.y) * gameData.difficulty;
-    if (Math.abs(opponentPaddle.DirectionY) <= opponentPaddle.Speed)
+function MovePaddleInCenter(opponentPaddle) {
+    let center = gameRender.playerField.Mesh.position.y;
+    let gap = 10;
+    if (opponentPaddle.Mesh.position.y > center + gap)
     {
-        opponentPaddle.Mesh.position.y += opponentPaddle.DirectionY;
+        opponentPaddle.DirectionY = -ball.Speed/4;
+    }
+    else if (opponentPaddle.Mesh.position.y < center - gap)
+    {
+        opponentPaddle.DirectionY = ball.Speed/4;
     }
     else
     {
-        if (opponentPaddle.DirectionY > opponentPaddle.Speed)
-        {
-            opponentPaddle.Mesh.position.y += opponentPaddle.Speed;
-        }
-        else if (opponentPaddle.DirectionY < -opponentPaddle.Speed)
-        {
-            opponentPaddle.Mesh.position.y -= opponentPaddle.Speed;
+        opponentPaddle.DirectionY = 0;
+    }
+    opponentPaddle.Mesh.position.y += opponentPaddle.DirectionY;
+}
+
+function CalculateBotPaddleSpeed(speed, difficulty) {
+    opponentPaddle.DirectionY = (ball.Mesh.position.y - opponentPaddle.Mesh.position.y) * difficulty;
+    if (Math.abs(opponentPaddle.DirectionY) <= speed) {
+        opponentPaddle.Mesh.position.y += opponentPaddle.DirectionY;
+    } else {
+        if (opponentPaddle.DirectionY > speed) {
+            opponentPaddle.Mesh.position.y += speed;
+        } else if (opponentPaddle.DirectionY < -speed) {
+            opponentPaddle.Mesh.position.y -= speed;
         }
     }
 }
 
+function RandomSpellCast() {
+    switch (botCollisionCounter) {
+        case 0:
+            if (Math.random() <= 1) {
+                ActivateSpell(opponentPaddle);
+                botCollisionCounter = 0;
+            }
+            break;
+        case 1:
+            if (Math.random() <= 1) {
+                ActivateSpell(opponentPaddle);
+                botCollisionCounter = 0;
+
+            }
+            break;
+        case 2:
+            if (Math.random() <= 1) {
+                ActivateSpell(opponentPaddle);
+                botCollisionCounter = 0;
+
+            }
+            break;
+        case 3:
+            if (Math.random() <= 1) {
+                ActivateSpell(opponentPaddle);
+                botCollisionCounter = 0;
+
+            }
+            break;
+        case 4:
+            if (Math.random() <= 1) {
+                ActivateSpell(opponentPaddle);
+                botCollisionCounter = 0;
+            }
+            break;
+        default:
+            break;
+    }
+}
+
+function BotPaddleMovement()
+{
+    if(ball.DirX < 0)
+    {
+        MovePaddleInCenter(opponentPaddle);
+        return;
+    }
+    if(ball.Mesh.position.x < gameRender.playerField.Mesh.position.x)
+    {
+        CalculateBotPaddleSpeed(ball.Speed, 0.03);
+        return;
+    }
+    if(ball.Mesh.position.x < gameRender.playerField.Mesh.position.x + gameRender.playerField.Width/2)
+    {
+        CalculateBotPaddleSpeed(ball.Speed, 0.3);
+        return;
+    }
+    CalculateBotPaddleSpeed(opponentPaddle.Speed, gameData.difficulty);
+    if(CanActiveSpell(opponentPaddle))
+    {
+        botCollisionCounter++;
+        RandomSpellCast();
+        console.log("Spell try activated");
+    }
+}
+
 const CanActiveSpell = (paddle) => {
-    if(paddle.isSpellActive && !IsBallOnPaddle(paddle)) return false;
-    return Math.abs(ball.Mesh.position.x - paddle.Mesh.position.x) < 50
+    if(paddle.isSpellActive) console.log("Spell already activated");
+    if(!IsBallOnPaddleWidth(paddle)) console.log("Ball not on paddle width");
+    
+    if(paddle.isSpellActive && !IsBallOnPaddleWidth(paddle)) return false;
+    if(!paddle.isPlayer) console.log("Bot ready to cast spell");
+    return IsBallNearPaddle(paddle, paddle.Width * 3);
 };
 
 function ActivateSpell(paddle) {
@@ -32,7 +113,7 @@ function ActivateSpell(paddle) {
         paddle.isSpellActive = false;
         paddle.SpellMesh.visible = false;
     }, 1000);
-}s
+}
 
 function playerPaddleMovement(paddle, leftKey, rightKey, spellKey)
 {
@@ -40,7 +121,7 @@ function playerPaddleMovement(paddle, leftKey, rightKey, spellKey)
     {
         if (paddle.Mesh.position.y < gameRender.playerField.Height * 0.45)
         {
-            paddle.DirectionY = paddle.Speed * 0.5;
+            paddle.DirectionY = paddle.Speed;
         }
         else
         {
@@ -51,7 +132,7 @@ function playerPaddleMovement(paddle, leftKey, rightKey, spellKey)
     {
         if (paddle.Mesh.position.y > -gameRender.playerField.Height * 0.45)
         {
-            paddle.DirectionY = -paddle.Speed * 0.5;
+            paddle.DirectionY = -paddle.Speed;
         }
         else
         {
@@ -67,7 +148,7 @@ function playerPaddleMovement(paddle, leftKey, rightKey, spellKey)
     {
         if(CanActiveSpell(paddle))
         {
-            ActivateSpell(paddle);
+            //ActivateSpell(paddle);
             console.log("Spell activated");
         }
     }
