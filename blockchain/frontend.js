@@ -79,7 +79,7 @@ var contract = new web3.eth.Contract(contractABI, contractAddress);
 
 function setResult(newPlayer, newResult, nameTournament) {
     // Вам также нужно указать аккаунт (адрес кошелька), который будет отправителем транзакции
-    var senderAddress = "0xBcd4042DE499D14e55001CcbB24a551F3b954096";
+    var senderAddress = "0x70997970C51812dc3A010C7d01b50e0d17dc79C8";
 
     // Подготавливаем транзакцию
     var transactionObject = {
