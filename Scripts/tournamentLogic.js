@@ -7,6 +7,8 @@ class Tournament
     currentParticipants = [Player];
     currentPair = [Player];
     winner = "";
+	lastPair;
+	place3;
     OnGameFinished = new CustomEvent("OnGameFinished");
     StartTournament = () =>
     {
@@ -44,11 +46,37 @@ class Tournament
     }
 
     IsValidState() {
+		if (this.currentParticipants.length === 5) {
+			this.place3 =  [this.currentParticipants[1].playerName,
+			this.currentParticipants[2].playerName, 
+			this.currentParticipants[3].playerName,
+			this.currentParticipants[4].playerName];
+		}
+		if (this.currentParticipants.length === 4) {
+			this.place3 =  [this.currentParticipants[1].playerName,
+			this.currentParticipants[2].playerName, 
+			this.currentParticipants[3].playerName];
+		}
+		if (this.currentParticipants.length === 3) {
+			this.lastPair =  [this.currentParticipants[1].playerName,
+			this.currentParticipants[2].playerName];
+		}
         if (this.currentParticipants.length === 2) {
             gameType.tournament = false;
             this.winner = this.currentParticipants[1].playerName;
+			let secondPlace = this.winner === this.lastPair[0] ? this.lastPair[1] : this.lastPair[0];
+		
+			this.place3.splice(this.place3.indexOf(this.winner), 1);
+			this.place3.splice(this.place3.indexOf(secondPlace), 1);
             //TODO add winner on screen
             console.log(this.winner);
+			setResult(this.winner, 1, this.tournamentName);
+			setResult(secondPlace, 2, this.tournamentName);
+			if(this.numberOfParticipants >= 2) {
+				setResult(this.place3[0], 3, this.tournamentName);
+				if (this.numberOfParticipants == 4)
+					setResult(this.place3[1], 3, this.tournamentName);
+			}
             return false;
         }
         this.currentPair[1] = this.currentParticipants[1];

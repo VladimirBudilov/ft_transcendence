@@ -98,9 +98,9 @@ function setResult(newPlayer, newResult, nameTournament) {
 }
 
 // Пример вызова функции setResult
-setResult("Vova", 42, "first");
-setResult("Gevorg", 1, "first");
-setResult("Vitya", 3, "second");
+// setResult("Vova", 42, "first");
+// setResult("Gevorg", 1, "first");
+// setResult("Vitya", 3, "second");
 
 function getResultPlayer(playerName, nameTournament) {
     contract.methods.getResultPlayer(playerName, nameTournament).call()
@@ -121,7 +121,7 @@ function getResultTournament(nameTournament) {
             if (Array.isArray(results[0]) && Array.isArray(results[1]) && results[0].length === results[1].length) {
                 // Используем цикл по индексам
                 for (let i = 0; i < results[0].length; i++) {
-                    console.log("Player: " + results[0][i] + ", Score: " + results[1][i]);
+                    console.log("Player: " + results[0][i] + ", Place: " + results[1][i]);
                 }
             } else {
                 console.error("Invalid results format");
