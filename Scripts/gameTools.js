@@ -18,6 +18,17 @@ function ShowWinner(player) {
 }
 
 function ValidateFirstPlace(winner, loser) {
+	if(tournament.numberOfParticipants == 2)
+	{
+		tournament.firstPlace = tournament.currentPair[winner];
+		tournament.secondPlace = tournament.currentPair[loser];
+		console.log("first: " + tournament.firstPlace.playerName);
+		console.log("second: " + tournament.secondPlace.playerName);
+		tournament.winnersPool = [];
+		tournament.looserPool = [];
+		tournament.currentParticipants = [];
+		return;
+	}
 	if(tournament.firstPlace !== null) return;
 	if(tournament.winnersPool.length === 1 && tournament.currentParticipants.length === 0) {
 		tournament.firstPlace = tournament.currentPair[winner];
