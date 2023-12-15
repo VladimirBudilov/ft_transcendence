@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="">
+	<head>
+		<title>Game</title>
+		<link rel="stylesheet" href="style.css">
+	</head>
+	<body onload='PrepareData()'>
+		<div id='gameCanvas'></div>
+		<script src='./Scripts/three.min.js'></script>
+		<script src='./Scripts/globalData.js'></script>
+		<script src='./Scripts/keyboard.js'></script>
+		<script src='./Scripts/playerControl.js'></script>
+		<script src='./Scripts/tournamentLogic.js'></script>
+		<script src='Scripts/gameStateHandle.js'></script>
+		<script src='./Scripts/objectsPhysics.js'></script>
+		<script src='./Scripts/gameInitialization.js'></script>
+		<script src='Scripts/gameTools.js'></script>
+
+		<!-- Include web3.js using CDN -->
+		<script src="https://cdn.jsdelivr.net/npm/web3@1.6.0/dist/web3.min.js"></script>
+		<script src='blockchain/frontend.js'></script>
+
+		<div id='tournament' style='display: none;'>
+			<label for="userInput">
+				<h1>Enter tournament name</h1>
+			</label><input type="text" id="userInput" placeholder="Enter text here">
+			<button onclick="ReadInput()">Submit</button>
+		</div>
+		<div>
+			<button id='StartGameVsBot' onclick='StartGameVsBot()'>Player VS Bot</button>
+			<button id='StartGameVsPlayer' onclick='StartGameVsPlayer()'>Player VS Player</button>
+			<button id='StartTournament' onclick='StartTournament()'>Start Tournament</button>
+			<button id='StopGame' onclick='StopGame()' style='display: none;'>StopGame</button>
+		</div>
+		<div id='scoreboard'>
+			<h1 id='scores'>0-0</h1>
+			<h1 id='title'>PONG</h1>
+			<h2 id='winnerBoard'>First to score 7 wins!</h2>
+			<h3>A - move left
+			<br>D - move right</h3>
+		</div>
+	</body>
+</html>
