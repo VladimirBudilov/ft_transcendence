@@ -172,7 +172,7 @@ function getResultTournament(nameTournament) {
 }
 
 // Создаем объект tournamentsResult
-const tournamentsResult = {};
+let tournamentsResult;
 
 function getAllResult() {
 	contract.methods.getAllResult().call()
@@ -183,7 +183,7 @@ function getAllResult() {
             const playerNames = results[1];
             const playerScores = results[2];
 
-
+			tournamentsResult = {};
             // Итерируемся по результатам
             for (let i = 0; i < tournamentNames.length; i++) {
                 const tournamentName = tournamentNames[i];
@@ -206,7 +206,7 @@ function getAllResult() {
             for (const tournamentName in tournamentsResult) {
                 console.log("Tournament: " + tournamentName);
                 tournamentsResult[tournamentName].forEach(player => {
-                    console.log("  Player: " + player.playerName + ", Score: " + player.playerScore);
+                    console.log("  Player: " + player.playerName + ", Place: " + player.playerScore);
                 });
             }
 		})
@@ -215,6 +215,6 @@ function getAllResult() {
 		});
 }
 
-getResultTournament("first")
-getAllResult()
+//getResultTournament("first")
+//getAllResult()
 // getResultPlayer("Vova", "first")
