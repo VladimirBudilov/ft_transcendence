@@ -12,8 +12,9 @@ class GameRender{
 class Data{
     playerScore = 0;
     opponentScore = 0;
-    maxScore = 2;
+    maxScore = 1;
     difficulty = 0.6;
+    ballSpeed = 30;
 }
 
 class Lighting
@@ -31,7 +32,7 @@ class Paddle {
     Depth = 10;
     Quality = 10;
     DirectionY = 0;
-    Speed = 6;
+    Speed = 5;
     Material = null;
     isPlayer = false;
     ballDirectionChanged = false;
@@ -43,12 +44,15 @@ class Paddle {
 class Ball {
     DirX = 1;
     DirY = 1;
-    Speed = 7;
+    Speed;
     Radius = 7;
     segments = 100;
     rings = 100;
     Mesh =null;
     Material=null;
+    constructor() {
+        this.Speed = gameData.ballSpeed;
+    }
 }
 
 class Rectangular{
@@ -91,6 +95,6 @@ let stopGame = false;
 let animationId;
 let SpellEvent = new Event("SpellEvent");
 let botCollisionCounter = 0;
-
+let botTryCastSpell = false;
 
 

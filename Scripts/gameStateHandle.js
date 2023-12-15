@@ -6,7 +6,7 @@ function StopGame()
     stopGame = false;
     ball.DirX = 1;
     ball.DirY = 1;
-    ball.Speed = 7;
+    ball.Speed = gameData.ballSpeed;
     gameData.difficulty = 0.2;
     let gameCanvas = document.getElementById("gameCanvas");
     gameCanvas.removeChild(gameRender.renderer.domElement);
@@ -35,11 +35,11 @@ function UpdateVsBot()
         cancelIdleCallback(animationId);
         return;
     }
+    playerPaddleMovement(playerPaddle,Key.W, Key.S, Key.A);
+    BotPaddleMovement();
     ballPhysics();
     UpdateScore();
     paddlePhysics();
-    playerPaddleMovement(playerPaddle,Key.W, Key.S, Key.A);
-    BotPaddleMovement();
     gameRender.renderer.render(gameRender.gameScene, gameRender.gameCamera);
     if(IsGameFinished())
     {

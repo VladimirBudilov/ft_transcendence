@@ -38,9 +38,9 @@ function ballPhysics()
     ball.Mesh.position.y += ball.DirY * ball.Speed;
 }
 
-function IsBallOnPaddleWidth(paddle) {
-        return ball.Mesh.position.y <= paddle.Mesh.position.y + paddle.Height / 1.5
-            && ball.Mesh.position.y >= paddle.Mesh.position.y - paddle.Height / 1.5;
+function IsBallOnPaddleWidth(paddle, offset = 0) {
+        return ball.Mesh.position.y <= paddle.Mesh.position.y + paddle.Height / 1.5 + offset
+            && ball.Mesh.position.y >= paddle.Mesh.position.y - paddle.Height / 1.5 - offset;
 }
 
 function ChangeBallDirection(paddle) {
@@ -48,23 +48,24 @@ function ChangeBallDirection(paddle) {
     if (IsBallOnPaddleWidth(paddle)) {
         paddle.ballDirectionChanged = true;
         ball.DirX = -ball.DirX;
-        ball.DirY = paddle.DirectionY > 0 ? ball.DirY : -ball.DirY;
+        let rndNumber = Math.random() * (0.2 - 0.1) + 0.1;
+        let boost = paddle.DirectionY > gameData.ballSpeed ? gameData.ballSpeed * rndNumber : paddle.DirectionY * rndNumber;
+        ball.DirY = paddle.DirectionY >= 0 ? ball.DirY + boost : -ball.DirY - boost;
         setTimeout(() => {
             paddle.ballDirectionChanged = false;
-        }, 100);
+        }, 500);
     }
 }
 
 function IsBallNearPaddle(paddle, offset = 0) {
     let isNear = false;
     if (paddle.isPlayer) {
-        isNear = ball.Mesh.position.x - ball.Radius + offset <= paddle.Mesh.position.x + paddle.Width
-            && ball.Mesh.position.x - ball.Radius + offset >= paddle.Mesh.position.x - paddle.Width/2;
+        isNear = ball.Mesh.position.x - ball.Radius <= paddle.Mesh.position.x + paddle.Width + offset
+            && ball.Mesh.position.x - ball.Radius >= paddle.Mesh.position.x - paddle.Width/2;
     }
     else {
-        isNear = ball.Mesh.position.x + ball.Radius - offset <= paddle.Mesh.position.x + paddle.Width * 1.5
-            && ball.Mesh.position.x + ball.Radius - offset >= paddle.Mesh.position.x - paddle.Width/2;
-        if(isNear) console.log("Ball near bot paddle");
+        isNear = ball.Mesh.position.x - ball.Radius >= paddle.Mesh.position.x - paddle.Width * 1.5 - offset
+            && ball.Mesh.position.x - ball.Radius <= paddle.Mesh.position.x + paddle.Width/2;
     }
     return isNear;
 }
