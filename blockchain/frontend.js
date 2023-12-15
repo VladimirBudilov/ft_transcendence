@@ -122,8 +122,6 @@ function setResult(newPlayer, newResult, nameTournament) {
 
 // Пример вызова функции setResult
 // setResult("Vova", 42, "first");
-// setResult("Gevorg", 1, "first");
-// setResult("Vitya", 3, "second");
 
 function getResultPlayer(playerName, nameTournament) {
     contract.methods.getResultPlayer(playerName, nameTournament).call()
@@ -135,6 +133,8 @@ function getResultPlayer(playerName, nameTournament) {
         });
 }
 
+let tournamentResultByName;
+
 function getResultTournament(nameTournament) {
     contract.methods.getResultTournament(nameTournament).call()
         .then(function(results) {
@@ -142,18 +142,37 @@ function getResultTournament(nameTournament) {
 
             // Проверяем, что results является массивом и имеет нужные длины
             if (Array.isArray(results[0]) && Array.isArray(results[1]) && results[0].length === results[1].length) {
+                // Создаем объект турнира
+                tournamentResultByName = {
+                    tournamentName: nameTournament,
+                    players: []
+                };
+
                 // Используем цикл по индексам
                 for (let i = 0; i < results[0].length; i++) {
+                    // Выводим результаты в консоль
                     console.log("Player: " + results[0][i] + ", Place: " + results[1][i]);
+
+                    // Добавляем результат в объект турнира
+                    tournamentResultByName.players.push({
+                        playerName: results[0][i],
+                        place: results[1][i]
+                    });
                 }
+
+                // Теперь у вас есть объект tournament, который содержит результаты турнира
+                console.log(tournamentResultByName);
             } else {
                 console.error("Invalid results format");
             }
-        })
+		})
         .catch(function(error) {
             console.error(error);
         });
 }
+
+// Создаем объект tournamentsResult
+const tournamentsResult = {};
 
 function getAllResult() {
 	contract.methods.getAllResult().call()
@@ -164,9 +183,31 @@ function getAllResult() {
             const playerNames = results[1];
             const playerScores = results[2];
 
+
             // Итерируемся по результатам
             for (let i = 0; i < tournamentNames.length; i++) {
-                console.log("Tournament: " + tournamentNames[i] + ", Player: " + playerNames[i] + ", Score: " + playerScores[i]);
+                const tournamentName = tournamentNames[i];
+                const playerName = playerNames[i];
+                const playerScore = playerScores[i];
+
+                // Проверяем, есть ли уже турнир в объекте tournaments
+                if (!tournamentsResult[tournamentName]) {
+                    tournamentsResult[tournamentName] = [];
+                }
+
+                // Добавляем результат в массив турнира
+                tournamentsResult[tournamentName].push({
+                    playerName: playerName,
+                    playerScore: playerScore
+                });
+            }
+
+            // Выводим результаты
+            for (const tournamentName in tournamentsResult) {
+                console.log("Tournament: " + tournamentName);
+                tournamentsResult[tournamentName].forEach(player => {
+                    console.log("  Player: " + player.playerName + ", Score: " + player.playerScore);
+                });
             }
 		})
 		.catch(function(error) {
@@ -174,9 +215,6 @@ function getAllResult() {
 		});
 }
 
-//getResultTournament("first")
+getResultTournament("first")
 getAllResult()
-// getResultTournament("second")
 // getResultPlayer("Vova", "first")
-// getResultPlayer("Gevorg", "first")
-// getResultPlayer("Vitya", "second")
