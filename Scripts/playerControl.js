@@ -31,46 +31,49 @@ function CalculateBotPaddleSpeed(speed, difficulty) {
 
 function RandomSpellCast() {
     switch (botCollisionCounter) {
-        case 0:
-            if (Math.random() <= 1) {
-                ActivateSpell(opponentPaddle);
-                botCollisionCounter = 0;
-            }
-            break;
         case 1:
-            if (Math.random() <= 1) {
+            if (Math.random() <= 0.1) {
                 ActivateSpell(opponentPaddle);
                 botCollisionCounter = 0;
-
             }
             break;
         case 2:
-            if (Math.random() <= 1) {
+            if (Math.random() <= 0.3) {
                 ActivateSpell(opponentPaddle);
                 botCollisionCounter = 0;
 
             }
             break;
         case 3:
-            if (Math.random() <= 1) {
+            if (Math.random() <= 0.6) {
                 ActivateSpell(opponentPaddle);
                 botCollisionCounter = 0;
 
             }
             break;
         case 4:
-            if (Math.random() <= 1) {
+            if (Math.random() <= 0.8) {
                 ActivateSpell(opponentPaddle);
                 botCollisionCounter = 0;
             }
             break;
         default:
+            botCollisionCounter = 0;
             break;
     }
 }
 
 function BotPaddleMovement()
 {
+    if(CanActiveSpell(opponentPaddle) && !botTryCastSpell)
+    {
+        botTryCastSpell = true;
+        botCollisionCounter++;
+        RandomSpellCast();
+        setTimeout(() => {
+            botTryCastSpell = false;
+        }, 2000);
+    }
     if(ball.DirX < 0)
     {
         MovePaddleInCenter(opponentPaddle);
@@ -87,21 +90,11 @@ function BotPaddleMovement()
         return;
     }
     CalculateBotPaddleSpeed(opponentPaddle.Speed, gameData.difficulty);
-    if(CanActiveSpell(opponentPaddle))
-    {
-        botCollisionCounter++;
-        RandomSpellCast();
-        console.log("Spell try activated");
-    }
 }
 
 const CanActiveSpell = (paddle) => {
-    if(paddle.isSpellActive) console.log("Spell already activated");
-    if(!IsBallOnPaddleWidth(paddle)) console.log("Ball not on paddle width");
-    
-    if(paddle.isSpellActive && !IsBallOnPaddleWidth(paddle)) return false;
-    if(!paddle.isPlayer) console.log("Bot ready to cast spell");
-    return IsBallNearPaddle(paddle, paddle.Width * 3);
+    if(paddle.isSpellActive && !IsBallOnPaddleWidth(paddle, paddle.Width/2)) return false;
+    return IsBallNearPaddle(paddle, paddle.Height * 0.5);
 };
 
 function ActivateSpell(paddle) {
@@ -148,8 +141,7 @@ function playerPaddleMovement(paddle, leftKey, rightKey, spellKey)
     {
         if(CanActiveSpell(paddle))
         {
-            //ActivateSpell(paddle);
-            console.log("Spell activated");
+            ActivateSpell(paddle);
         }
     }
 }
