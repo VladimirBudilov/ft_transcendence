@@ -9,12 +9,27 @@ contract Tournaments {
     }
 
     mapping (string => PlayerResult[]) private tournaments;
+	string[] private keys;
 
     function setResult(string memory newPlayer, uint newResult, string memory nameTournament) public {
         tournaments[nameTournament].push(PlayerResult({
             playerName: newPlayer,
             score: newResult
         }));
+
+		// Check if the key is already in the keys array
+        bool keyExists = false;
+        for (uint i = 0; i < keys.length; i++) {
+            if (keccak256(abi.encodePacked(keys[i])) == keccak256(abi.encodePacked(nameTournament))) {
+                keyExists = true;
+                break;
+            }
+        }
+
+        // If the key is not in the keys array, add it
+        if (!keyExists) {
+            keys.push(nameTournament);
+        }
     }
 
     function getResultPlayer(string memory playerName, string memory nameTournament) public view returns (uint) {
@@ -44,5 +59,31 @@ contract Tournaments {
         }
 
         return (playerNames, playerScores);
+    }
+
+	function getAllResult() public view returns (string[] memory, string[] memory, uint[] memory) {
+		uint totalResults = 0;
+		// Подсчитываем общее количество результатов
+		for (uint j = 0; j < keys.length; j++) {
+			totalResults += tournaments[keys[j]].length;
+		}
+		// Выделяем память для массивов с известной длиной
+		string[] memory tournamentsNames = new string[](totalResults);
+		string[] memory playerNames = new string[](totalResults);
+		uint[] memory playerScores = new uint[](totalResults);
+
+		// Заполняем массивы
+		uint index = 0;
+		for (uint j = 0; j < keys.length; j++) {
+			PlayerResult[] storage playerResults = tournaments[keys[j]];
+
+			for (uint i = 0; i < playerResults.length; i++) {
+				tournamentsNames[index] = keys[j];
+				playerNames[index] = playerResults[i].playerName;
+				playerScores[index] = playerResults[i].score;
+				index++;
+			}
+		}
+    	return (tournamentsNames, playerNames, playerScores);
     }
 }

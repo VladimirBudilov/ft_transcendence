@@ -2,6 +2,29 @@ var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
 
 var contractABI = [
     {
+      "inputs": [],
+      "name": "getAllResult",
+      "outputs": [
+        {
+          "internalType": "string[]",
+          "name": "",
+          "type": "string[]"
+        },
+        {
+          "internalType": "string[]",
+          "name": "",
+          "type": "string[]"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "",
+          "type": "uint256[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
       "inputs": [
         {
           "internalType": "string",
@@ -132,7 +155,27 @@ function getResultTournament(nameTournament) {
         });
 }
 
-getResultTournament("first")
+function getAllResult() {
+	contract.methods.getAllResult().call()
+		.then(function(results) {
+			console.log("All results: ");
+			// Распаковываем результаты
+            const tournamentNames = results[0];
+            const playerNames = results[1];
+            const playerScores = results[2];
+
+            // Итерируемся по результатам
+            for (let i = 0; i < tournamentNames.length; i++) {
+                console.log("Tournament: " + tournamentNames[i] + ", Player: " + playerNames[i] + ", Score: " + playerScores[i]);
+            }
+		})
+		.catch(function(error) {
+			console.error(error);
+		});
+}
+
+//getResultTournament("first")
+getAllResult()
 // getResultTournament("second")
 // getResultPlayer("Vova", "first")
 // getResultPlayer("Gevorg", "first")
