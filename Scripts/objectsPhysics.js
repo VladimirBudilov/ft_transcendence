@@ -48,12 +48,24 @@ function ChangeBallDirection(paddle) {
     if (IsBallOnPaddleWidth(paddle)) {
         paddle.ballDirectionChanged = true;
         ball.DirX = -ball.DirX;
-        let rndNumber = Math.random() * (0.2 - 0.1) + 0.1;
-        let boost = paddle.DirectionY > gameData.ballSpeed ? gameData.ballSpeed * rndNumber : paddle.DirectionY * rndNumber;
-        ball.DirY = paddle.DirectionY >= 0 ? ball.DirY + boost : -ball.DirY - boost;
+        let rndNumber = Math.random() * (gameData.slidePunchSpeed - gameData.slidePunchSpeed/3) + gameData.slidePunchSpeed/3;
+        let boost = Math.abs(paddle.DirectionY) > gameData.ballSpeed ? gameData.ballSpeed * rndNumber : 0;
+        ball.DirY = paddle.DirectionY > 0 ? Math.abs(ball.DirY + paddle.DirectionY/5 ) : Math.abs(ball.DirY+ paddle.DirectionY/5 ) * -1;
+        if(paddle.DirectionY === 0) ball.DirY *= -1;
+        ball.Speed += boost;
+        let vector = {
+            x: ball.DirX,
+            y: ball.DirY
+        };
+        let magnitude = Math.sqrt(vector.x * vector.x + vector.y * vector.y);
+        ball.DirX /= magnitude;
+        ball.DirY /= magnitude;
         setTimeout(() => {
             paddle.ballDirectionChanged = false;
-        }, 500);
+        }, 1000);
+        setTimeout(() => {
+            ball.Speed -= boost;
+        }, gameData.slidePunchTime);
     }
 }
 
@@ -94,19 +106,16 @@ function resetBall(loser)
 {
     ball.Mesh.position.x = 0;
     ball.Mesh.position.y = 0;
-    if (loser === 1)
-    {
-        ball.DirX = -1;
-    }
-    else
-    {
-        ball.DirX = 1;
-    }
+    ball.Speed = gameData.ballSpeed;
+    ball.DirX = loser === 1 ? -1: 1;
     ball.DirY = 1;
 }
 
 function IncreaseBallSpeed() {
-        ball.Speed += 0;
+        ball.Speed += gameData.spellSpeed;
+        setTimeout(() => {
+            ball.Speed = gameData.ballSpeed;
+        }, gameData.spellTime);
 }
 
 function ChangeBallColor() {

@@ -7,7 +7,6 @@ function StopGame()
     ball.DirX = 1;
     ball.DirY = 1;
     ball.Speed = gameData.ballSpeed;
-    gameData.difficulty = 0.2;
     let gameCanvas = document.getElementById("gameCanvas");
     gameCanvas.removeChild(gameRender.renderer.domElement);
     cancelAnimationFrame(animationId);

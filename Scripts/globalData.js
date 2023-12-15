@@ -13,8 +13,12 @@ class Data{
     playerScore = 0;
     opponentScore = 0;
     maxScore = 100;
-    difficulty = 0.5;
-    ballSpeed = 3;
+    difficulty = 0.8;
+    ballSpeed = 4.5;
+    spellTime = 3000;
+    slidePunchSpeed = 0.5;
+    slidePunchTime = 1500;
+    spellSpeed = 0.5;
 }
 
 class Lighting
@@ -32,7 +36,7 @@ class Paddle {
     Depth = 10;
     Quality = 10;
     DirectionY = 0;
-    Speed = 5;
+    Speed = 4.5;
     Material = null;
     isPlayer = false;
     ballDirectionChanged = false;
