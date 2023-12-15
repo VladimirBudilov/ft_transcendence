@@ -3,18 +3,22 @@ class Tournament
     tournamentInput = null;
     numberOfParticipants = 0;
     tournamentName = "";
-    participants = [Player];
-    currentParticipants = [Player];
-    currentPair = [Player];
-    winner = "";
-	lastPair;
-	place3;
+    participants = [];
+    currentParticipants = [];
+    winnersPool = [];
+    looserPool = [];
+    currentPair = [];
+    firstPlace = null;
+	secondPlace = null
+	thirdPlace = null;
     OnGameFinished = new CustomEvent("OnGameFinished");
+    winnerBranch = true;
+    gameForThirdPlace = false;
     StartTournament = () =>
     {
+        document.addEventListener("OnGameFinished", this.StartMatch);
         gameType.tournament = true;
         this.currentParticipants = this.participants;
-        document.addEventListener("OnGameFinished", this.StartMatch);
         this.StartMatch();
     }
     StopTournament = () =>{
@@ -26,14 +30,44 @@ class Tournament
         this.tournamentInput = null;
         this.numberOfParticipants = 0;
         this.tournamentName = "";
-        this.participants = [Player];
-        this.currentParticipants = [Player];
-        this.currentPair = [Player];
+        this.participants = [];
+        this.currentParticipants = [];
+        this.currentPair = [];
         this.winner = "";
         ChangeDivStateById("StopGame", false);
     }
     StartMatch = () =>
     {
+        if(this.currentParticipants.length % 2 !== 0)
+        {
+            let player = this.currentParticipants[this.currentParticipants.length - 1]
+            player.isFirstRound = false;
+            this.winnersPool.push(player);
+            this.currentParticipants.splice(this.currentParticipants.length - 1, 1);
+        }
+        if(this.currentParticipants.length === 0 && this.winnersPool.length !== 0)
+        {
+            //start new round
+            this.currentParticipants = this.winnersPool;
+            this.winnersPool = [];
+        }
+        else if(this.currentParticipants.length === 0 && this.winnersPool.length === 0
+        && this.numberOfParticipants > 2 && this.looserPool.length > 1)
+        {
+            //start rounds for 3rd place
+            this.currentParticipants = this.looserPool;
+            this.looserPool = [];
+        }
+         if(this.numberOfParticipants == 2 && this.currentParticipants.length === 0)
+            this.looserPool = [];
+        if(this.numberOfParticipants > 2 && this.firstPlace != null && this.looserPool.length === 1 && this.currentParticipants.length === 0)
+        {
+            this.currentParticipants = this.looserPool;
+            this.currentParticipants.push(this.secondPlace);
+            this.winnersPool = [];
+            this.looserPool = [];
+            this.secondPlace = null;
+        }
         if(!this.IsValidState()) {
             this.StopTournament();
             return;
@@ -46,46 +80,29 @@ class Tournament
     }
 
     IsValidState() {
-		if (this.currentParticipants.length === 5) {
-			this.place3 =  [this.currentParticipants[1].playerName,
-			this.currentParticipants[2].playerName, 
-			this.currentParticipants[3].playerName,
-			this.currentParticipants[4].playerName];
-		}
-		if (this.currentParticipants.length === 4) {
-			this.place3 =  [this.currentParticipants[1].playerName,
-			this.currentParticipants[2].playerName, 
-			this.currentParticipants[3].playerName];
-		}
-		if (this.currentParticipants.length === 3) {
-			this.lastPair =  [this.currentParticipants[1].playerName,
-			this.currentParticipants[2].playerName];
-		}
-        if (this.currentParticipants.length === 2) {
+        if (this.currentParticipants.length === 0
+            && this.winnersPool.length === 0
+            && this.looserPool.length === 0
+        ) {
             gameType.tournament = false;
-            this.winner = this.currentParticipants[1].playerName;
-			let secondPlace = this.winner === this.lastPair[0] ? this.lastPair[1] : this.lastPair[0];
-		
-			this.place3.splice(this.place3.indexOf(this.winner), 1);
-			this.place3.splice(this.place3.indexOf(secondPlace), 1);
-            //TODO add winner on screen
-            console.log(this.winner);
-			setResult(this.winner, 1, this.tournamentName);
-			setResult(secondPlace, 2, this.tournamentName);
-			if(this.numberOfParticipants >= 2) {
-				setResult(this.place3[0], 3, this.tournamentName);
-				if (this.numberOfParticipants == 4)
-					setResult(this.place3[1], 3, this.tournamentName);
-			}
+            console.log("tournament finished");
+            console.log("first: " + this.firstPlace.playerName);
+            setResult(this.firstPlace.playerName, 1, this.tournamentName);
+            console.log("second: " + this.secondPlace.playerName);
+            setResult(this.secondPlace.playerName, 2, this.tournamentName);
+            if(this.numberOfParticipants != 2) {
+                console.log("third: " + this.thirdPlace.playerName);
+                setResult(this.thirdPlace.playerName, 3, this.tournamentName);
+            }
             return false;
         }
+        this.currentPair[0] = this.currentParticipants[0];
         this.currentPair[1] = this.currentParticipants[1];
-        this.currentPair[2] = this.currentParticipants[2];
-        let player1 = this.currentPair[1];
-        let player2 = this.currentPair[2];
+        let player1 = this.currentPair[0];
+        let player2 = this.currentPair[1];
         //TODO add player names on screen
         console.log(player1.playerName + " vs " + player2.playerName);
-        this.currentParticipants.splice(1, 2);
+        this.currentParticipants.splice(0, 2);
         return true;
     }
 }
@@ -149,7 +166,7 @@ function ReadInput() {
     tournament.participants.push(player);
     console.log(tournament.participants);
     document.getElementById("userInput").value = "";
-    if ((tournament.participants.length-1).toString() === tournament.numberOfParticipants.toString()) {
+    if ((tournament.participants.length).toString() === tournament.numberOfParticipants.toString()) {
         const successMessage = document.createElement("p");
         successMessage.textContent = "Reached " + tournament.numberOfParticipants;
         successMessage.style.color = "green";

@@ -43,7 +43,7 @@ class Paddle {
 class Ball {
     DirX = 1;
     DirY = 1;
-    Speed = 2;
+    Speed = 7;
     Radius = 7;
     segments = 100;
     rings = 100;
@@ -71,6 +71,7 @@ class Player {
     playerName = "";
     id = -1;
     score = 0;
+    isFirstRound = true;
     constructor(name, id) {
         this.playerName = name;
         this.id = id; 
