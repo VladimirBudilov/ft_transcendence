@@ -38,6 +38,16 @@ class Tournament
     }
     StartMatch = () =>
     {
+        console.log("start match");
+        console.log("names of losers: " + this.looserPool);
+        console.log("names of winners: " + this.winnersPool);
+        console.log("names of current participants: " + this.currentParticipants);
+        console.log("before validation");
+        if(!this.winnerBranch && this.looserPool.length === 1 && this.currentParticipants.length === 1)
+        {
+            this.currentParticipants.push(this.looserPool[0]);
+            this.looserPool = [];
+        }
         if(this.currentParticipants.length % 2 !== 0)
         {
             let player = this.currentParticipants[this.currentParticipants.length - 1]
@@ -47,15 +57,19 @@ class Tournament
         }
         if(this.currentParticipants.length === 0 && this.winnersPool.length !== 0)
         {
-            //start new round
             this.currentParticipants = this.winnersPool;
             this.winnersPool = [];
         }
         else if(this.currentParticipants.length === 0 && this.winnersPool.length === 0
-        && this.numberOfParticipants > 2 && this.looserPool.length > 1)
+            && this.numberOfParticipants > 2 && this.looserPool.length > 1)
         {
-            //start rounds for 3rd place
             this.currentParticipants = this.looserPool;
+            if(this.currentParticipants.length % 2 !== 0)
+            {
+                let player = this.currentParticipants[this.currentParticipants.length - 1]
+                this.looserPool.push(player);
+                this.currentParticipants.splice(this.currentParticipants.length - 1, 1);
+            }
             this.looserPool = [];
         }
          if(this.numberOfParticipants == 2 && this.currentParticipants.length === 0)
@@ -68,6 +82,11 @@ class Tournament
             this.looserPool = [];
             this.secondPlace = null;
         }
+        console.log("start match");
+        console.log("names of losers: " + this.looserPool.length);
+        console.log("names of winners: " + this.winnersPool.length);
+        console.log("names of current participants: " + this.currentParticipants.length);
+        console.log("after validation");
         if(!this.IsValidState()) {
             this.StopTournament();
             return;
