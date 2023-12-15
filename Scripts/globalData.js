@@ -12,9 +12,9 @@ class GameRender{
 class Data{
     playerScore = 0;
     opponentScore = 0;
-    maxScore = 1;
-    difficulty = 0.6;
-    ballSpeed = 30;
+    maxScore = 100;
+    difficulty = 0.5;
+    ballSpeed = 3;
 }
 
 class Lighting
