@@ -43,10 +43,10 @@ function InitCamera(WIDTH, HEIGHT) {
             NEAR,
             FAR);
     gameRender.gameScene.add(gameRender.gameCamera);
-    gameRender.gameCamera.position.z = 250;
+    gameRender.gameCamera.position.z = 300;
     gameRender.gameCamera.position.x = 0;
-    gameRender.gameCamera.position.y = -100;
-    gameRender.gameCamera.rotation.x = 30 * Math.PI / 360;
+    gameRender.gameCamera.position.y = 0;
+    gameRender.gameCamera.rotation.x = 0;
     gameRender.gameCamera.rotation.y = 0;
     gameRender.gameCamera.rotation.z = 0;
 }
