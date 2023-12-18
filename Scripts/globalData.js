@@ -43,9 +43,11 @@ class Lighting
 {
     spotLight =null;
     pointLight =null;
+    ambientLight =null;
 }
 class Paddle {
     Mesh;
+    
     Spell;
     isSpellActive = false;
     SpellMesh;

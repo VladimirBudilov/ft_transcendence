@@ -12,18 +12,16 @@ function createScene()
     InitCamera(gameRender.WIDTH, gameRender.HEIGHT);
     gameRender.renderer.setSize(gameRender.WIDTH, gameRender.HEIGHT);
     currentCanvas.appendChild(gameRender.renderer.domElement);
-    gameRender.renderer.shadowMapEnabled = true;
     InitGameField();
     InitGround();
-    
+    InitGameTable();
     InitLight();
-    
     InitBall();
-    InitPaddle( playerPaddle, (new THREE.MeshLambertMaterial(
+    InitPaddle( playerPaddle, (new THREE.MeshPhongMaterial(
         {
             color: 0x069E92
         })))
-    InitPaddle(opponentPaddle, (new THREE.MeshLambertMaterial(
+    InitPaddle(opponentPaddle, (new THREE.MeshPhongMaterial(
         {
             color: 0xFE638B
         })))
@@ -58,34 +56,27 @@ function InitBall() {
                 color: 0xFCCA45
             });
     ball.Mesh = new THREE.Mesh(
-        new THREE.SphereGeometry(
+        new THREE.CircleGeometry(
             ball.Radius,
-            ball.segments,
-            ball.rings),
+            ball.segments),
         ball.Material);
     gameRender.gameScene.add(ball.Mesh);
     ball.Mesh.position.x = 0;
     ball.Mesh.position.y = 0;
     ball.Mesh.position.z = ball.Radius;
-    ball.Mesh.receiveShadow = true;
-    ball.Mesh.castShadow = true;
 }
 
 function InitPaddle(paddle, paddle1Material) {
     paddle.Material= paddle1Material;
     paddle.Mesh = new THREE.Mesh(
-        new THREE.CubeGeometry(
+        new THREE.PlaneGeometry(
             paddle.Width,
             paddle.Height,
-            paddle.Depth,
-            paddle.Quality,
             paddle.Quality,
             paddle.Quality),
         paddle.Material);
     gameRender.gameScene.add(paddle.Mesh);
-    paddle.Mesh.receiveShadow = true;
-    paddle.Mesh.castShadow = true;
-
+    paddle.Mesh.position.z = 2;
     paddle.Spell = new THREE.SphereGeometry(
         paddle.Width * 1.6,
         paddle.Quality,
@@ -104,9 +95,9 @@ function InitPaddle(paddle, paddle1Material) {
 
 function InitGround() {
     gameRender.ground.Material =
-        new THREE.MeshLambertMaterial(
+        new THREE.MeshPhongMaterial(
             {
-                color: 0xFCCA45
+                color: 0x041B29 
             });
     gameRender.ground.Mesh = new THREE.Mesh(
         new THREE.CubeGeometry(
@@ -117,45 +108,44 @@ function InitGround() {
             1,
             1),
         gameRender.ground.Material);
-    gameRender.ground.Mesh.position.z = -132;
-    gameRender.ground.Mesh.receiveShadow = true;
+    gameRender.ground.Mesh.position.z = -55;
     gameRender.gameScene.add(gameRender.ground.Mesh);
 }
 
 function InitLight() {
-    lighting.pointLight =
-        new THREE.PointLight(0x404040);
-    lighting.pointLight.position.x = -1000;
+    lighting.pointLight = new THREE.PointLight(0xffffff);
+    lighting.pointLight.position.x = 0;
     lighting.pointLight.position.y = 0;
-    lighting.pointLight.position.z = 1000;
-    lighting.pointLight.intensity = 2.9;
+    lighting.pointLight.position.z = 150;
+    lighting.pointLight.intensity = 2;
     lighting.pointLight.distance = 10000;
     gameRender.gameScene.add(lighting.pointLight);
 
-    lighting.spotLight = new THREE.SpotLight(0xF8D898);
-    lighting.spotLight.position.set(0, 0, 460);
-    lighting.spotLight.intensity = 1.5;
-    lighting.spotLight.castShadow = true;
-    gameRender.gameScene.add(lighting.spotLight);
+/*
+    Ix don't know why but this light is not working. always white screen. *sounds of tears*
+    
+    lighting.ambientLight = new THREE.AmbientLight(0x404040 );
+    lighting.ambientLight.intensity = 0.01; // Adjust the intensity to a lower value
+    gameRender.gameScene.add(lighting.ambientLight);*/
 }
 
 function InitGameField() {
         gameRender.playerField.Width = gameData.playerFieldWidth;
         gameRender.playerField.Height = gameData.playerFieldHeight;
         gameRender.playerField.Quality = gameData.playerFieldQuality;
-        gameRender.playerField.Material = new THREE.MeshLambertMaterial(
+        gameRender.playerField.Material = new THREE.MeshPhongMaterial(
             {
                 color: 0x041B29
             });
     gameRender.playerField.Mesh = new THREE.Mesh(
         new THREE.PlaneGeometry(
-            gameRender.playerField.Width * 0.95,	
+            gameRender.playerField.Width,	
             gameRender.playerField.Height,
             gameRender.playerField.Quality,
             gameRender.playerField.Quality,),
             gameRender.playerField.Material);
     gameRender.gameScene.add(gameRender.playerField.Mesh);
-    gameRender.playerField.Mesh.receiveShadow = true;
+    gameRender.playerField.Mesh.position.z = 0;
 }
 
 function InitGameTable() {
@@ -163,18 +153,18 @@ function InitGameTable() {
     gameRender.table.Material =
         new THREE.MeshLambertMaterial(
             {
-                color: 0x111111
+                //white color
+                color: 0xffffff
             });
     gameRender.table.Mesh = new THREE.Mesh(
-        new THREE.CubeGeometry(
-            gameRender.table.Width * 1.05,
-            gameRender.table.Height * 1.03,
+        new THREE.PlaneGeometry(
+            gameRender.table.Width * 1.135,
+            gameRender.table.Height * 1.137,
             100,
             gameRender.table.Quality,
             gameRender.table.Quality,
             1),
         gameRender.table.Material);
-    gameRender.table.Mesh.position.z = -51;
+    gameRender.table.Mesh.position.z = -52;
     gameRender.gameScene.add(gameRender.table.Mesh);
-    gameRender.table.Mesh.receiveShadow = true;
 }
