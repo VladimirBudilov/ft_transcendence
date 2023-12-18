@@ -13,29 +13,29 @@ function createScene()
     gameRender.renderer.setSize(gameRender.WIDTH, gameRender.HEIGHT);
     currentCanvas.appendChild(gameRender.renderer.domElement);
     gameRender.renderer.shadowMapEnabled = true;
-    InitLight();
     InitGameField();
-    InitGameTable();
+    InitGround();
+    
+    InitLight();
+    
     InitBall();
     InitPaddle( playerPaddle, (new THREE.MeshLambertMaterial(
         {
-            color: 0x1B32C0
+            color: 0x069E92
         })))
     InitPaddle(opponentPaddle, (new THREE.MeshLambertMaterial(
         {
-            color: 0xFF4045
+            color: 0xFE638B
         })))
     playerPaddle.Mesh.position.x = -gameRender.playerField.Width/2 + playerPaddle.Width;
     opponentPaddle.Mesh.position.x =  gameRender.playerField.Width/2 - opponentPaddle.Width;
-    InitGround();
-    InitLight();
 }
 
 function InitCamera(WIDTH, HEIGHT) {
     let VIEW_ANGLE = 50,
         ASPECT = WIDTH / HEIGHT,
         NEAR = 0.1,
-        FAR = 1000;
+        FAR = 10000;
     gameRender.gameCamera =
         new THREE.PerspectiveCamera(
             VIEW_ANGLE,
@@ -43,7 +43,7 @@ function InitCamera(WIDTH, HEIGHT) {
             NEAR,
             FAR);
     gameRender.gameScene.add(gameRender.gameCamera);
-    gameRender.gameCamera.position.z = 300;
+    gameRender.gameCamera.position.z = 400;
     gameRender.gameCamera.position.x = 0;
     gameRender.gameCamera.position.y = 0;
     gameRender.gameCamera.rotation.x = 0;
@@ -55,7 +55,7 @@ function InitBall() {
     ball.Material =
         new THREE.MeshPhongMaterial(
             {
-                color: 0xD43001
+                color: 0xFCCA45
             });
     ball.Mesh = new THREE.Mesh(
         new THREE.SphereGeometry(
@@ -106,7 +106,7 @@ function InitGround() {
     gameRender.ground.Material =
         new THREE.MeshLambertMaterial(
             {
-                color: 0x888888
+                color: 0xFCCA45
             });
     gameRender.ground.Mesh = new THREE.Mesh(
         new THREE.CubeGeometry(
@@ -124,7 +124,7 @@ function InitGround() {
 
 function InitLight() {
     lighting.pointLight =
-        new THREE.PointLight(0xF8D898);
+        new THREE.PointLight(0x404040);
     lighting.pointLight.position.x = -1000;
     lighting.pointLight.position.y = 0;
     lighting.pointLight.position.z = 1000;
@@ -140,12 +140,12 @@ function InitLight() {
 }
 
 function InitGameField() {
-        gameRender.playerField.Width = 400;
-        gameRender.playerField.Height = 200;
-        gameRender.playerField.Quality = 10;
+        gameRender.playerField.Width = gameData.playerFieldWidth;
+        gameRender.playerField.Height = gameData.playerFieldHeight;
+        gameRender.playerField.Quality = gameData.playerFieldQuality;
         gameRender.playerField.Material = new THREE.MeshLambertMaterial(
             {
-                color: 0x4BD121
+                color: 0x041B29
             });
     gameRender.playerField.Mesh = new THREE.Mesh(
         new THREE.PlaneGeometry(

@@ -120,7 +120,7 @@ function IncreaseBallSpeed() {
 
 function ChangeBallColor() {
     let color = Math.floor(Math.random() * 16777215).toString(16);
-    ball.Material.color.setHex(color);
+//    ball.Material.color.setHex(color);
 }
 
 document.addEventListener("SpellEvent", IncreaseBallSpeed);

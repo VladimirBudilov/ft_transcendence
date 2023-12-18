@@ -13,5 +13,6 @@ function scaleScene(scaleFactor) {
 	gameRender.gameScene.traverse(function (object) {
 			object.scale.multiplyScalar(scaleFactor);
 	});
+	
 }
 

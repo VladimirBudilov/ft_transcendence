@@ -13,6 +13,17 @@ class GameRender{
     }
 }
 
+class Vector3{
+    x=0;
+    y=0;
+    z=0;
+    constructor(x, y, z) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
+}
+
 class Data{
     playerScore = 0;
     opponentScore = 0;
@@ -23,6 +34,9 @@ class Data{
     slidePunchSpeed = 0.5;
     slidePunchTime = 1500;
     spellSpeed = 0.5;
+    playerFieldWidth = 400;
+    playerFieldHeight = 200;
+    playerFieldQuality = 100;
 }
 
 class Lighting
