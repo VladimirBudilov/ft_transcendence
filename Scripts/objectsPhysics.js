@@ -64,7 +64,7 @@ function ChangeBallDirection(paddle) {
             paddle.ballDirectionChanged = false;
         }, 1000);
         setTimeout(() => {
-            ball.Speed -= boost;
+            ball.Speed = gameData.ballSpeed;
         }, gameData.slidePunchTime);
     }
 }
@@ -107,8 +107,8 @@ function resetBall(loser)
     ball.Mesh.position.x = 0;
     ball.Mesh.position.y = 0;
     ball.Speed = gameData.ballSpeed;
-    ball.DirX = loser === 1 ? -1: 1;
-    ball.DirY = 1;
+    ball.DirX = loser === 1 ? -0.5 : 0.5;
+    ball.DirY = 0.5;
 }
 
 function IncreaseBallSpeed() {

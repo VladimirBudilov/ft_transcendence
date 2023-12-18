@@ -104,7 +104,6 @@ const CanActiveSpell = (paddle) => {
 
 function ActivateSpell(paddle) {
     document.dispatchEvent(SpellEvent);
-    console.log("Spell activated" + ball.Speed);
     paddle.isSpellActive = true;
     paddle.SpellMesh.visible = true;
     paddle.SpellMesh.position = paddle.Mesh.position;
