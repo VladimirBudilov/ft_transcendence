@@ -1,12 +1,16 @@
 class GameRender{
-    WIDTH = 640;
-    HEIGHT = 360;
+    WIDTH = window.innerWidth/2;
+    HEIGHT = window.innerHeight/2;
     renderer =null;
     gameScene =null;
     gameCamera =null;
     playerField = new Rectangular();
     table = new Rectangular();
     ground = new Rectangular();
+    SetWindowSize(width, height) {
+        this.WIDTH = width/2;
+        this.HEIGHT = height/2;
+    }
 }
 
 class Data{
