@@ -7,9 +7,23 @@ class GameRender{
     playerField = new Rectangular();
     table = new Rectangular();
     ground = new Rectangular();
-    SetWindowSize(width, height) {
-        this.WIDTH = width/2;
-        this.HEIGHT = height/2;
+    SetWindowSize(newWidth, newHeight) {
+        let Wscale = (newWidth/2) / this.WIDTH;
+        let Hscale = (newHeight/2) / this.HEIGHT;
+        this.WIDTH = newWidth/2;
+        this.HEIGHT = newHeight/2;
+        gameData.playerFieldWidth *= Wscale;
+        gameData.playerFieldHeight *= Hscale;
+        if(Wscale < 1 || Hscale < 1)
+        {
+            return Wscale < Hscale ? Wscale : Hscale;
+        }
+        this.renderer.setSize(newWidth, newHeight);
+        if(Wscale > 1 || Hscale > 1)
+        {
+            return Wscale > Hscale ? Wscale : Hscale;
+        }
+        return 1;
     }
 }
 
@@ -34,9 +48,10 @@ class Data{
     slidePunchSpeed = 0.5;
     slidePunchTime = 1500;
     spellSpeed = 0.5;
-    playerFieldWidth = 400;
-    playerFieldHeight = 200;
+    playerFieldWidth = gameRender.WIDTH/2;
+    playerFieldHeight = gameRender.HEIGHT/2;
     playerFieldQuality = 100;
+    bounceTime = 100;
 }
 
 class Lighting

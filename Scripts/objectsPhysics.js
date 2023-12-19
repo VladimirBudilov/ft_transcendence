@@ -62,7 +62,7 @@ function ChangeBallDirection(paddle) {
         ball.DirY /= magnitude;
         setTimeout(() => {
             paddle.ballDirectionChanged = false;
-        }, 1000);
+        }, gameData.bounceTime);
         setTimeout(() => {
             ball.Speed = gameData.ballSpeed;
         }, gameData.slidePunchTime);
