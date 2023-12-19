@@ -105,11 +105,12 @@ const CanActiveSpell = (paddle) => {
 function ActivateSpell(paddle) {
     document.dispatchEvent(SpellEvent);
     paddle.isSpellActive = true;
-    paddle.SpellMesh.visible = true;
-    paddle.SpellMesh.position = paddle.Mesh.position;
+    //TODO add sclaling
+    //paddle.SpellMesh.visible = true;
     setTimeout(() => {
         paddle.isSpellActive = false;
-        paddle.SpellMesh.visible = false;
+        //TODO tern off scaling
+        //paddle.SpellMesh.visible = false;
     }, gameData.spellTime);
 }
 

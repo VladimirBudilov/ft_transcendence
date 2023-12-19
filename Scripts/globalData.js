@@ -71,6 +71,8 @@ class Paddle {
     Spell;
     isSpellActive = false;
     SpellMesh;
+    leftPart;
+    rightPart;
     Width = 10;
     Height = 30;
     Depth = 10;

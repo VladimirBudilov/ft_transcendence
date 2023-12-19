@@ -12,8 +12,14 @@ function UpdateScore() {
     }
 }
 
-function updateSpellPosition(paddle) {
-    paddle.SpellMesh.position = paddle.Mesh.position;
+function updatePaddlePosition(paddle) {
+    paddle.leftPartMesh.position.z = paddle.Mesh.position.z;
+    paddle.rightPartMesh.position.z = paddle.Mesh.position.z;
+    paddle.leftPartMesh.position.x = paddle.Mesh.position.x;
+    paddle.rightPartMesh.position.x = paddle.Mesh.position.x;
+    paddle.leftPartMesh.position.y = paddle.Mesh.position.y + paddle.Height/2;
+    paddle.rightPartMesh.position.y = paddle.Mesh.position.y - paddle.Height/2;
+    //TODO update paddle left and right parts position
 }
 
 function ballPhysics()
@@ -92,7 +98,7 @@ function HandlePlayerPaddleMovement(paddle) {
     else {
         ChangeBallDirection(paddle);
     }
-    updateSpellPosition(paddle);
+    updatePaddlePosition(paddle);
 }
 
 
@@ -100,6 +106,8 @@ function paddlePhysics()
 {
     HandlePlayerPaddleMovement(playerPaddle);
     HandlePlayerPaddleMovement(opponentPaddle);
+    updatePaddlePosition(playerPaddle);
+    updatePaddlePosition(opponentPaddle);
 }
 
 function resetBall(loser)

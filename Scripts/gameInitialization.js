@@ -77,10 +77,24 @@ function InitPaddle(paddle, paddle1Material) {
         paddle.Material);
     gameRender.gameScene.add(paddle.Mesh);
     paddle.Mesh.position.z = 2;
-    paddle.Spell = new THREE.SphereGeometry(
-        paddle.Width * 1.6,
-        paddle.Quality,
+    let leftPart = new THREE.CircleGeometry(
+        paddle.Width/2,
         paddle.Quality);
+    let rightPart = new THREE.CircleGeometry(
+        paddle.Width/2,
+        paddle.Quality);
+    paddle.leftPartMesh = new THREE.Mesh(
+        leftPart,
+        paddle.Material);
+    paddle.rightPartMesh = new THREE.Mesh(
+        rightPart,
+        paddle.Material);
+    gameRender.gameScene.add(paddle.leftPartMesh);
+    gameRender.gameScene.add(paddle.rightPartMesh);
+    updatePaddlePosition(paddle);
+    
+    /*
+     Skill object deprecated
     paddle.SpellMesh = new THREE.Mesh(
         paddle.Spell,
         new THREE.MeshPhongMaterial(
@@ -90,7 +104,7 @@ function InitPaddle(paddle, paddle1Material) {
     paddle.SpellMesh.visible = false;
     gameRender.gameScene.add(paddle.SpellMesh);
     paddle.SpellMesh.receiveShadow = true;
-    paddle.SpellMesh.castShadow = true;
+    paddle.SpellMesh.castShadow = true;*/
 }
 
 function InitGround() {
