@@ -46,8 +46,8 @@ class Data{
     slidePunchSpeed = 0.5;
     slidePunchTime = 1500;
     spellSpeed = 0.5;
-    playerFieldWidth = gameRender.WIDTH;
-    playerFieldHeight = gameRender.HEIGHT * 0.8;
+    playerFieldWidth = 640;
+    playerFieldHeight = 480;
     playerFieldQuality = 100;
     bounceTime = 100;
     startCameraPosition = this.playerFieldHeight*1.3;

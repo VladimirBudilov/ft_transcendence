@@ -108,7 +108,7 @@ function InitGround() {
             1,
             1),
         gameRender.ground.Material);
-    gameRender.ground.Mesh.position.z = -55;
+    gameRender.ground.Mesh.position.z = -5;
     gameRender.gameScene.add(gameRender.ground.Mesh);
 }
 
@@ -158,13 +158,13 @@ function InitGameTable() {
             });
     gameRender.table.Mesh = new THREE.Mesh(
         new THREE.PlaneGeometry(
-            gameRender.table.Width * 1.135,
-            gameRender.table.Height * 1.137,
+            gameRender.table.Width * 1.007,
+            gameRender.table.Height * 1.008,
             100,
             gameRender.table.Quality,
             gameRender.table.Quality,
             1),
         gameRender.table.Material);
-    gameRender.table.Mesh.position.z = -52;
+    gameRender.table.Mesh.position.z = -0.4;
     gameRender.gameScene.add(gameRender.table.Mesh);
 }
