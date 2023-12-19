@@ -98,6 +98,7 @@ function BotPaddleMovement()
 }
 
 const CanActiveSpell = (paddle) => {
+    if(paddle.isSpellActive) return false;
     if(paddle.isSpellActive && !IsBallOnPaddleWidth(paddle, paddle.Width/2)) return false;
     return IsBallNearPaddle(paddle, paddle.Height * 0.5);
 };
@@ -105,13 +106,14 @@ const CanActiveSpell = (paddle) => {
 function ActivateSpell(paddle) {
     document.dispatchEvent(SpellEvent);
     paddle.isSpellActive = true;
-    //TODO add sclaling
-    //paddle.SpellMesh.visible = true;
+    for(let i = 1.1; i <= 1.4; i+=0.1)
+    {
+        paddle.ScalePaddle(i);
+    }
     setTimeout(() => {
         paddle.isSpellActive = false;
-        //TODO tern off scaling
-        //paddle.SpellMesh.visible = false;
-    }, gameData.spellTime);
+        paddle.OriginalScalePaddle();
+    }, 300);
 }
 
 function playerPaddleMovement(paddle, leftKey, rightKey, spellKey)

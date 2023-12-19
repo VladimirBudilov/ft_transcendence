@@ -61,16 +61,12 @@ class Data{
 
 class Lighting
 {
-    spotLight =null;
     pointLight =null;
-    ambientLight =null;
 }
 class Paddle {
     Mesh;
     
-    Spell;
     isSpellActive = false;
-    SpellMesh;
     leftPart;
     rightPart;
     Width = 10;
@@ -84,6 +80,18 @@ class Paddle {
     ballDirectionChanged = false;
     constructor(type) {
         this.isPlayer = type;
+    }
+    ScalePaddle(scale) {
+        this.Mesh.scale.y *= scale;
+        this.Height *= scale;
+        this.Mesh.scale.z *= scale;
+        this.Depth *= scale;
+    }
+    OriginalScalePaddle() {
+        this.Mesh.scale.y = 1;
+        this.Height = 30;
+        this.Mesh.scale.z = 1;
+        this.Depth = 10;
     }
 }
 

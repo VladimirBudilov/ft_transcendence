@@ -19,7 +19,6 @@ function updatePaddlePosition(paddle) {
     paddle.rightPartMesh.position.x = paddle.Mesh.position.x;
     paddle.leftPartMesh.position.y = paddle.Mesh.position.y + paddle.Height/2;
     paddle.rightPartMesh.position.y = paddle.Mesh.position.y - paddle.Height/2;
-    //TODO update paddle left and right parts position
 }
 
 function ballPhysics()
