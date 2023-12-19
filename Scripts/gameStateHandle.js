@@ -19,6 +19,7 @@ function StartGameVsBot()
 {
     if(startPlaying)
         return;
+    gameData.UpdateScreenData();
     startPlaying = true;
     ChangeDivStateById("StopGame", true);
     PrepareData();
@@ -50,6 +51,7 @@ function UpdateVsBot()
 
 function StartGameVsPlayer()
 {
+    gameData.UpdateScreenData();
     ChangeDivStateById("StopGame", true);
     PrepareData();
     createScene();

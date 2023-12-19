@@ -1,6 +1,6 @@
 class GameRender{
-    WIDTH = window.innerWidth/2;
-    HEIGHT = window.innerHeight/2;
+    WIDTH = window.innerWidth * 0.6;
+    HEIGHT = window.innerHeight * 0.4;
     renderer =null;
     gameScene =null;
     gameCamera =null;
@@ -8,12 +8,10 @@ class GameRender{
     table = new Rectangular();
     ground = new Rectangular();
     SetWindowSize(newWidth, newHeight) {
-        let Wscale = (newWidth/2) / this.WIDTH;
-        let Hscale = (newHeight/2) / this.HEIGHT;
-        this.WIDTH = newWidth/2;
-        this.HEIGHT = newHeight/2;
-        gameData.playerFieldWidth *= Wscale;
-        gameData.playerFieldHeight *= Hscale;
+        let Wscale = (newWidth * 0.6) / this.WIDTH;
+        let Hscale = (newHeight * 0.4) / this.HEIGHT;
+        this.WIDTH = newWidth * 0.6;
+        this.HEIGHT = newHeight * 0.4;
         if(Wscale < 1 || Hscale < 1)
         {
             return Wscale < Hscale ? Wscale : Hscale;
@@ -48,10 +46,17 @@ class Data{
     slidePunchSpeed = 0.5;
     slidePunchTime = 1500;
     spellSpeed = 0.5;
-    playerFieldWidth = gameRender.WIDTH/2;
-    playerFieldHeight = gameRender.HEIGHT/2;
+    playerFieldWidth = gameRender.WIDTH;
+    playerFieldHeight = gameRender.HEIGHT * 0.8;
     playerFieldQuality = 100;
     bounceTime = 100;
+    startCameraPosition = this.playerFieldHeight*1.3;
+    maxCameraPosition = 220;
+    UpdateScreenData() {
+        this.playerFieldWidth = gameRender.WIDTH;
+        this.playerFieldHeight = gameRender.HEIGHT * 0.8;
+        this.startCameraPosition = this.playerFieldHeight*1.4;
+    }
 }
 
 class Lighting
