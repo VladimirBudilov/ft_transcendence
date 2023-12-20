@@ -4,8 +4,6 @@ function StopGame()
     gameData.opponentScore = 0;
     startPlaying = false;
     stopGame = false;
-    ball.DirX = 1;
-    ball.DirY = 1;
     ball.Speed = gameData.ballSpeed;
     let gameCanvas = document.getElementById("gameCanvas");
     gameCanvas.removeChild(gameRender.renderer.domElement);
@@ -47,6 +45,7 @@ function UpdateVsBot()
         return;
     }
     animationId = requestAnimationFrame(UpdateVsBot);
+    console.log("DirX: " + ball.DirX + " DirY: " + ball.DirY + " Speed: " + ball.Speed);
 }
 
 function StartGameVsPlayer()

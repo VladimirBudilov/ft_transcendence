@@ -21,13 +21,15 @@ function updatePaddlePosition(paddle) {
     paddle.rightPartMesh.position.y = paddle.Mesh.position.y - paddle.Height/2;
 }
 
+let paddleBounced = false;
 function ballPhysics()
 {
-    if (ball.Mesh.position.y <= -gameRender.playerField.Height/2)
+    if(paddleBounced) return;
+    if (ball.Mesh.position.y - ball.Radius <= -gameRender.playerField.Height/2)
     {
         ball.DirY =  -ball.DirY;
     }
-    if (ball.Mesh.position.y >= gameRender.playerField.Height/2)
+    if (ball.Mesh.position.y + ball.Radius >= gameRender.playerField.Height/2)
     {
         ball.DirY = -ball.DirY;
     }
@@ -41,6 +43,9 @@ function ballPhysics()
     }
     ball.Mesh.position.x += ball.DirX * ball.Speed;
     ball.Mesh.position.y += ball.DirY * ball.Speed;
+    setTimeout(() => {
+        paddleBounced = false;
+    }, gameData.bounceTime);
 }
 
 function IsBallOnPaddleWidth(paddle, offset = 0) {
