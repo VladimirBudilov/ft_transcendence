@@ -61,11 +61,11 @@ function StartGameVsPlayer()
 
 function UpdateVsPlayer()
 {
+    playerPaddleMovement(playerPaddle, Key.W, Key.S, Key.A);
+    playerPaddleMovement(opponentPaddle, Key.I, Key.K, Key.L);
     ballPhysics();
     UpdateScore();
     paddlePhysics();
-    playerPaddleMovement(playerPaddle, Key.W, Key.S, Key.A);
-    playerPaddleMovement(opponentPaddle, Key.I, Key.K, Key.L);
     gameRender.renderer.render(gameRender.gameScene, gameRender.gameCamera);
     if(IsGameFinished())
     {
