@@ -25,21 +25,32 @@ let paddleBounced = false;
 function ballPhysics()
 {
     if(paddleBounced) return;
+    let rand = Math.random() * 0.3;
+    
+    
     if (ball.Mesh.position.y - ball.Radius <= -gameRender.playerField.Height/2)
     {
         ball.DirY =  -ball.DirY;
+        if(ball.DirX > 0)
+            ball.DirX = ball.DirX < 0.3 ? 0.3 : ball.DirX;
+        else
+            ball.DirX = ball.DirX > -0.3 ? -0.3 : ball.DirX;
     }
     if (ball.Mesh.position.y + ball.Radius >= gameRender.playerField.Height/2)
     {
         ball.DirY = -ball.DirY;
+        if(ball.DirX > 0)
+            ball.DirX = ball.DirX < 0.3 ? 0.3 : ball.DirX;
+        else
+            ball.DirX = ball.DirX > -0.3 ? -0.3 : ball.DirX;
     }
-    if (ball.DirY > ball.Speed)
+    if (ball.DirY > 1)
     {
-        ball.DirY = ball.Speed;
+        ball.DirY = 1;
     }
-    else if (ball.DirY < -ball.Speed)
+    else if (ball.DirY < -1)
     {
-        ball.DirY = -ball.Speed;
+        ball.DirY = -1;
     }
     ball.Mesh.position.x += ball.DirX * ball.Speed;
     ball.Mesh.position.y += ball.DirY * ball.Speed;
@@ -73,9 +84,9 @@ function ChangeBallDirection(paddle) {
         setTimeout(() => {
             paddle.ballDirectionChanged = false;
         }, gameData.bounceTime);
-        setTimeout(() => {
-            ball.Speed = gameData.ballSpeed;
-        }, gameData.slidePunchTime);
+        gameData.allTimeouts.push(setTimeout(() => {
+            ball.Speed -= boost;
+        }, gameData.slidePunchTime))
     }
 }
 
@@ -125,9 +136,9 @@ function resetBall(loser)
 
 function IncreaseBallSpeed() {
         ball.Speed += gameData.spellSpeed;
-        setTimeout(() => {
-            ball.Speed = gameData.ballSpeed;
-        }, gameData.spellTime);
+        gameData.allTimeouts.push(setTimeout(() => {
+            ball.Speed -= gameData.spellSpeed;
+        }, gameData.spellTime));
 }
 
 function ChangeBallColor() {

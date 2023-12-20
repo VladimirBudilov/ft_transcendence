@@ -1,5 +1,6 @@
 function StopGame()
 {
+    for(let timeout of gameData.allTimeouts) {clearTimeout(timeout);}
     gameData.playerScore = 0;
     gameData.opponentScore = 0;
     startPlaying = false;
@@ -45,7 +46,6 @@ function UpdateVsBot()
         return;
     }
     animationId = requestAnimationFrame(UpdateVsBot);
-    console.log("DirX: " + ball.DirX + " DirY: " + ball.DirY + " Speed: " + ball.Speed);
 }
 
 function StartGameVsPlayer()

@@ -115,13 +115,13 @@ function ActivateSpell(paddle) {
         paddle.OriginalScalePaddle();
     }, 300);
 }
-
+let tryToUseSkill = false;
 function playerPaddleMovement(paddle, leftKey, rightKey, spellKey)
 {
     let border= 0.42;
     if (Key.isDown(leftKey))
     {
-        if (paddle.Mesh.position.y < gameRender.playerField.Height * border)
+        if (paddle.Mesh.position.y < gameRender.playerField.Height/2 - paddle.Height/2 -paddle.Width/2)
         {
             paddle.DirectionY = paddle.Speed;
         }
@@ -132,7 +132,7 @@ function playerPaddleMovement(paddle, leftKey, rightKey, spellKey)
     }
     else if (Key.isDown(rightKey))
     {
-        if (paddle.Mesh.position.y > -gameRender.playerField.Height * border)
+        if (paddle.Mesh.position.y > -gameRender.playerField.Height/2 + paddle.Height/2 + paddle.Width/2)
         {
             paddle.DirectionY = -paddle.Speed;
         }
@@ -148,9 +148,14 @@ function playerPaddleMovement(paddle, leftKey, rightKey, spellKey)
     paddle.Mesh.position.y += paddle.DirectionY;
     if (Key.isDown(spellKey))
     {
+        if(tryToUseSkill) return;
+        tryToUseSkill = true;
         if(CanActiveSpell(paddle))
         {
             ActivateSpell(paddle);
         }
+        setTimeout(() => {
+            tryToUseSkill = false;
+        }, 1000);
     }
 }

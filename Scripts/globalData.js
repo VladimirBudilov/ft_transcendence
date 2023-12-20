@@ -52,6 +52,7 @@ class Data{
     bounceTime = 100;
     startCameraPosition = this.playerFieldHeight*1.3;
     maxCameraPosition = 220;
+    allTimeouts = [];
     UpdateScreenData() {
         this.playerFieldWidth = gameRender.WIDTH;
         this.playerFieldHeight = gameRender.HEIGHT * 0.8;
