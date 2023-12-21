@@ -1,0 +1,153 @@
+* {
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'Font';
+  src: url('font/SourceCodePro-Italic-VariableFont_wght.ttf') format('woff2');
+  src: url('font/SourceCodePro-VariableFont_wght.ttf') format('woff2');
+  
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Source Code Pro', monospace;
+    font-size: 100%;
+    height: 100%;
+}
+
+.hero {
+    background-color: #fefae9;
+    background-image: url('/src/static/1217.gif'); /* Путь к вашей картинке */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 93vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    animation: spin 4s infinite;
+}
+
+
+.w-30 {
+    width: 30%;
+}
+
+.btn-primary {
+  background: #FE638B;
+  border: none;
+  color: #041b29;
+  font-weight: bold;
+  /* letter-spacing: -1px; */
+  transition: 0.3s;
+}
+
+.btn-primary:hover {
+  background: #069E92;
+  color: #041b29;
+}
+
+.btn-primary:active {
+  background: #041b29 !important; 
+  color: #ffffff !important;
+}
+  
+button {
+    font-family: 'Font', sans-serif;
+    font-size: 100%;
+    border: none;
+    padding: 0.3rem;
+    cursor: pointer;
+    transition: 0.3s;
+    background: none;
+}
+
+.button_menu {
+    border: none;
+    color: #ffffff;
+    
+}
+
+.button_menu:hover {
+  transform: translateY(-3px);
+  transition: 0.3s;
+}
+
+.button_text {
+    font-size: 2rem;
+    color: #041b29;
+    /* letter-spacing: -1px; */
+    font-weight: bold;
+    transition: color 0.2s;  
+}
+
+.button_text:hover {
+  color: #069E92;
+  text-shadow: 1px 1px 1px #041b29;
+}
+
+.button_text:active {
+  transition: color 0s;
+  color: #FE638B;
+  text-shadow: 1px 1px 1px #041b29;
+}
+
+.button_text.active_button_text {
+  color: #FE638B;
+  text-shadow: 1px 1px 1px #041b29;
+}
+
+.logo {
+  justify-content: center;
+}
+
+.logo_text {
+  font-size: 2rem;
+  color: #069E92;
+  font-weight: bold;
+  /* letter-spacing: -1px; */
+}
+
+.nav_bar {
+  background: #041b29;
+  height: 7vh;
+  display: flex;
+  align-items: center;
+}
+
+.img_logo {
+  width: 40vw;
+}
+
+@media screen and (max-width: 768px) {
+  .img_logo {
+    width: 50vw;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .img_logo {
+    width: 60vw;
+  }
+  
+}
+
+.logo_text_menu {
+  font-size: 2rem;
+  color: #041b29;
+  font-weight: bold;
+  /* letter-spacing: -1px; */
+}
+
+.menu-transition {
+
+  
+}
+
+.menu-visible {
+  opacity: 1;
+  transform: translateX(0);
+}

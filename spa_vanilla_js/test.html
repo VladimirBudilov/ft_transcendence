@@ -1,0 +1,15 @@
+<button class="btn">Button 1</button>
+<button class="btn">Button 2</button>
+<button class="btn">Button 3</button>
+<button class="btn">Button 4</button>
+
+
+<script>
+    let btns = document.querySelectorAll('.btn');
+    console.log(btns);
+    btns.forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+            console.log(e.target);
+        });
+    });
+</script>
