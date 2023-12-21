@@ -9,6 +9,7 @@
   
 }
 
+
 body {
     margin: 0;
     padding: 0;
@@ -142,12 +143,7 @@ button {
   /* letter-spacing: -1px; */
 }
 
-.menu-transition {
-
-  
-}
-
-.menu-visible {
-  opacity: 1;
-  transform: translateX(0);
+.game {
+  background: #FCCA45;
+  height: 93vh;
 }

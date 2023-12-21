@@ -18,19 +18,21 @@ export default class Hero {
                 <button class="btn btn-primary me-5" type="submit">Sign In</button>
             </div>      
         </div>
-        <div class="hero">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4">
-                    </div>
-                    <div class="col-lg-4">
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="row logo justify-content-end me-5">
-                            <img class="img_logo m-2" src="/src/static/text_logo.png" alt=""></img>
+        <div id="hero">
+            <div class="hero">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4">
                         </div>
-                        <div id="menu" class="me-5 mt-5">
-                            ${await this.menu.getHtml()}
+                        <div class="col-lg-4">
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="row logo justify-content-end me-5">
+                                <img class="img_logo m-2" src="/src/static/text_logo.png" alt=""></img>
+                            </div>
+                            <div id="menu" class="me-5 mt-5">
+                                ${await this.menu.getHtml()}
+                            </div>
                         </div>
                     </div>
                 </div>

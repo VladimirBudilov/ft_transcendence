@@ -2,39 +2,30 @@ import Hero from './components/Hero.js';
 import NewGameMenu from './components/NewGameMenu.js';
 import MainMenu from './components/MainMenu.js';
 import AboutUs from './components/AboutUs.js';
+import GamePage from './components/GamePage.js';
 
 async function buttonClickHandler(buttonText) {
-
+    console.log(buttonText);
     setTimeout(async () => {
+        
         if (buttonText === "New Game") {
             const newGame = new NewGameMenu();
             document.getElementById('menu').innerHTML = await newGame.getHtml();
 
         } else if (buttonText === "About Us") {
-            const aboutUs = new AboutUs();
-            const modalHtml = await aboutUs.getHtml();
-      
-            // Вставляем HTML модального окна в документ
-            menuContainer.innerHTML = modalHtml;
-      
-            // Активируем модальное окно с помощью Bootstrap
-            const aboutUsModal = new bootstrap.Modal(document.getElementById('aboutUsModal'));
-            aboutUsModal.show();
-      
-            // После закрытия модального окна восстанавливаем исходное содержимое
-            aboutUsModal._element.addEventListener('hidden.bs.modal', function () {
-              menuContainer.innerHTML = originalContent;
-            });
             
-
         } else if (buttonText === "Settings") {
-            // Другие действия...
+            
         } else if (buttonText === "Back") {
             const menu = new MainMenu();
             document.getElementById('menu').innerHTML = await menu.getHtml();
+
+        } else if (buttonText === "Singleplayer") {
+            const gamePage = new GamePage();
+            document.getElementById('hero').innerHTML = await gamePage.getHtml();
         }
 
-    }, 400); // Установите нужное вам время задержки
+    }, 400);
 }
 
 
