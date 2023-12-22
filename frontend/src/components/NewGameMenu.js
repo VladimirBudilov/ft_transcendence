@@ -3,9 +3,9 @@ import MenuButton from "./MenuButton.js";
 export default class NewGameMenu {
     constructor() {
         this.buttons = [
-            new MenuButton("Singleplayer"),
-            new MenuButton("Multiplayer"),
-            new MenuButton("Back"),
+            new MenuButton("Game Mode"),
+            new MenuButton("Tournament"),
+            new MenuButton("Main Menu"),
         ];
         document.title = 'New Game';
     }

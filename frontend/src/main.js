@@ -3,9 +3,12 @@ import NewGameMenu from './components/NewGameMenu.js';
 import MainMenu from './components/MainMenu.js';
 import AboutUs from './components/AboutUs.js';
 import GamePage from './components/GamePage.js';
+import GameMode from './components/GameMode.js';
+import Tournament from './components/Tournament.js';
 
 async function buttonClickHandler(buttonText) {
-    console.log(buttonText);
+
+    
     setTimeout(async () => {
         
         if (buttonText === "New Game") {
@@ -16,16 +19,21 @@ async function buttonClickHandler(buttonText) {
             
         } else if (buttonText === "Settings") {
             
-        } else if (buttonText === "Back") {
+        } else if (buttonText === "Main Menu") {
             const menu = new MainMenu();
             document.getElementById('menu').innerHTML = await menu.getHtml();
 
-        } else if (buttonText === "Singleplayer") {
-            const gamePage = new GamePage();
-            document.getElementById('hero').innerHTML = await gamePage.getHtml();
-        }
+        } else if (buttonText === "Game Mode") {
+            const gameMode = new GameMode();
+            document.getElementById('menu').innerHTML = await gameMode.getHtml();
 
+        } else if (buttonText === "Tournament") {
+            const tournament = new Tournament();
+            document.getElementById('menu').innerHTML = await tournament.getHtml();
+
+        }
     }, 400);
+    
 }
 
 
