@@ -30,9 +30,31 @@ export default class Hero {
                             <div class="row logo justify-content-end me-5">
                                 <img class="img_logo m-2" src="/src/static/text_logo.png" alt=""></img>
                             </div>
-                            <div id="menu" class="me-5 mt-5">
+
+                           <div id="menu" class="me-5 mt-5">
                                 ${await this.menu.getHtml()}
                             </div>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                              <div class="modal-dialog">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                  </div>
+                                  <div class="modal-body">
+                                    ...
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary">Understood</button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+
                         </div>
                     </div>
                 </div>

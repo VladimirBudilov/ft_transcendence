@@ -8,6 +8,7 @@ import Tournament from './components/Tournament.js';
 
 async function buttonClickHandler(buttonText) {
 
+
     
     setTimeout(async () => {
         
@@ -16,6 +17,8 @@ async function buttonClickHandler(buttonText) {
             document.getElementById('menu').innerHTML = await newGame.getHtml();
 
         } else if (buttonText === "About Us") {
+            // const aboutUs = new AboutUs();
+            // aboutUs.findContent(buttonText);
             
         } else if (buttonText === "Settings") {
             
@@ -77,6 +80,14 @@ const router = async () => {
         isMatch (это bool сравнение текущего пути (location.pathname) с путем из объекта route)
 
     */
+        for (const button of document.querySelectorAll('button')) {
+            if (button.textContent.includes("About Us")) {
+                button.setAttribute('data-bs-toggle', 'modal');
+                button.setAttribute('data-bs-target', '#staticBackdrop');
+                // button.setAttribute('id', 'modal_button');
+            }
+        }
+
 
     const potentialMatches = routes.map(route => {
         return {
@@ -136,6 +147,7 @@ window.addEventListener('popstate', router);
 document.addEventListener('DOMContentLoaded', () => {
     router();
 });
+
 
 document.addEventListener('click', async e => {
     if (e.target.className === 'link') {
