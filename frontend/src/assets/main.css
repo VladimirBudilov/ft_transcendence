@@ -150,3 +150,16 @@ button {
   background: #FCCA45;
   height: 93vh;
 }
+
+.modal-content {
+  background: #041b29;
+  color: #069E92;
+}
+
+.modal-header {
+  border-bottom: none;
+}
+
+.modal-footer {
+  border-top: none;
+}

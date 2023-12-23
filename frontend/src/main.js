@@ -80,14 +80,6 @@ const router = async () => {
         isMatch (это bool сравнение текущего пути (location.pathname) с путем из объекта route)
 
     */
-        for (const button of document.querySelectorAll('button')) {
-            if (button.textContent.includes("About Us")) {
-                button.setAttribute('data-bs-toggle', 'modal');
-                button.setAttribute('data-bs-target', '#staticBackdrop');
-                // button.setAttribute('id', 'modal_button');
-            }
-        }
-
 
     const potentialMatches = routes.map(route => {
         return {
@@ -119,6 +111,19 @@ const router = async () => {
 
     const view = new match.route.view();
     document.getElementById('app').innerHTML = await view.getHtml();
+
+    /* после рендеринга дома бежим циклом по всем кнопкам которые получаем с помощью querySelectorAll
+        и если текст кнопки содержит "About Us", то добавляем атрибуты data-bs-toggle и data-bs-target
+        для открытия модального окна
+    */
+
+    for (const button of document.querySelectorAll('button')) {
+        if (button.textContent.includes('About Us')) {
+            button.setAttribute('data-bs-toggle', 'modal');
+            button.setAttribute('data-bs-target', '#staticBackdrop');
+        }
+    }
+
 };
 
 /* 
@@ -147,6 +152,8 @@ window.addEventListener('popstate', router);
 document.addEventListener('DOMContentLoaded', () => {
     router();
 });
+
+
 
 
 document.addEventListener('click', async e => {
