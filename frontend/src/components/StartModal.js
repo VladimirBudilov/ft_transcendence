@@ -25,6 +25,8 @@ export default class StartModal {
                                 <span class="fw-bold" style="color: #FE638B;">Move down:</span> Press the <span class="fw-bold" style="color: #FE638B;">S</span> key<br>
                                 <span class="fw-bold" style="color: #FE638B;">Move right:</span> Press the <span class="fw-bold" style="color: #FE638B;">D</span> key<br>
                             </p>
+                            
+                        <!--
                             <p>
                                 You can also control the menu:
                             </p>
@@ -33,6 +35,8 @@ export default class StartModal {
                                 <span class="fw-bold" style="color: #FE638B;">Move down:</span> Use the Down key <span class="fw-bold" style="color: #FE638B;">(↓)</span><br>
                                 <span class="fw-bold" style="color: #FE638B;">Accept:</span> Enter <span class="fw-bold" style="color: #FE638B;">(⏎)</span><br>
                             </p>
+                        -->
+                        
                         </div>
                         <div class="modal-footer">
                         </div>

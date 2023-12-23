@@ -17,6 +17,7 @@ function findContent(text) {
 }
 
 
+
 async function buttonClickHandler(buttonText) {
     setTimeout(async () => {
         
@@ -49,6 +50,12 @@ async function buttonClickHandler(buttonText) {
             const tournament = new Tournament();
             document.getElementById('menu').innerHTML = await tournament.getHtml();
 
+        } else if (buttonText === "Mute") {
+            if (myAudio.muted) {
+                myAudio.muted = false;
+            } else {
+                myAudio.muted = true;
+            }
         }
     }, 400);
     
@@ -177,13 +184,6 @@ const myAudio = document.getElementById('myAudio');
 myAudio.volume = 0.1;
 
 
-//для громкости кнопки
-// for (const key in audio) {
-//    if (typeof audio[key] === "number") {
-//        console.log(key);
-//    }
-// }
-
 document.addEventListener('click', async e => {
     if (e.target.className === 'link') {
         e.preventDefault();
@@ -193,8 +193,8 @@ document.addEventListener('click', async e => {
         e.preventDefault();
         await buttonClickHandler(e.target.innerHTML);
         findContent("About Us");
+        audio.play();
     }
-    audio.play();
 });
 
 
