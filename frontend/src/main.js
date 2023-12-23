@@ -6,10 +6,18 @@ import GamePage from './components/GamePage.js';
 import GameMode from './components/GameMode.js';
 import Tournament from './components/Tournament.js';
 
+
+function findContent(text) {
+    for (const button of document.querySelectorAll('button')) {
+        if (button.textContent.includes('About Us')) {
+            button.setAttribute('data-bs-toggle', 'modal');
+            button.setAttribute('data-bs-target', '#staticBackdrop');
+        }
+    }
+
+}
+
 async function buttonClickHandler(buttonText) {
-
-
-    
     setTimeout(async () => {
         
         if (buttonText === "New Game") {
@@ -25,7 +33,7 @@ async function buttonClickHandler(buttonText) {
         } else if (buttonText === "Main Menu") {
             const menu = new MainMenu();
             document.getElementById('menu').innerHTML = await menu.getHtml();
-
+            findContent("About Us");        
         } else if (buttonText === "Game Mode") {
             const gameMode = new GameMode();
             document.getElementById('menu').innerHTML = await gameMode.getHtml();
@@ -117,12 +125,7 @@ const router = async () => {
         для открытия модального окна
     */
 
-    for (const button of document.querySelectorAll('button')) {
-        if (button.textContent.includes('About Us')) {
-            button.setAttribute('data-bs-toggle', 'modal');
-            button.setAttribute('data-bs-target', '#staticBackdrop');
-        }
-    }
+    findContent("About Us");
 
 };
 
@@ -164,6 +167,7 @@ document.addEventListener('click', async e => {
     if (e.target.classList.contains('button_text')) {
         e.preventDefault();
         await buttonClickHandler(e.target.innerHTML);
+        findContent("About Us");
     }
 });
 

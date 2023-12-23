@@ -6,28 +6,28 @@ export default class AboutUs {
     async getHtml() {
         return `
             <p>
-                Мы - Виктор, Алексей, Владимир и Геворг, стоящие за созданием 
-                захватывающей игры Ping Pong, реализованной веб-технологиями с 
-                использованием Jango и Vanilla JavaScript. Наша команда разработчиков 
-                объединяет уникальные навыки и страсть к созданию игр, и мы гордимся представить вам ft_transcendence.
+                We are Vladimir, Gevorg, Victor and Alexey behind the creation 
+                of the addictive game Ping Pong, implemented by web technologies 
+                using Jango and Vanilla JavaScript. Our development team combines 
+                unique skills and passion for game creation, 
+                and we are proud to introduce you to ft_transcendence.
             </p>
             <p>
-                Наш проект, основанный на теме ft_transcendence, 
-                предлагает захватывающий и интересный опыт игры 
-                в пинг-понг прямо в веб-браузере. Мы стремились создать 
-                уникальное взаимодействие с игрой, используя последние 
-                веб-технологии и обеспечивая потрясающую графику и игровой процесс.
+                Our project, based on the ft_transcendence theme, offers an 
+                immersive and fun experience of playing ping pong right in a 
+                web browser. We aimed to create a unique interaction with the game, 
+                utilizing the latest web technologies and providing 
+                stunning graphics and gameplay.
             </p>
             <p>
-                Нашей целью было не просто создать игру, но и сделать 
-                ее интересной и доступной для всех. Мы уделили 
-                внимание деталям, чтобы обеспечить вас увлекательным и уникальным 
-                опытом игры в Ping Pong. Спасибо, 
-                что присоединились к нам в этом захватывающем приключении!
+                Our goal was not just to create a game, but to make it 
+                fun and accessible to everyone. We paid attention to detail 
+                to provide you with an exciting and unique experience playing 
+                Ping Pong. Thank you for joining us on this exciting adventure!
             </p>
             <p>
-            С любовью,<br>
-            Команда разработчиков ft_transcendence
+                With Love,<br>
+                ft_transcendence Development Team
             </p>
 
         `;

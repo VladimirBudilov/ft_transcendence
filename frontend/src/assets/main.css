@@ -32,9 +32,18 @@ body {
     animation: spin 4s infinite;
 }
 
-
 .w-30 {
     width: 30%;
+}
+
+.padding-2 {
+    padding: 0.5rem!important;
+}
+@media screen and (max-width: 391px) {
+    .padding-2 {
+        padding: 0!important;
+    }
+  
 }
 
 .btn-primary {
@@ -42,7 +51,6 @@ body {
   border: none;
   color: #041b29;
   font-weight: bold;
-  /* letter-spacing: -1px; */
   transition: 0.3s;
 }
 
@@ -80,7 +88,6 @@ button {
 .button_text {
     font-size: 2rem;
     color: #041b29;
-    /* letter-spacing: -1px; */
     font-weight: bold;
     transition: color 0.2s;
 }
@@ -97,12 +104,6 @@ button {
 
 }
 
-
-/* .button_text.active_button_text {
-  color: #FE638B;
-  text-shadow: 1px 1px 1px #041b29;
-} */
-
 .logo {
   justify-content: center;
 }
@@ -112,7 +113,6 @@ button {
   color: #069E92;
   font-weight: bold;
   text-decoration: none;
-  /* letter-spacing: -1px; */
 }
 
 .nav_bar {
@@ -125,13 +125,11 @@ button {
 .img_logo {
   width: 40vw;
 }
-
 @media screen and (max-width: 768px) {
   .img_logo {
     width: 50vw;
   }
 }
-
 @media screen and (max-width: 576px) {
   .img_logo {
     width: 60vw;
@@ -143,7 +141,6 @@ button {
   font-size: 2rem;
   color: #041b29;
   font-weight: bold;
-  /* letter-spacing: -1px; */
 }
 
 .game {

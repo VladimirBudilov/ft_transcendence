@@ -13,10 +13,10 @@ export default class Hero {
 
         return `
         <div class="row-1 nav_bar d-flex justify-content-between">
-            <div class="p-2">
+            <div class="padding-2">
                 <a class="logo_text ps-5" href="/">PING PONG</a>
             </div>
-            <div class="auth_button p-2">
+            <div class="auth_button padding-2">
                 <button class="btn btn-primary me-5" type="submit">Sign In</button>
             </div>      
         </div>
