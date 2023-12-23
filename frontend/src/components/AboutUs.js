@@ -33,15 +33,25 @@ export default class AboutUs {
         `;
     }
 
-    // findContent(text) {
-    //     const matches = [];
-    //     for (const button of document.querySelectorAll('button')) {
-    //         if (button.textContent.includes(text)) {
-    //             button.setAttribute('data-bs-toggle', 'modal');
-    //             button.setAttribute('data-bs-target', '#staticBackdrop');
-    //             // button.setAttribute('id', 'modal_button');
-    //         }
-    //     }
-    // }
+    async getModalView() {
+        return `
+        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">About Us</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                ${await this.getHtml()}          
+              </div>
+              <div class="modal-footer">
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        `;
+    }
 
 }

@@ -157,7 +157,14 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-const audio = new Audio("/src/static/button_click.mp3");
+// для модального окна в начале
+document.addEventListener('DOMContentLoaded', function () {
+    var myModal = new bootstrap.Modal(document.getElementById('myModal'));
+    myModal.show();
+});
+
+//для звука кнопки
+const audio = new Audio("/src/static/button_click2.mp3");
 
 
 document.addEventListener('click', async e => {
