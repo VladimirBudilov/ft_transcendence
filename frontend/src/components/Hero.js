@@ -1,9 +1,11 @@
 import Menu from "./MainMenu.js";
+import AboutUs from "./AboutUs.js";
 
 export default class Hero {
     constructor() {
         document.title = 'Main';
         this.menu = new Menu();
+        this.about = new AboutUs();
     }
 
     async getHtml() {
@@ -40,11 +42,11 @@ export default class Hero {
                               <div class="modal-dialog">
                                 <div class="modal-content">
                                   <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">About Us</h1>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                   </div>
                                   <div class="modal-body">
-                                    ...
+                                        ${await this.about.getHtml()}
                                   </div>
                                   <div class="modal-footer">
 
