@@ -20,6 +20,7 @@ export default class Hero {
                 <button class="btn btn-primary me-5" type="submit">Sign In</button>
             </div>      
         </div>
+
         <div id="hero">
             <div class="hero">
                 <div class="container">

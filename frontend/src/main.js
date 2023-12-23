@@ -157,6 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+const audio = new Audio("/src/static/button_click.mp3");
 
 
 document.addEventListener('click', async e => {
@@ -169,6 +170,7 @@ document.addEventListener('click', async e => {
         await buttonClickHandler(e.target.innerHTML);
         findContent("About Us");
     }
+    audio.play();
 });
 
 
