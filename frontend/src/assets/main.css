@@ -173,3 +173,23 @@ button {
 .img_modal {
   width: 40%;
 }
+
+.volume_box {
+  background: #041b29;
+  border-radius: 5px;
+  width: 100%;
+  height: 0.5rem;
+  align-items: center;
+  cursor: pointer;
+  padding: 0;
+  .volume {
+    background: #069E92;
+    height: 0.5rem;
+  }
+}
+
+.button_volume {
+  font-size: 2rem;
+    color: #041b29;
+    font-weight: bold;
+}

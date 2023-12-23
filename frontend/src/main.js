@@ -1,21 +1,21 @@
 import Hero from './components/Hero.js';
 import NewGameMenu from './components/NewGameMenu.js';
 import MainMenu from './components/MainMenu.js';
-import AboutUs from './components/AboutUs.js';
 import GamePage from './components/GamePage.js';
 import GameMode from './components/GameMode.js';
 import Tournament from './components/Tournament.js';
+import Settings from './components/Settings.js';
 
 
 function findContent(text) {
     for (const button of document.querySelectorAll('button')) {
-        if (button.textContent.includes('About Us')) {
+        if (button.textContent.includes(text)) {
             button.setAttribute('data-bs-toggle', 'modal');
             button.setAttribute('data-bs-target', '#staticBackdrop');
         }
     }
-
 }
+
 
 async function buttonClickHandler(buttonText) {
     setTimeout(async () => {
@@ -23,13 +23,20 @@ async function buttonClickHandler(buttonText) {
         if (buttonText === "New Game") {
             const newGame = new NewGameMenu();
             document.getElementById('menu').innerHTML = await newGame.getHtml();
-
-        } else if (buttonText === "About Us") {
-            // const aboutUs = new AboutUs();
-            // aboutUs.findContent(buttonText);
             
         } else if (buttonText === "Settings") {
-            
+            const settings = new Settings();
+            document.getElementById('menu').innerHTML = await settings.getHtml();
+            const volume = document.querySelector('.volume');
+            const volume_box = document.querySelector('.volume_box');
+            volume.style.width = myAudio.volume * 100 + '%';
+            volume_box.addEventListener('click', e => {
+                const x = e.offsetX;
+                const width = volume_box.clientWidth;
+                myAudio.volume = x / width;
+                volume.style.width = x / width * 100 + '%';
+            });
+                        
         } else if (buttonText === "Main Menu") {
             const menu = new MainMenu();
             document.getElementById('menu').innerHTML = await menu.getHtml();
@@ -166,6 +173,16 @@ document.addEventListener('DOMContentLoaded', function () {
 //для звука кнопки
 const audio = new Audio("/src/static/button_click2.mp3");
 
+const myAudio = document.getElementById('myAudio');
+myAudio.volume = 0.1;
+
+
+//для громкости кнопки
+// for (const key in audio) {
+//    if (typeof audio[key] === "number") {
+//        console.log(key);
+//    }
+// }
 
 document.addEventListener('click', async e => {
     if (e.target.className === 'link') {
