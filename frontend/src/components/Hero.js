@@ -15,7 +15,7 @@ export default class Hero {
     async getHtml() {
         return `
             ${await this.startModal.getHtml()}
-            ${await this.navbar.getHtml()}
+           <!-- ${await this.navbar.getHtml()} -->
             <div id="hero">
                 <div class="hero">
                     <div class="container">

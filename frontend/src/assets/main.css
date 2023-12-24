@@ -26,11 +26,11 @@ body {
 
 .hero {
     background-color: #fefae9;
-    background-image: url('/src/static/re2.jpg'); /* Путь к вашей картинке */
+    background-image: url('/src/static/1.gif'); /* Путь к вашей картинке */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    height: 93vh;
+    height: 100vh;
     display: flex;
     justify-content: space-around;
     align-items: center;
