@@ -6,8 +6,8 @@ export default class MenuButton {
     getHtml() {
         
         return `
-            <button class="button_menu">
-                <span id="button_text" class="button_text">${this.text}</span>
+            <button class="button_menu back">
+                <span id="button_text" class="button_text mx-5">${this.text}</span>
             </button>
         `;
     }

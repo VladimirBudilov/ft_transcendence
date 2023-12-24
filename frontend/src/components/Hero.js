@@ -28,7 +28,11 @@ export default class Hero {
                                 
                                 <!-- Logo -->
                                 <div class="row logo justify-content-end me-5">
+                                
+                                <!--
                                     <img class="img_logo m-2" src="/src/static/text_logo.png" alt=""></img>
+                                -->
+                                
                                 </div>
                                 
                                 <!-- Buttons -->

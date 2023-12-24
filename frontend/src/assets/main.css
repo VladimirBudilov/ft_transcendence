@@ -4,16 +4,22 @@
 
 @font-face {
   font-family: 'Font';
-  src: url('font/SourceCodePro-Italic-VariableFont_wght.ttf') format('woff2');
-  src: url('font/SourceCodePro-VariableFont_wght.ttf') format('woff2');
+  /* src: url('font/SourceCodePro-Italic-VariableFont_wght.ttf') format('woff2');
+  src: url('font/SourceCodePro-VariableFont_wght.ttf') format('woff2'); */
+  src: url('font/font.ttf') format('woff2');
   
+}
+
+@font-face {
+  font-family: 'Font2';
+  src: url('font/Cyberpunk-Regular.ttf') format('woff2');
 }
 
 
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Source Code Pro', monospace;
+    font-family: 'Font', sans-serif;
     font-size: 100%;
     height: 100%;
 }
@@ -47,21 +53,24 @@ body {
 }
 
 .btn-primary {
-  background: #FE638B;
+  background: #805EF6;
   border: none;
-  color: #041b29;
+  color: #35264E;
   font-weight: bold;
   transition: 0.3s;
+  letter-spacing: 3px;
+  font-size: 1.2rem;
+
 }
 
 .btn-primary:hover {
-  background: #069E92;
-  color: #041b29;
+  background: #E6992A;
+  color: #35264E;
 }
 
 .btn-primary:active {
-  background: #041b29 !important; 
-  color: #ffffff !important;
+  background: #D6562D !important; 
+  color: #35264E !important;
 }
   
 button {
@@ -81,25 +90,26 @@ button {
 }
 
 .button_menu:hover {
-  transform: translateY(-3px);
+  /* transform: translateY(-3px); */
   transition: 0.3s;
 }
 
 .button_text {
-    font-size: 2rem;
-    color: #041b29;
-    font-weight: bold;
-    transition: color 0.2s;
+  font-size: 3rem;
+  color: #E6F8FA;
+  font-weight: bold;
+  transition: color 0.2s;
+  letter-spacing: 4px;
 }
 
 .button_text:hover {
-  color: #069E92;
+  color: #E6992A;
   text-shadow: 1px 1px 1px #041b29;
 }
 
 .button_text:active {
   transition: color 0s;
-  color: #FE638B;
+  color: #D6562D;
   text-shadow: 1px 1px 1px #041b29;
 
 }
@@ -109,14 +119,15 @@ button {
 }
 
 .logo_text {
-  font-size: 2rem;
-  color: #069E92;
+  font-size: 2.5rem;
+  color: #805EF6;
   font-weight: bold;
   text-decoration: none;
+  letter-spacing: 4px;
 }
 
 .nav_bar {
-  background: #041b29;
+  background: #35264E;
   height: 7vh;
   display: flex;
   align-items: center;
@@ -138,10 +149,12 @@ button {
 }
 
 .logo_text_menu {
-  font-size: 2rem;
-  color: #041b29;
-  font-weight: bold;
+  font-size: 4rem;
+  color: #E6F8FA;
+  font-family: 'Font2', sans-serif;
 }
+
+
 
 .game {
   background: #FCCA45;
@@ -149,12 +162,13 @@ button {
 }
 
 .modal-content {
-  background: #041b29;
-  color: #069E92;
+  background: #35264E;
+  color: #805EF6;
 }
 
 .modal-title {
-  color: #FE638B;
+  color: #D6562D;
+  font-size: 2rem;
 }
 
 .modal-header {
@@ -166,8 +180,12 @@ button {
 }
 
 .btn-close {
-  --bs-btn-close-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23FE638B'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3e%3c/svg%3e");
+  --bs-btn-close-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23D6562D'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z'/%3e%3c/svg%3e");
   --bs-btn-close-opacity: 1;
+}
+
+.btn {
+  --bs-btn-padding-y: 0.175rem;
 }
 
 .img_modal {
@@ -175,7 +193,7 @@ button {
 }
 
 .volume_box {
-  background: #041b29;
+  background: #35264E;
   border-radius: 5px;
   width: 100%;
   height: 0.5rem;
@@ -183,13 +201,29 @@ button {
   cursor: pointer;
   padding: 0;
   .volume {
-    background: #069E92;
+    background: #4431D8;
     height: 0.5rem;
   }
 }
 
 .button_volume {
-  font-size: 2rem;
-  color: #041b29;
+  font-size: 3rem;
+  color: #E6F8FA;
   font-weight: bold;
+}
+
+.back {
+  background-image: url('/src/static/bg1.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.text {
+  font-family: 'Source Code Pro', monospace;
+  color: #E6F8FA;
+}
+
+.text_modal {
+  font-family: 'Source Code Pro', monospace;
 }

@@ -16,14 +16,14 @@ export default class StartModal {
                             <div class="row justify-content-center">
                                 <img class="img_modal" src="/src/static/avatar.png" alt="">
                             </div>
-                            <p>
+                            <p class="text_modal">
                                 In-game management instructions:
                             </p>
-                            <p>
-                                <span class="fw-bold" style="color: #FE638B;">Move left:</span> Press the <span class="fw-bold" style="color: #FE638B;">A</span> key<br>
-                                <span class="fw-bold" style="color: #FE638B;">Move up:</span> Press the <span class="fw-bold" style="color: #FE638B;">W</span> key<br>
-                                <span class="fw-bold" style="color: #FE638B;">Move down:</span> Press the <span class="fw-bold" style="color: #FE638B;">S</span> key<br>
-                                <span class="fw-bold" style="color: #FE638B;">Move right:</span> Press the <span class="fw-bold" style="color: #FE638B;">D</span> key<br>
+                            <p class="text_modal">
+                                <span class="fw-bold" style="color: #D6562D;">Move left:</span> Press the <span class="fw-bold" style="color: #D6562D;">A</span> key<br>
+                                <span class="fw-bold" style="color: #D6562D;">Move up:</span> Press the <span class="fw-bold" style="color: #D6562D;">W</span> key<br>
+                                <span class="fw-bold" style="color: #D6562D;">Move down:</span> Press the <span class="fw-bold" style="color: #D6562D;">S</span> key<br>
+                                <span class="fw-bold" style="color: #D6562D;">Move right:</span> Press the <span class="fw-bold" style="color: #D6562D;">D</span> key<br>
                             </p>
                             
                         <!--
@@ -31,12 +31,12 @@ export default class StartModal {
                                 You can also control the menu:
                             </p>
                             <p>
-                                <span class="fw-bold" style="color: #FE638B;">Move up:</span> Use the Up key <span class="fw-bold" style="color: #FE638B;">(↑)</span><br>
-                                <span class="fw-bold" style="color: #FE638B;">Move down:</span> Use the Down key <span class="fw-bold" style="color: #FE638B;">(↓)</span><br>
-                                <span class="fw-bold" style="color: #FE638B;">Accept:</span> Enter <span class="fw-bold" style="color: #FE638B;">(⏎)</span><br>
+                                <span class="fw-bold" style="color: #D6562D;">Move up:</span> Use the Up key <span class="fw-bold" style="color: #D6562D;">(↑)</span><br>
+                                <span class="fw-bold" style="color: #D6562D;">Move down:</span> Use the Down key <span class="fw-bold" style="color: #D6562D;">(↓)</span><br>
+                                <span class="fw-bold" style="color: #D6562D;">Accept:</span> Enter <span class="fw-bold" style="color: #D6562D;">(⏎)</span><br>
                             </p>
                         -->
-                        
+
                         </div>
                         <div class="modal-footer">
                         </div>

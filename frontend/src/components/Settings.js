@@ -13,10 +13,12 @@ export default class Settings {
         const buttonsHtml = await Promise.all(this.buttons.map(button => button.getHtml()));
         
         const html = ` 
-        <div class="row">
-            <p class="button_volume d-flex justify-content-end">Volume</p>
+        <div class="d-flex justify-content-end mb-2">
+            <div class="back">
+                <p class="button_volume mx-5">Volume</p>
+            </div>
         </div>
-        <div class="row ms-5 me-1">
+        <div class="row ms-5 me-1 mb-5">
             <div class="volume_box">
                 <div class="volume">
 
