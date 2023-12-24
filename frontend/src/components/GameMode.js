@@ -3,7 +3,7 @@ import MenuButton from "./MenuButton.js";
 export default class MainMenu {
     constructor() {
         this.buttons = [
-            new MenuButton("Single Player"),
+            new MenuButton("Single Game"),
             new MenuButton("Multiplayer"),
             new MenuButton("Main Menu"),
         ];

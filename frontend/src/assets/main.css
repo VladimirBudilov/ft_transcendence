@@ -26,11 +26,12 @@ body {
 
 .hero {
     background-color: #fefae9;
-    background-image: url('/src/static/1.gif'); /* Путь к вашей картинке */
+    background-image: url('/src/static/3.gif'); /* Путь к вашей картинке */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    height: 100vh;
+    /* height: 100vh; */
+    height: 93vh;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -96,7 +97,7 @@ button {
 
 .button_text {
   font-size: 3rem;
-  color: #E6F8FA;
+  color: #FFD4FB;
   font-weight: bold;
   transition: color 0.2s;
   letter-spacing: 4px;
@@ -208,7 +209,7 @@ button {
 
 .button_volume {
   font-size: 3rem;
-  color: #E6F8FA;
+  color: #FFD4FB;
   font-weight: bold;
 }
 
@@ -221,7 +222,7 @@ button {
 
 .text {
   font-family: 'Source Code Pro', monospace;
-  color: #E6F8FA;
+  color: #805EF6;
 }
 
 .text_modal {
