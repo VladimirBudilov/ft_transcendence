@@ -201,10 +201,17 @@ button {
   align-items: center;
   cursor: pointer;
   padding: 0;
-  .volume {
-    background: #4431D8;
-    height: 0.5rem;
-  }
+}
+
+.volume {
+  border-radius: 5px;
+  width: 100%;
+  height: 0.5rem;
+  align-items: center;
+  cursor: pointer;
+  padding: 0;
+  background: #4431D8;
+  height: 0.5rem;
 }
 
 .button_volume {
