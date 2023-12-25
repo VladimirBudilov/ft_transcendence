@@ -56,7 +56,11 @@ async function buttonClickHandler(buttonText) {
             } else {
                 myAudio.muted = true;
             }
+        } else if (buttonText === "Single Game") {
+            navigateTo('/game');
         }
+
+
     }, 400);
     
 }
@@ -94,6 +98,7 @@ const router = async () => {
 
     const routes = [
         { path: '/', view: Hero },
+        { path: '/game', view: GamePage },
     ];
 
     /* 

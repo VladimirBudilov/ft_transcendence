@@ -5,11 +5,7 @@ const app = express();
 
 
 app.use('/src', express.static(path.resolve(__dirname, 'frontend', 'src')));
-// app.use((req, res, next) => {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Content-Type", "application/javascript");
-//   next();
-// });
+app.use('/game', express.static(path.resolve(__dirname, 'game')));
 app.get('/*', (req, res) => {
   res.sendFile(path.resolve(__dirname, 'frontend', 'index.html'));
 });
