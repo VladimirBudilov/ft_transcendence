@@ -1,13 +1,11 @@
 function StopGame()
 {
+    for(let timeout of gameData.allTimeouts) {clearTimeout(timeout);}
     gameData.playerScore = 0;
     gameData.opponentScore = 0;
     startPlaying = false;
     stopGame = false;
-    ball.DirX = 1;
-    ball.DirY = 1;
     ball.Speed = gameData.ballSpeed;
-    gameData.difficulty = 0.2;
     let gameCanvas = document.getElementById("gameCanvas");
     gameCanvas.removeChild(gameRender.renderer.domElement);
     cancelAnimationFrame(animationId);
@@ -20,6 +18,7 @@ function StartGameVsBot()
 {
     if(startPlaying)
         return;
+    gameData.UpdateScreenData();
     startPlaying = true;
     ChangeDivStateById("StopGame", true);
     PrepareData();
@@ -51,6 +50,7 @@ function UpdateVsBot()
 
 function StartGameVsPlayer()
 {
+    gameData.UpdateScreenData();
     ChangeDivStateById("StopGame", true);
     PrepareData();
     createScene();
@@ -60,11 +60,11 @@ function StartGameVsPlayer()
 
 function UpdateVsPlayer()
 {
+    playerPaddleMovement(playerPaddle, Key.W, Key.S, Key.A);
+    playerPaddleMovement(opponentPaddle, Key.I, Key.K, Key.L);
     ballPhysics();
     UpdateScore();
     paddlePhysics();
-    playerPaddleMovement(playerPaddle, Key.W, Key.S, Key.A);
-    playerPaddleMovement(opponentPaddle, Key.I, Key.K, Key.L);
     gameRender.renderer.render(gameRender.gameScene, gameRender.gameCamera);
     if(IsGameFinished())
     {

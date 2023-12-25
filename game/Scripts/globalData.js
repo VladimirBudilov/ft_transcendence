@@ -1,49 +1,104 @@
 class GameRender{
-    WIDTH = 640;
-    HEIGHT = 360;
+    WIDTH = window.innerWidth * 0.6;
+    HEIGHT = window.innerHeight * 0.4;
     renderer =null;
     gameScene =null;
     gameCamera =null;
     playerField = new Rectangular();
     table = new Rectangular();
     ground = new Rectangular();
+    SetWindowSize(newWidth, newHeight) {
+        let Wscale = (newWidth * 0.6) / this.WIDTH;
+        let Hscale = (newHeight * 0.4) / this.HEIGHT;
+        this.WIDTH = newWidth * 0.6;
+        this.HEIGHT = newHeight * 0.4;
+        if(Wscale < 1 || Hscale < 1)
+        {
+            return Wscale < Hscale ? Wscale : Hscale;
+        }
+        this.renderer.setSize(newWidth, newHeight);
+        if(Wscale > 1 || Hscale > 1)
+        {
+            return Wscale > Hscale ? Wscale : Hscale;
+        }
+        return 1;
+    }
+}
+
+class Vector3{
+    x=0;
+    y=0;
+    z=0;
+    constructor(x, y, z) {
+        this.x = x;
+        this.y = y;
+        this.z = z;
+    }
 }
 
 class Data{
     playerScore = 0;
     opponentScore = 0;
-    maxScore = 1;
-    difficulty = 0.6;
-    ballSpeed = 30;
+    maxScore = 100;
+    difficulty = 0.8;
+    ballSpeed = 4.5;
+    spellTime = 3000;
+    slidePunchSpeed = 0.5;
+    slidePunchTime = 1500;
+    spellSpeed = 0.5;
+    playerFieldWidth = 640;
+    playerFieldHeight = 480;
+    playerFieldQuality = 100;
+    bounceTime = 100;
+    startCameraPosition = this.playerFieldHeight*1.3;
+    maxCameraPosition = 220;
+    allTimeouts = [];
+    UpdateScreenData() {
+        this.playerFieldWidth = gameRender.WIDTH;
+        this.playerFieldHeight = gameRender.HEIGHT * 0.8;
+        this.startCameraPosition = this.playerFieldHeight*1.4;
+    }
 }
 
 class Lighting
 {
-    spotLight =null;
     pointLight =null;
 }
 class Paddle {
     Mesh;
-    Spell;
+    
     isSpellActive = false;
-    SpellMesh;
+    leftPart;
+    rightPart;
     Width = 10;
     Height = 30;
     Depth = 10;
     Quality = 10;
     DirectionY = 0;
-    Speed = 5;
+    Speed = 4.5;
     Material = null;
     isPlayer = false;
     ballDirectionChanged = false;
     constructor(type) {
         this.isPlayer = type;
     }
+    ScalePaddle(scale) {
+        this.Mesh.scale.y *= scale;
+        this.Height *= scale;
+        this.Mesh.scale.z *= scale;
+        this.Depth *= scale;
+    }
+    OriginalScalePaddle() {
+        this.Mesh.scale.y = 1;
+        this.Height = 30;
+        this.Mesh.scale.z = 1;
+        this.Depth = 10;
+    }
 }
 
 class Ball {
-    DirX = 1;
-    DirY = 1;
+    DirX = 0.5;
+    DirY = 0.5;
     Speed;
     Radius = 7;
     segments = 100;
