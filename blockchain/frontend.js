@@ -218,3 +218,4 @@ function getAllResult() {
 //getResultTournament("first")
 //getAllResult()
 // getResultPlayer("Vova", "first")
+export { getAllResult };

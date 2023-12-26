@@ -1,0 +1,24 @@
+{
+  "name": "spa_vanilla_js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chizhovvictor/spa_vanilla_js.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chizhovvictor/spa_vanilla_js/issues"
+  },
+  "homepage": "https://github.com/chizhovvictor/spa_vanilla_js#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "morgan": "^1.10.0"
+  }
+}
