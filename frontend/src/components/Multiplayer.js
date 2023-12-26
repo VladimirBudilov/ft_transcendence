@@ -11,13 +11,6 @@ export default class Multiplayer {
     }
 
     async getHtml() {
-
-        /* 
-            Promise.all - метод, который принимает массив промисов и возвращает промис, который 
-            выполняется тогда, когда выполняются все промисы из массива
-            создаем массив buttonsHtml, который содержит HTML-коды всех кнопок
-        */
-
         const buttonsHtml = await Promise.all(this.buttons.map(button => button.getHtml()));
         const menuHtml = buttonsHtml.map(html => `
             <div class="row">

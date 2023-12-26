@@ -16,9 +16,6 @@ export default class StartModal {
                             <div class="row justify-content-center">
                                 <img class="img_modal" src="/src/static/avatar.png" alt="">
                             </div>
-                            <p class="text_modal fw-bold fs-5 mt-3" style="color: #D6562D;">
-                                Welcome back samurai! <br>
-                            </p>
                             <p class="text_modal">
                                 In-game management instructions:
                             </p>

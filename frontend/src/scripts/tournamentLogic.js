@@ -91,7 +91,7 @@ class Tournament
             this.StopTournament();
             return;
         }
-        ChangeDivStateById("StopGame", true);
+        //ChangeDivStateById("StopGame", true);
         PrepareData();
         createScene();
         UpdateVsPlayer();
@@ -129,17 +129,19 @@ class Tournament
 let tournament = new Tournament();
 
 function ChangeDivStateById(name, state){
-    let tournamentInput = document.getElementById(name);
-    if(state)
-        tournamentInput.style.display = "block";
-    else
-        tournamentInput.style.display = "none";
+    // let tournamentInput = document.getElementById(name);
+    // if(state)
+    //     tournamentInput.style.display = "block";
+    // else
+    //     tournamentInput.style.display = "none";
 }
 
 function StartTournament()
-{
-    ChangeDivStateById("tournament", true);
+{   
+    setTimeout(() => {
+    //ChangeDivStateById("tournament", true);
     tournament.tournamentInput = document.getElementById("tournament");
+    }, 1000);
 }
 
 function generateError(errorMessageContainer, errorMessageContent) {
@@ -194,7 +196,7 @@ function ReadInput() {
             if(document.getElementById("errorMessage") !== null)
                 document.getElementById("errorMessage").remove();
             document.getElementById("userInput").value = ""
-            ChangeDivStateById("tournament", false);
+            //ChangeDivStateById("tournament", false);
         }, 2000);
         tournament.StartTournament();
     }

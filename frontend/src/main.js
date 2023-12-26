@@ -1,7 +1,7 @@
 import Hero from './components/Hero.js';
 import NewGameMenu from './components/NewGameMenu.js';
 import MainMenu from './components/MainMenu.js';
-import GamePage from './components/GamePage.js';
+import Game from './components/Game.js';
 import GameMode from './components/GameMode.js';
 import Tournament from './components/Tournament.js';
 import Settings from './components/Settings.js';
@@ -16,6 +16,7 @@ function findContent(text) {
         }
     }
 }
+
 
 async function buttonClickHandler(buttonText) {
     setTimeout(async () => {
@@ -40,7 +41,8 @@ async function buttonClickHandler(buttonText) {
         } else if (buttonText === "Main Menu") {
             const menu = new MainMenu();
             document.getElementById('menu').innerHTML = await menu.getHtml();
-            findContent("About Us");        
+            findContent("About Us");  
+
         } else if (buttonText === "Game Mode") {
             const gameMode = new GameMode();
             document.getElementById('menu').innerHTML = await gameMode.getHtml();
@@ -61,13 +63,16 @@ async function buttonClickHandler(buttonText) {
             document.getElementById('menu').innerHTML = await multiplayer.getHtml();
 
         } else if (buttonText === "Single Game") {
-        navigateTo('/singlegame');
+            navigateTo('/singlegame');
 
         } else if (buttonText === "Exit") {
-        navigateTo('/');
+            navigateTo('/');
 
         } else if (buttonText === "Two Players") {
-        navigateTo('/twoplayers');
+            navigateTo('/twoplayers');
+
+        } else if (buttonText === "Start") {
+            navigateTo('/tournament');
 
         }
 
@@ -109,9 +114,9 @@ const router = async () => {
 
     const routes = [
         { path: '/', view: Hero },
-        { path: '/singlegame', view: GamePage },
-        { path: '/twoplayers', view: GamePage },
-        // { path: '/tournament', view: GamePage },
+        { path: '/singlegame', view: Game },
+        { path: '/twoplayers', view: Game },
+        { path: '/tournament', view: Game },
     ];
 
     /* 
@@ -151,6 +156,7 @@ const router = async () => {
 
     const view = new match.route.view();
     document.getElementById('app').innerHTML = await view.getHtml();
+    
 
     /* после рендеринга дома бежим циклом по всем кнопкам которые получаем с помощью querySelectorAll
         и если текст кнопки содержит "About Us", то добавляем атрибуты data-bs-toggle и data-bs-target
@@ -193,6 +199,8 @@ document.addEventListener('DOMContentLoaded', function () {
     var myModal = new bootstrap.Modal(document.getElementById('myModal'));
     myModal.show();
 });
+
+
 
 //для звука кнопки
 const audio = new Audio("/src/static/button_click2.mp3");
