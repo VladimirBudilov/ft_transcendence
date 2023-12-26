@@ -24,36 +24,38 @@ function updatePaddlePosition(paddle) {
 let paddleBounced = false;
 function ballPhysics()
 {
-    if(paddleBounced) return;
-    if (ball.Mesh.position.y - ball.Radius <= -gameRender.playerField.Height/2)
+    if (!paddleBounced && (ball.Mesh.position.y - ball.Radius <= -gameRender.playerField.Height/2))
     {
-        ball.DirY =  -ball.DirY;
+        //console.log(ball.DirX, ball.DirY);
+        paddleBounced = true;
+        ball.DirY *=  -1;
+        ball.DirY = Math.max(ball.DirY, -1);
         if(ball.DirX > 0)
-            ball.DirX = ball.DirX < 0.4 ? 0.4 : ball.DirX;
+            ball.DirX = ball.DirX < 0.35 ? 0.35 : ball.DirX;
         else
-            ball.DirX = ball.DirX > -0.4 ? -0.4 : ball.DirX;
+            ball.DirX = ball.DirX > -0.35 ? -0.35 : ball.DirX;
+        setTimeout(() => {
+            paddleBounced = false;
+        }, 20);
     }
-    if (ball.Mesh.position.y + ball.Radius >= gameRender.playerField.Height/2)
+    else if (!paddleBounced && (ball.Mesh.position.y + ball.Radius >= gameRender.playerField.Height/2))
     {
-        ball.DirY = -ball.DirY;
+        //console.log(ball.DirX, ball.DirY);
+        paddleBounced = true;
+        ball.DirY *= -1;
+        ball.DirY = Math.min(ball.DirY, 1);
         if(ball.DirX > 0)
-            ball.DirX = ball.DirX < 0.4 ? 0.4 : ball.DirX;
+            ball.DirX = ball.DirX < 0.35 ? 0.35 : ball.DirX;
         else
-            ball.DirX = ball.DirX > -0.4 ? -0.4 : ball.DirX;
-    }
-    if (ball.DirY > 1)
-    {
-        ball.DirY = 1;
-    }
-    else if (ball.DirY < -1)
-    {
-        ball.DirY = -1;
+            ball.DirX = ball.DirX > -0.35 ? -0.35 : ball.DirX;
+        paddleBounced = true;
+        setTimeout(() => {
+            paddleBounced = false;
+        }, 20);
     }
     ball.Mesh.position.x += ball.DirX * ball.Speed;
     ball.Mesh.position.y += ball.DirY * ball.Speed;
-    setTimeout(() => {
-        paddleBounced = false;
-    }, gameData.bounceTime);
+
 }
 
 function IsBallOnPaddleWidth(paddle, offset = 0) {
@@ -87,16 +89,14 @@ function ChangeBallDirection(paddle) {
 }
 
 function IsBallNearPaddle(paddle, offset = 0) {
-    let isNear = false;
     if (paddle.isPlayer) {
-        isNear = ball.Mesh.position.x - ball.Radius <= paddle.Mesh.position.x + paddle.Width + offset
+        return ball.Mesh.position.x - ball.Radius <= paddle.Mesh.position.x + paddle.Width/2 + offset
             && ball.Mesh.position.x - ball.Radius >= paddle.Mesh.position.x - paddle.Width/2;
     }
     else {
-        isNear = ball.Mesh.position.x - ball.Radius >= paddle.Mesh.position.x - paddle.Width * 1.5 - offset
-            && ball.Mesh.position.x - ball.Radius <= paddle.Mesh.position.x + paddle.Width/2;
+        return ball.Mesh.position.x + ball.Radius >= paddle.Mesh.position.x - paddle.Width/2 - offset
+            && ball.Mesh.position.x + ball.Radius <= paddle.Mesh.position.x + paddle.Width/2;
     }
-    return isNear;
 }
 
 function HandlePlayerPaddleMovement(paddle) {
