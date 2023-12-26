@@ -25,22 +25,21 @@ let paddleBounced = false;
 function ballPhysics()
 {
     if(paddleBounced) return;
-    let rand = Math.random() * 0.3;
     if (ball.Mesh.position.y - ball.Radius <= -gameRender.playerField.Height/2)
     {
         ball.DirY =  -ball.DirY;
         if(ball.DirX > 0)
-            ball.DirX = ball.DirX < 0.3 ? 0.3 : ball.DirX;
+            ball.DirX = ball.DirX < 0.4 ? 0.4 : ball.DirX;
         else
-            ball.DirX = ball.DirX > -0.3 ? -0.3 : ball.DirX;
+            ball.DirX = ball.DirX > -0.4 ? -0.4 : ball.DirX;
     }
     if (ball.Mesh.position.y + ball.Radius >= gameRender.playerField.Height/2)
     {
         ball.DirY = -ball.DirY;
         if(ball.DirX > 0)
-            ball.DirX = ball.DirX < 0.3 ? 0.3 : ball.DirX;
+            ball.DirX = ball.DirX < 0.4 ? 0.4 : ball.DirX;
         else
-            ball.DirX = ball.DirX > -0.3 ? -0.3 : ball.DirX;
+            ball.DirX = ball.DirX > -0.4 ? -0.4 : ball.DirX;
     }
     if (ball.DirY > 1)
     {
@@ -67,9 +66,8 @@ function ChangeBallDirection(paddle) {
     if (IsBallOnPaddleWidth(paddle)) {
         paddle.ballDirectionChanged = true;
         ball.DirX = -ball.DirX;
-        let rndNumber = Math.random() * (gameData.slidePunchSpeed - gameData.slidePunchSpeed/3) + gameData.slidePunchSpeed/3;
-        let boost = Math.abs(paddle.DirectionY) > gameData.ballSpeed ? gameData.ballSpeed * rndNumber : 0;
-        ball.DirY = paddle.DirectionY > 0 ? Math.abs(ball.DirY + paddle.DirectionY/5 ) : Math.abs(ball.DirY+ paddle.DirectionY/5 ) * -1;
+        let boost = Math.abs(paddle.DirectionY) > 0 ? gameData.ballSpeed * gameData.slidePunchSpeed : 0;
+        ball.DirY = paddle.DirectionY > 0 ? Math.abs(ball.DirY + paddle.DirectionY/4 ) : Math.abs(ball.DirY+ paddle.DirectionY/4) * -1;
         if(paddle.DirectionY === 0) ball.DirY *= -1;
         ball.Speed += boost;
         let vector = {
@@ -125,6 +123,7 @@ function paddlePhysics()
 
 function resetBall(loser)
 {
+    for(let timeout of gameData.allTimeouts) {clearTimeout(timeout);}
     ball.Mesh.position.x = 0;
     ball.Mesh.position.y = 0;
     ball.Speed = gameData.ballSpeed;
@@ -135,7 +134,8 @@ function resetBall(loser)
 function IncreaseBallSpeed() {
         ball.Speed += gameData.spellSpeed;
         gameData.allTimeouts.push(setTimeout(() => {
-            ball.Speed -= gameData.spellSpeed;
+            if(ball.Speed > gameData.ballSpeed)
+                ball.Speed -= gameData.spellSpeed;
         }, gameData.spellTime));
 }
 

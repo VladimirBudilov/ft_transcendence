@@ -24,16 +24,16 @@ class Data{
     playerScore = 0;
     opponentScore = 0;
     maxScore = 100;
-    difficulty = 0.8;
-    ballSpeed = 8;
-    spellTime = 3000;
-    slidePunchSpeed = 100;
-    slidePunchTime = 2500;
-    spellSpeed = 100;
+    difficulty = 1;
+    ballSpeed = 10;
+    spellTime = 2500;
+    slidePunchSpeed = 0.3;
+    slidePunchTime = 1400;
+    spellSpeed = 4;
     playerFieldWidth = 720;
     playerFieldHeight = 540;
     playerFieldQuality = 100;
-    bounceTime = 100;
+    bounceTime = 1000;
     startCameraPosition = this.playerFieldHeight*1.3;
     allTimeouts = [];
     UpdateScreenData() {
@@ -52,11 +52,11 @@ class Paddle {
     leftPart;
     rightPart;
     Width = 20;
-    Height = 60;
+    Height = 70;
     Depth = 10;
     Quality = 10;
     DirectionY = 0;
-    Speed = 9;
+    Speed = 10;
     Material = null;
     isPlayer = false;
     ballDirectionChanged = false;
@@ -71,7 +71,7 @@ class Paddle {
     }
     OriginalScalePaddle() {
         this.Mesh.scale.y = 1;
-        this.Height = 60;
+        this.Height = 70;
         this.Mesh.scale.z = 1;
         this.Depth = 10;
     }
@@ -81,7 +81,7 @@ class Ball {
     DirX = 0.5;
     DirY = 0.5;
     Speed;
-    Radius = 14;
+    Radius = 16;
     segments = 100;
     rings = 100;
     Mesh =null;

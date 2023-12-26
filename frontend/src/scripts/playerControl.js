@@ -17,7 +17,6 @@ function MovePaddleInCenter(opponentPaddle) {
 }
 
 function CalculateBotPaddleSpeed(speed, difficulty) {
-    //check that paddle is not out of field
     if (opponentPaddle.Mesh.position.y > gameRender.playerField.Height/2 - opponentPaddle.Height/2 - opponentPaddle.Width/2)
     {
         opponentPaddle.Mesh.position.y = gameRender.playerField.Height/2 - opponentPaddle.Height/2 - opponentPaddle.Width/2;
@@ -90,17 +89,22 @@ function BotPaddleMovement()
     }
     if(ball.Mesh.position.x < gameRender.playerField.Mesh.position.x)
     {
+        CalculateBotPaddleSpeed(opponentPaddle.Speed, gameData.difficulty/15);
+        return;
+    }
+    if(ball.Mesh.position.x < gameRender.playerField.Mesh.position.x + gameRender.playerField.Width/1.5)
+    {
         CalculateBotPaddleSpeed(opponentPaddle.Speed, gameData.difficulty/10);
         return;
     }
     if(ball.Mesh.position.x < gameRender.playerField.Mesh.position.x + gameRender.playerField.Width/2)
     {
-        CalculateBotPaddleSpeed(opponentPaddle.Speed, gameData.difficulty/5);
+        CalculateBotPaddleSpeed(opponentPaddle.Speed, gameData.difficulty/6);
         return;
     }
     if(ball.Mesh.position.x < gameRender.playerField.Mesh.position.x + gameRender.playerField.Width/2)
     {
-        CalculateBotPaddleSpeed(opponentPaddle.Speed, gameData.difficulty/2);
+        CalculateBotPaddleSpeed(opponentPaddle.Speed, gameData.difficulty/1.5);
         return;
     }
     CalculateBotPaddleSpeed(opponentPaddle.Speed, gameData.difficulty);

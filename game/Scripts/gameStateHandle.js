@@ -1,6 +1,8 @@
 function StopGame()
 {
-    for(let timeout of gameData.allTimeouts) {clearTimeout(timeout);}
+    for (let i = 0; i < gameData.allTimeouts.length; i++){
+        let timeout = gameData.allTimeouts[i];
+        clearTimeout(timeout);}
     gameData.playerScore = 0;
     gameData.opponentScore = 0;
     startPlaying = false;
