@@ -16,8 +16,6 @@ function findContent(text) {
     }
 }
 
-
-
 async function buttonClickHandler(buttonText) {
     setTimeout(async () => {
         
@@ -56,8 +54,15 @@ async function buttonClickHandler(buttonText) {
             } else {
                 myAudio.muted = true;
             }
+
         } else if (buttonText === "Single Game") {
             navigateTo('/newgame');
+
+        } else if (buttonText === "Exit") {
+            navigateTo('/');
+
+        } else if (buttonText === "Multiplayer") {
+            
         }
 
 
@@ -145,7 +150,6 @@ const router = async () => {
     */
 
     findContent("About Us");
-
 };
 
 /* 

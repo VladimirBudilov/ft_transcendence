@@ -16,14 +16,16 @@ export default class StartModal {
                             <div class="row justify-content-center">
                                 <img class="img_modal" src="/src/static/avatar.png" alt="">
                             </div>
+                            <p class="text_modal fw-bold fs-5 mt-3" style="color: #D6562D;">
+                                Welcome back samurai! <br>
+                            </p>
                             <p class="text_modal">
                                 In-game management instructions:
                             </p>
                             <p class="text_modal">
-                                <span class="fw-bold" style="color: #D6562D;">Move left:</span> Press the <span class="fw-bold" style="color: #D6562D;">A</span> key<br>
-                                <span class="fw-bold" style="color: #D6562D;">Move up:</span> Press the <span class="fw-bold" style="color: #D6562D;">W</span> key<br>
-                                <span class="fw-bold" style="color: #D6562D;">Move down:</span> Press the <span class="fw-bold" style="color: #D6562D;">S</span> key<br>
-                                <span class="fw-bold" style="color: #D6562D;">Move right:</span> Press the <span class="fw-bold" style="color: #D6562D;">D</span> key<br>
+                                <span class="fw-bold" style="color: #D6562D;">Move left:</span> Press the <span class="fw-bold" style="color: #D6562D;">W</span> key<br>
+                                <span class="fw-bold" style="color: #D6562D;">Move right:</span> Press the <span class="fw-bold" style="color: #D6562D;">S</span> key<br>
+                                <span class="fw-bold" style="color: #D6562D;">Strong hit:</span> Press the <span class="fw-bold" style="color: #D6562D;">A</span> key<br>
                             </p>
                             
                         <!--
