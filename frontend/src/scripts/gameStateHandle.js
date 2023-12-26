@@ -52,12 +52,14 @@ function UpdateVsBot()
 
 function StartGameVsPlayer()
 {
-    gameData.UpdateScreenData();
-    ChangeDivStateById("StopGame", true);
-    PrepareData();
-    createScene();
-    UpdateVsPlayer();
-    startPlaying = true;
+    setTimeout(() => {
+        gameData.UpdateScreenData();
+        //ChangeDivStateById("StopGame", true);
+        // PrepareData();
+        createScene();
+        UpdateVsPlayer();
+        startPlaying = true;
+    }, 1000);
 }
 
 function UpdateVsPlayer()

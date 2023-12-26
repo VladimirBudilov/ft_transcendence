@@ -5,6 +5,7 @@ import GamePage from './components/GamePage.js';
 import GameMode from './components/GameMode.js';
 import Tournament from './components/Tournament.js';
 import Settings from './components/Settings.js';
+import Multiplayer from './components/Multiplayer.js';
 
 
 function findContent(text) {
@@ -55,14 +56,19 @@ async function buttonClickHandler(buttonText) {
                 myAudio.muted = true;
             }
 
+        } else if (buttonText === "Multiplayer") {
+            const multiplayer = new Multiplayer();
+            document.getElementById('menu').innerHTML = await multiplayer.getHtml();
+
         } else if (buttonText === "Single Game") {
-            navigateTo('/newgame');
+        navigateTo('/singlegame');
 
         } else if (buttonText === "Exit") {
-            navigateTo('/');
+        navigateTo('/');
 
-        } else if (buttonText === "Multiplayer") {
-            
+        } else if (buttonText === "Two Players") {
+        navigateTo('/twoplayers');
+
         }
 
 
@@ -103,7 +109,9 @@ const router = async () => {
 
     const routes = [
         { path: '/', view: Hero },
-        { path: '/newgame', view: GamePage },
+        { path: '/singlegame', view: GamePage },
+        { path: '/twoplayers', view: GamePage },
+        // { path: '/tournament', view: GamePage },
     ];
 
     /* 
