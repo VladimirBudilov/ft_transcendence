@@ -13,10 +13,10 @@ export default class GamePage {
             <div class="game">
                 <div class="container">
                 <div class="row">
-                    <div class="col-9">
+                    <div class="col-lg-9" style="display: flex; align-items: center;">
                         <div id='gameCanvas' class="mt-2"></div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-lg-3">
                         <div id='scoreboard'>
                             <h1 id='scores' class="text_game" style="color: #805EF6!important">0-0</h1>
                            <!-- <h2 id='winnerBoard' class="text_game">First to score 7 wins!</h2> -->
