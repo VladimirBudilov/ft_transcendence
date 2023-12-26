@@ -26,8 +26,6 @@ function ballPhysics()
 {
     if(paddleBounced) return;
     let rand = Math.random() * 0.3;
-    
-    
     if (ball.Mesh.position.y - ball.Radius <= -gameRender.playerField.Height/2)
     {
         ball.DirY =  -ball.DirY;
@@ -60,8 +58,8 @@ function ballPhysics()
 }
 
 function IsBallOnPaddleWidth(paddle, offset = 0) {
-        return ball.Mesh.position.y <= paddle.Mesh.position.y + paddle.Height / 1.5 + offset
-            && ball.Mesh.position.y >= paddle.Mesh.position.y - paddle.Height / 1.5 - offset;
+        return ball.Mesh.position.y <= paddle.Mesh.position.y + paddle.Height/2 + paddle.Width + offset
+            && ball.Mesh.position.y >= paddle.Mesh.position.y - paddle.Height/2 - paddle.Width - offset;
 }
 
 function ChangeBallDirection(paddle) {

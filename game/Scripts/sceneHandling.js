@@ -1,4 +1,4 @@
-window.addEventListener('resize', onWindowResize, false);
+/*window.addEventListener('resize', onWindowResize, false);
 
 
 function onWindowResize() {
@@ -18,5 +18,5 @@ function ScaleScene(scaleFactor) {
 		gameRender.gameCamera.position.z < gameData.maxCameraPosition ? 
 			gameData.maxCameraPosition : gameRender.gameCamera.position.z;
 	
-}
+}*/
 

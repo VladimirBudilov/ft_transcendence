@@ -131,7 +131,7 @@ function InitLight() {
     lighting.pointLight = new THREE.PointLight(0xffffff);
     lighting.pointLight.position.x = 0;
     lighting.pointLight.position.y = 0;
-    lighting.pointLight.position.z = 150;
+    lighting.pointLight.position.z = 250;
     lighting.pointLight.intensity = 2;
     lighting.pointLight.distance = 10000;
     gameRender.gameScene.add(lighting.pointLight);

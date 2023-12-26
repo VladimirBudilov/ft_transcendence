@@ -7,22 +7,6 @@ class GameRender{
     playerField = new Rectangular();
     table = new Rectangular();
     ground = new Rectangular();
-    SetWindowSize(newWidth, newHeight) {
-        let Wscale = (newWidth * 0.6) / this.WIDTH;
-        let Hscale = (newHeight * 0.4) / this.HEIGHT;
-        this.WIDTH = newWidth * 0.6;
-        this.HEIGHT = newHeight * 0.4;
-        if(Wscale < 1 || Hscale < 1)
-        {
-            return Wscale < Hscale ? Wscale : Hscale;
-        }
-        this.renderer.setSize(newWidth, newHeight);
-        if(Wscale > 1 || Hscale > 1)
-        {
-            return Wscale > Hscale ? Wscale : Hscale;
-        }
-        return 1;
-    }
 }
 
 class Vector3{
@@ -43,15 +27,14 @@ class Data{
     difficulty = 0.8;
     ballSpeed = 8;
     spellTime = 3000;
-    slidePunchSpeed = 0.5;
-    slidePunchTime = 1500;
-    spellSpeed = 0.5;
+    slidePunchSpeed = 100;
+    slidePunchTime = 2500;
+    spellSpeed = 100;
     playerFieldWidth = 720;
     playerFieldHeight = 540;
     playerFieldQuality = 100;
     bounceTime = 100;
     startCameraPosition = this.playerFieldHeight*1.3;
-    maxCameraPosition = 220;
     allTimeouts = [];
     UpdateScreenData() {
         

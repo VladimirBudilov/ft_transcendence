@@ -17,6 +17,15 @@ function MovePaddleInCenter(opponentPaddle) {
 }
 
 function CalculateBotPaddleSpeed(speed, difficulty) {
+    //check that paddle is not out of field
+    if (opponentPaddle.Mesh.position.y > gameRender.playerField.Height/2 - opponentPaddle.Height/2 - opponentPaddle.Width/2)
+    {
+        opponentPaddle.Mesh.position.y = gameRender.playerField.Height/2 - opponentPaddle.Height/2 - opponentPaddle.Width/2;
+    }
+    else if (opponentPaddle.Mesh.position.y < -gameRender.playerField.Height/2 + opponentPaddle.Height/2 + opponentPaddle.Width/2)
+    {
+        opponentPaddle.Mesh.position.y = -gameRender.playerField.Height/2 + opponentPaddle.Height/2 + opponentPaddle.Width/2;
+    }
     opponentPaddle.DirectionY = (ball.Mesh.position.y - opponentPaddle.Mesh.position.y) * difficulty;
     if (Math.abs(opponentPaddle.DirectionY) <= speed) {
         opponentPaddle.Mesh.position.y += opponentPaddle.DirectionY;
