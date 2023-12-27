@@ -1,13 +1,13 @@
 body {
     background-color: black;
 }
-#gameCanvas {
+/* #gameCanvas {
     background-color: black;
     width: 640px;
     height: 360px;
     margin: auto;
     align: center;
-}
+} */
 #scoreboard {
     text-align: center;
     font-family: Segoe UI, Helvetica, Ubuntu, sans-serif;

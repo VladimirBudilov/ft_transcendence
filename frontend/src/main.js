@@ -189,6 +189,8 @@ window.addEventListener('popstate', router);
         предположительно для начальной инициализации страницы.
 */
 
+
+
 document.addEventListener('DOMContentLoaded', () => {
     router();
 });

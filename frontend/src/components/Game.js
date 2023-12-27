@@ -1,10 +1,11 @@
 import Navbar from './Navbar.js';
 import MenuButton from './MenuButton.js';
- 
+
 export default class Game {
     constructor() {
         document.title = 'Game';
         this.button = new MenuButton("Exit", "StopGame()");
+        this.navbar = new Navbar();
     }
 
     async getHtml() {
@@ -12,14 +13,14 @@ export default class Game {
         const tournamrnInputs = window.location.href.substring(window.location.href.lastIndexOf('/')) === '/tournament' ? await this.tournamrnInputs() : '';
 
         return `
-            ${await new Navbar().getHtml()}
+            ${await this.navbar.getHtml()}
             <div class="game">
                 <div class="container">
-                    <div class="row">
-                        <div class="col-lg-9" style="display: flex; align-items: center;">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-9 col-xxl-7 col-lg-8 col-md-7">
                             <div id='gameCanvas' class="mt-2"></div>
                         </div>
-                        <div class="col-lg-3">
+                        <div class="col-lg-3 col-md-5">
                             <div id='scoreboard'>
                                 <h1 id='scores' class="text_game" style="color: #805EF6!important">0-0</h1>
                                 <h2 id='winnerBoard' class="text_game">First to score 7 wins!</h2>
@@ -49,4 +50,5 @@ export default class Game {
             </div>
         `;
     }
+
 }

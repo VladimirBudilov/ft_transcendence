@@ -25,8 +25,8 @@ body {
 }
 
 .hero {
-    background-color: #fefae9;
-    background-image: url('/src/static/3.gif'); /* Путь к вашей картинке */
+    background-image: url('/src/static/3.gif');
+     /* Путь к вашей картинке */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -158,9 +158,13 @@ button {
 
 
 .game {
-  background: #4431D8;
   height: 93vh;
+  background-image: url('/src/static/re2-2.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
+
 
 .modal-content {
   background: #35264E;
@@ -255,3 +259,4 @@ canvas {
   background: none!important;
   height: auto!important;
 }
+
