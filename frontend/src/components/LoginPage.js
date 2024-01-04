@@ -10,7 +10,7 @@ function signIn() {
 	console.log(code);
 
 	if (code == null || code == '') {
-		window.href.location = backend_url + '/api/v1/auth/login/';
+		window.location.href = backend_url + '/api/v1/auth/intra/login/';
 		return;
 	}
 	if (login == null || login == '') {
@@ -35,6 +35,7 @@ function signIn() {
 	.catch((error) => {
 		console.error('Error:', error);
 	});
+	console.log(document.cookie);
 }
 
 

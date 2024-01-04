@@ -7,6 +7,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.authtoken.models import Token
+from rest_framework.authentication import TokenAuthentication, SessionAuthentication
+
 
 INTRA_LOGIN_URL = os.environ.get('INTRA_API_URL') + \
         '/oauth/authorize?client_id=' + os.environ.get('INTRA_API_UID') + \
@@ -16,16 +19,25 @@ INTRA_LOGIN_URL = os.environ.get('INTRA_API_URL') + \
 
 class IntraLogin(APIView):
     """
-    If code is not provided, redirect to intra login page
-    else get access token from intra api
-    url: /intra/login
     """
 
     def get(self, request):
+        """
+            Redirect to intra login page
+        """
+
         return redirect(INTRA_LOGIN_URL)
 
 
     def post(self, request):
+        """
+            Get user info from intra and login
+            Create user if not exists
+        """
+        print(request.user)
+        print(request.session.items())
+        if (request.user.is_authenticated):
+            return Response({'error': 'already logged in'}, status=401)
         code = request.data.get('code')
         if (code == None):
             return Response({'error': 'code not provided'}, status=400)
@@ -35,11 +47,9 @@ class IntraLogin(APIView):
         access_token = self.get_access_token(code)
         if (access_token == None):
             return Response({'error': 'invalid code'}, status=401)
-
         user_info = self.get_user_info(intra_login, access_token['access_token'])
         if (user_info == None or user_info == {}):
             return Response({'error': 'invalid login'}, status=401)
-
         user = User.objects.filter(username=user_info['login']).first()
         if (user == None):
             user = User.objects.create(username=user_info['login'])
@@ -48,11 +58,18 @@ class IntraLogin(APIView):
             user.email = user_info['email']
         user.set_password(access_token['access_token'])
         user.save()
-        user = authenticate(username=user.username, password=access_token['access_token'])
-        if user is None:
-            return Response({'error': 'invalid login'}, status=401)
-        login(request, user)
-        return Response(user_info, status=200)
+
+        # user = authenticate(username=user.username, password=access_token['access_token'])
+        # if user is None:
+        #     return Response({'error': 'invalid login'}, status=401)
+        # login(request, user)
+        # session_key = request.session.session_key
+        # response = Response({
+        #     'session_key': session_key
+        #     }, status=200)
+        # response.set_cookie('key', session_key)
+        # return response
+
 
 
     def get_user_info(self, login, access_token):

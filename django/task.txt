@@ -2,4 +2,6 @@ todo:
 	- url for WebSocket connection
 	- WebSocket Customer
 in progress:
+	- Intra Login class (get, post)
+	- Intra Logout class (get)
 done:
