@@ -1,0 +1,5 @@
+todo:
+	- url for WebSocket connection
+	- WebSocket Customer
+in progress:
+done:

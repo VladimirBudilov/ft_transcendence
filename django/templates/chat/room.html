@@ -28,6 +28,7 @@
 
         chatSocket.onclose = function(e) {
             console.error('Chat socket closed unexpectedly');
+			console.log(e);
         };
 
         document.querySelector('#chat-message-input').focus();

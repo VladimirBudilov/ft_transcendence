@@ -1,6 +1,6 @@
 export default class {
   constructor() {
-
+	  this.intra_login_url = "http://localhost:8000/api/v1/auth/intra/login/";
   }
 
   async getHtml() {
@@ -10,7 +10,7 @@ export default class {
             <a class="logo_text ms-3" href="/">PING PONG</a>
         </div>
         <div class="auth_button padding-2">
-            <button class="btn btn-primary me-3" type="submit">Sign In</button>
+			<a href="${this.intra_login_url}" class="btn btn-primary me-3">Sign In</a>
         </div>      
       </div>
     `;

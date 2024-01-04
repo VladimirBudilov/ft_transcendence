@@ -5,6 +5,7 @@ import GamePage from './components/GamePage.js';
 import GameMode from './components/GameMode.js';
 import Tournament from './components/Tournament.js';
 import Settings from './components/Settings.js';
+import LoginPage from './components/LoginPage.js';
 
 
 function findContent(text) {
@@ -104,6 +105,7 @@ const router = async () => {
     const routes = [
         { path: '/', view: Hero },
         { path: '/newgame', view: GamePage },
+        { path: '/login', view: LoginPage },
     ];
 
     /* 

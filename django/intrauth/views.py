@@ -22,17 +22,16 @@ class IntraLogin(APIView):
     """
 
     def get(self, request):
-        code = request.headers.get('code')
-        if (code == None):
-            return redirect(INTRA_LOGIN_URL)
-        
-        if request.user:
-            return Response({'error': 'already logged in'}, status=401)
+        return redirect(INTRA_LOGIN_URL)
 
-        intra_login = request.headers.get('login')
+
+    def post(self, request):
+        code = request.data.get('code')
+        if (code == None):
+            return Response({'error': 'code not provided'}, status=400)
+        intra_login = request.data.get('login')
         if (intra_login == None or intra_login == ""):
             return Response({'error': 'intra_login not provided'}, status=400)
-
         access_token = self.get_access_token(code)
         if (access_token == None):
             return Response({'error': 'invalid code'}, status=401)
@@ -54,6 +53,7 @@ class IntraLogin(APIView):
             return Response({'error': 'invalid login'}, status=401)
         login(request, user)
         return Response(user_info, status=200)
+
 
     def get_user_info(self, login, access_token):
         headers = {
@@ -117,9 +117,10 @@ class IntraCallback(APIView):
         code = request.GET.get('code')
         if (code == None):
             return redirect(os.environ.get('FRONTEND_URL') \
-                    + '?error=invalid_code',
+                    + '/login?error=invalid_code',
                     status=401)
-        return redirect(os.environ.get('FRONTEND_URL') + '?code=' + code)
+        return redirect(os.environ.get('FRONTEND_URL') + '/login?code=' + code)
+
 
 
 class IntraLoginPage(TemplateView):
