@@ -7,8 +7,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework.authtoken.models import Token
-from rest_framework.authentication import TokenAuthentication, SessionAuthentication
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication 
+from rest_framework_simplejwt.authentication import JWTAuthentication
+from rest_framework_simplejwt.tokens import RefreshToken
 
 
 INTRA_LOGIN_URL = os.environ.get('INTRA_API_URL') + \
@@ -17,10 +18,8 @@ INTRA_LOGIN_URL = os.environ.get('INTRA_API_URL') + \
         '&response_type=code' 
 
 
-class IntraLogin(APIView):
-    """
-    """
 
+class IntraLogin(APIView):
     def get(self, request):
         """
             Redirect to intra login page
@@ -34,42 +33,48 @@ class IntraLogin(APIView):
             Get user info from intra and login
             Create user if not exists
         """
+
+        # Check if user is already logged in
         print(request.user)
-        print(request.session.items())
+        print(request.POST)
         if (request.user.is_authenticated):
-            return Response({'error': 'already logged in'}, status=401)
+            return Response({'error': 'already logged in'}, status=200)
         code = request.data.get('code')
+
+        # Check if code is provided
         if (code == None):
             return Response({'error': 'code not provided'}, status=400)
         intra_login = request.data.get('login')
+
+        # Check if intra_login is provided
         if (intra_login == None or intra_login == ""):
             return Response({'error': 'intra_login not provided'}, status=400)
         access_token = self.get_access_token(code)
+
+        # Check if access_token is valid
         if (access_token == None):
             return Response({'error': 'invalid code'}, status=401)
         user_info = self.get_user_info(intra_login, access_token['access_token'])
+
+        # Check if user_info is valid
         if (user_info == None or user_info == {}):
             return Response({'error': 'invalid login'}, status=401)
         user = User.objects.filter(username=user_info['login']).first()
+
+        # Create user if not exists
         if (user == None):
             user = User.objects.create(username=user_info['login'])
             user.first_name = user_info['first_name']
             user.last_name = user_info['last_name']
             user.email = user_info['email']
-        user.set_password(access_token['access_token'])
-        user.save()
 
-        # user = authenticate(username=user.username, password=access_token['access_token'])
-        # if user is None:
-        #     return Response({'error': 'invalid login'}, status=401)
-        # login(request, user)
-        # session_key = request.session.session_key
-        # response = Response({
-        #     'session_key': session_key
-        #     }, status=200)
-        # response.set_cookie('key', session_key)
-        # return response
-
+        # Login user
+        refresh = RefreshToken.for_user(user)
+        return Response({
+            'refresh': str(refresh),
+            'access': str(refresh.access_token),
+            'expires': str(refresh.access_token.lifetime)
+            }, status=200)
 
 
     def get_user_info(self, login, access_token):
@@ -81,6 +86,7 @@ class IntraLogin(APIView):
                 headers=headers)
         return response.json()
 
+
     def get_access_token(self, code):
         data = {
             'grant_type': 'client_credentials',
@@ -90,6 +96,27 @@ class IntraLogin(APIView):
         }
         response = requests.post('https://api.intra.42.fr/oauth/token', data=data)
         return response.json()
+
+
+
+class RefreshTokenView(APIView):
+    """
+        Refresh token
+        url: /intra/jwt/refresh
+    """
+
+    def get(self, request):
+        refresh_token = request.GET.get('refresh')
+        if (refresh_token == None):
+            return Response({'error': 'refresh token not provided'}, status=400)
+        try:
+            refresh = RefreshToken(refresh_token)
+        except:
+            return Response({'error': 'invalid refresh token'}, status=401)
+        return Response({
+            'access': str(refresh.access_token),
+            'refresh': str(refresh)
+            }, status=200)
 
 
 
@@ -111,20 +138,6 @@ class IntraMe(APIView):
 
 
 
-class IntraLogout(APIView):
-    """
-    Logout user
-    url: /intra/logout
-    """
-    def get(self, request):
-        user = request.user
-        if (user == None):
-            return Response({'error': 'not logged in'}, status=401)
-        user.auth_token.delete()
-        return Response({'success': 'logged out'}, status=200)
-
-
-
 class IntraCallback(APIView):
     """
     Redirect to frontend with code
@@ -137,12 +150,3 @@ class IntraCallback(APIView):
                     + '/login?error=invalid_code',
                     status=401)
         return redirect(os.environ.get('FRONTEND_URL') + '/login?code=' + code)
-
-
-
-class IntraLoginPage(TemplateView):
-    template_name = 'login.html'
-
-
-class TestPage(TemplateView):
-    template_name = 'test.html'
