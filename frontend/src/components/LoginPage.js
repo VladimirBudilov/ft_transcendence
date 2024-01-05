@@ -1,41 +1,97 @@
 import Navbar from './Navbar.js';
 
 
-function signIn() {
+// Function to set a cookie
+function setCookie(name, value, seconds) {
+	document.cookie = name + "=" + escape(value) + "; path=/; expires=" + seconds;
+}
+
+// Function to get a cookie
+function getCookie(name) {
+	let items = document.cookie.split(";");
+	for (let i = 0; i < items.length; i++) {
+		if (items[i].trim().startsWith(name + "=")) {
+			return unescape(items[i].trim().substring(name.length + 1));
+		}
+	}
+}
+
+
+// Function to get the headers for the fetch request
+function getHeaders() {
+	headers = {};
+	headers['Content-Type'] = 'application/json';
+	if (getCookie('access_token') != null) {
+		headers['Authorization'] = 'Bearer ' + getCookie('access_token');
+	}
+	return headers;
+}
+
+
+// Function to sign in with intra
+// Send a POST request to the backend with the login from 
+// the input and the code from the url
+async function signIn() {
 	const backend_url = 'http://localhost:8000';
 	let login = document.getElementById('login').value;
 	let code = window.location.href.split('?code=')[1];
 
-	console.log(login);
-	console.log(code);
-
+	// If the code is empty, redirect to the intra login page
+	// to get the code
 	if (code == null || code == '') {
 		window.location.href = backend_url + '/api/v1/auth/intra/login/';
 		return;
 	}
+	// If the login is empty, alert the user
 	if (login == null || login == '') {
 		alert('Please enter your login');
 		return;
 	}
 
-	fetch(backend_url + '/api/v1/auth/intra/login/', {
+	// Send the POST request
+	let res = await fetch(backend_url + '/api/v1/auth/intra/login/', {
 		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-		},
+		headers: getHeaders(),
 		body: JSON.stringify({
 			'login': login,
-			'code': code
+			'code': code,
 		}),
-	})
-	.then(response => response.json())
-	.then(data => {
-		console.log(data);
-	})
-	.catch((error) => {
-		console.error('Error:', error);
 	});
-	console.log(document.cookie);
+
+	// If the response is not ok, alert the user
+	// and redirect to the login page
+	if (!res.ok) {
+		alert('Invalid login');
+		return;
+	}
+
+	// If the response is ok, save the tokens and redirect to the home page
+	let data = await res.json();
+	if (data.access != null && data.refresh != null) {
+		setCookie('access_token', data.access, data.expires);
+		setCookie('refresh_token', data.refresh, data.expires);
+	}
+
+	// Get the user data
+	res = await fetch(backend_url + '/api/v1/auth/intra/me/', {
+		method: 'GET',
+		headers: getHeaders(),
+	});
+
+	// If the response is not ok, alert the user
+	if (!res.ok) {
+		alert('Something went wrong ' + res.status);
+		return;
+	}
+
+	// If the response is ok, save the user data
+	data = await res.json();
+	localStorage.setItem('username', data.username);
+	localStorage.setItem('email', data.email);
+	localStorage.setItem('first_name', data.first_name);
+	localStorage.setItem('last_name', data.last_name);
+
+	window.location.href = '/';
 }
 
 
@@ -43,8 +99,15 @@ export default class LoginPage {
     constructor() {
         document.title = 'Login';
 
+		// Add the signIn and getHeaders functions to the script tag
+		// to be able to use them in the html
 		const script = document.createElement('script');
+
+		script.innerHTML += getCookie.toString();
+		script.innerHTML += setCookie.toString();
 		script.innerHTML += signIn.toString();
+		script.innerHTML += getHeaders.toString();
+
 		document.head.appendChild(script);
     }
 
