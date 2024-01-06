@@ -35,8 +35,6 @@ class IntraLogin(APIView):
         """
 
         # Check if user is already logged in
-        print(request.user)
-        print(request.POST)
         if (request.user.is_authenticated):
             return Response({'error': 'already logged in'}, status=200)
         code = request.data.get('code')
@@ -54,15 +52,16 @@ class IntraLogin(APIView):
         # Check if access_token is valid
         if (access_token == None):
             return Response({'error': 'invalid code'}, status=401)
-        user_info = self.get_user_info(intra_login, access_token['access_token'])
 
-        # Check if user_info is valid
-        if (user_info == None or user_info == {}):
-            return Response({'error': 'invalid login'}, status=401)
-        user = User.objects.filter(username=user_info['login']).first()
-
-        # Create user if not exists
+        # Check if user exists
+        user = User.objects.filter(username=intra_login).first()
         if (user == None):
+            user_info = self.get_user_info(intra_login, access_token['access_token'])
+
+            # Check if user_info is valid
+            if (user_info == None or user_info == {}):
+                return Response({'error': 'invalid login'}, status=401)
+
             user = User.objects.create(username=user_info['login'])
             user.first_name = user_info['first_name']
             user.last_name = user_info['last_name']

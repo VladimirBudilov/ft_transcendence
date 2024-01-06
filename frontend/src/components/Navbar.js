@@ -1,19 +1,23 @@
-function authButton() {
-	window.addEventListener("load", () => {
-	console.log("authButton");
-	const auth_button = document.getElementById("auth_button");
-	console.log(auth_button);
+import { register } from "../izolda.js";
+import { getCookie } from "../utils.js";
 
-	if (localStorage.getItem("username") != null) {
+function logout() {
+	document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+}
+
+function authButton() {
+	const auth_button = document.getElementById("auth_button");
+
+	if (getCookie('username') != null) {
 		auth_button.innerHTML = `
-					<button class="btn btn-primary me-3">${localStorage.getItem('username')}</a>
-				`.trim();
+				<button class="btn btn-primary me-3">${getCookie('username')}</a>
+				<button class="btn btn-primary me-3" onclick="logout()">Logout</button>
+			`.trim();
 	} else {
 		auth_button.innerHTML = `
-					<a href="http://localhost:8000/api/v1/auth/intra/login/" class="btn btn-primary me-3">Sign In</a>
-				`.trim();
+				<a href="http://localhost:8000/api/v1/auth/intra/login/" class="btn btn-primary me-3">Sign In</a>
+			`.trim();
 	};
-	});
 }
 
 
@@ -21,13 +25,9 @@ export default class {
 	constructor() {
 		this.intra_login_url = "http://localhost:8000/api/v1/auth/intra/login/";
 
-		let script = document.createElement("script");
-		script.type = "text/javascript";
-
-		script.innerHTML += authButton.toString();
-		script.innerHTML += `\nauthButton();`;
-
-		document.head.appendChild(script);
+		// Register the functions
+		register(authButton, true);
+		register(logout);
 	}
 
 	async getHtml() {

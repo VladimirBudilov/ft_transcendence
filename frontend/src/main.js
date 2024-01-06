@@ -7,6 +7,8 @@ import Tournament from './components/Tournament.js';
 import Settings from './components/Settings.js';
 import LoginPage from './components/LoginPage.js';
 
+import { script } from './izolda.js';
+
 
 function findContent(text) {
     for (const button of document.querySelectorAll('button')) {
@@ -209,4 +211,6 @@ document.addEventListener('click', async e => {
 });
 
 
-
+window.addEventListener('load', () => {
+	document.body.append(script);
+});
