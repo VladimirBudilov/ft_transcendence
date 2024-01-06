@@ -1,8 +1,16 @@
 # chat/consumers.py
 import json
 
-from asgiref.sync import async_to_sync
+from asgiref.sync import async_to_sync, sync_to_async
+
 from channels.generic.websocket import AsyncWebsocketConsumer
+
+from django.contrib.auth.models import User
+
+from rest_framework_simplejwt.tokens import AccessToken
+
+from .utils import get_user_by_jwt_token
+from .models import Message
 
 
 class GlobalChatConsumer(AsyncWebsocketConsumer):
@@ -13,11 +21,6 @@ class GlobalChatConsumer(AsyncWebsocketConsumer):
         # Join room group
         await self.channel_layer.group_add("global_chat", self.channel_name)
         await self.accept()
-        if self.scope["session"]:
-            print(self.scope["session"].session_key)
-        else:
-            self.scope["session"]
-            self.scope["session"].save()
 
     
     async def disconnect(self, close_code):
@@ -75,8 +78,14 @@ class ChatConsumer(AsyncWebsocketConsumer):
         text_data_json = json.loads(text_data)
         message = text_data_json["message"]
 
+        # Get user
+        user = await get_user_by_jwt_token(self.scope["cookies"].get("X-Access-Token"))
+
+        # Change message format
+        user = user if user else "Anonymous"
+        message = f"{user}: {message}"
+
         # Send message to room group
-        # group_send() method to send a message to a group
         await self.channel_layer.group_send(
             self.room_group_name, {"type": "chat_message", "message": message}
         )

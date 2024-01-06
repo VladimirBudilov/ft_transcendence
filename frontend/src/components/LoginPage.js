@@ -51,8 +51,8 @@ async function signIn() {
 	// If the response is ok, save the tokens and redirect to the home page
 	let data = await res.json();
 	if (data.access != null && data.refresh != null) {
-		setCookie('access_token', data.access, data.expires);
-		setCookie('refresh_token', data.refresh, data.expires);
+		setCookie('X-Access-Token', data.access, data.expires);
+		setCookie('X-Refresh-Token', data.refresh, data.expires);
 	}
 
 	// Get the user data
@@ -60,7 +60,7 @@ async function signIn() {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
-			'Authorization': 'Bearer ' + getCookie('access_token'),
+			'Authorization': 'Bearer ' + getCookie('X-Access-Token'),
 		},
 	});
 
@@ -73,10 +73,6 @@ async function signIn() {
 	// If the response is ok, save the user data
 	data = await res.json();
 	setCookie('username', data.username, 3600);
-	setCookie('email', data.email, 3600);
-	setCookie('first_name', data.first_name, 3600);
-	setCookie('last_name', data.last_name, 3600);
-
 	window.location.href = '/';
 }
 

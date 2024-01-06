@@ -28,21 +28,6 @@ DEBUG = True
 # ALLOWED_HOSTS = ["10.12.13.4", "localhost", "127.0.0.1"]
 ALLOWED_HOSTS = ["*"]
 
-CORS_ALLOW_ALL_ORIGINS = True # If this is used then `CORS_ALLOWED_ORIGINS` will not have any effect
-CORS_ALLOW_CREDENTIALS = True
-CORS_ALLOWED_HEADERS = [
-        'accept',
-        'sessionid',
-]
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:8080',
-    'http://localhost:8000',
-] # If this is used, then not need to use `CORS_ALLOW_ALL_ORIGINS = True`
-CORS_ALLOWED_ORIGIN_REGEXES = [
-    'http://localhost:8080',
-    'http://localhost:8000',
-]
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -152,6 +137,8 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+# REST FRAMEWORK
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -163,3 +150,20 @@ SIMPLE_JWT = {
         "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
         "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
 }
+
+# CORS
+CORS_ALLOW_ALL_ORIGINS = True # If this is used then `CORS_ALLOWED_ORIGINS` will not have any effect
+CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOWED_HEADERS = [
+        'accept',
+        'sessionid',
+]
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:8080',
+    'http://localhost:8000',
+] # If this is used, then not need to use `CORS_ALLOW_ALL_ORIGINS = True`
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    'http://localhost:8080',
+    'http://localhost:8000',
+]
+

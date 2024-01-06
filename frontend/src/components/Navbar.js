@@ -1,8 +1,11 @@
 import { register } from "../izolda.js";
-import { getCookie } from "../utils.js";
+import { getCookie, deleteCookie } from "../utils.js";
 
 function logout() {
-	document.cookie = "username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+	deleteCookie('username');
+	deleteCookie('X-Access-Token');
+	deleteCookie('X-Refresh-Token');
+	window.location.href = "/";
 }
 
 function authButton() {
