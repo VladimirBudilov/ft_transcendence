@@ -1,3 +1,7 @@
+function printNames() {
+	document.getElementById("playerNames").innerHTML = player.defaultPlayerName + "-" + player.defaultOpponentName;
+}
+
 function StopGame()
 {
     for(let timeout of gameData.allTimeouts) {clearTimeout(timeout);}

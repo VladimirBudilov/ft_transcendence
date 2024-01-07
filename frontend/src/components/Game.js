@@ -9,6 +9,15 @@ export default class Game {
     }
 
     async getHtml() {
+        const player = require('../scripts/globalData.js').default;
+
+        console.log(player.defaultPlayerName);
+
+        const loader = document.querySelector('.loader');
+        loader.classList.remove('hidden');
+        setTimeout(() => {
+            loader.classList.add('hidden');
+        }, 400);
 
         const tournamrnInputs = window.location.href.substring(window.location.href.lastIndexOf('/')) === '/tournament' ? await this.tournamrnInputs() : '';
 
@@ -22,6 +31,7 @@ export default class Game {
                         </div>
                         <div class="col-lg-3 col-md-5">
                             <div id='scoreboard'>
+                                <h1 id='playerNames' class="text_game"></h1>
                                 <h1 id='scores' class="text_game" style="color: #805EF6!important">0-0</h1>
                                 <h2 id='winnerBoard' class="text_game">First to score 7 wins!</h2>
                             </div>
