@@ -1,4 +1,5 @@
 import Navbar from './Navbar.js';
+import GlobalChat from './GlobalChat.js';
 import { register } from '../izolda.js';
 import { getCookie, setCookie } from '../utils.js';
 
@@ -90,22 +91,27 @@ export default class LoginPage {
 	async getHtml() {
 		return `
 			${await new Navbar().getHtml()}
-			<div class="my-5 py-5 d-flex justify-content-center align-items-center">
-				<div class="login p-4 rounded-4" style="background-color: #35264E; color:#805EF6;">
-					<h1 class="">Log In</h1>
-					<div>
-						<input
-							id="login"
-							type="text"
-							placeholder="Intra login"
-							class="ps-2 d-block border-0 text-black border-bottom rounded-1 mt-5 form-input"
-							style="width:15rem; height:40px; letter-spacing: 1px;"/>
-						<button
-							onclick="signIn()"
-							class="d-block btn btn-primary mt-2 mb-2 text-start"
-							style="width:15rem; height: 40px; letter-spacing:1px;">
-							Sign In
-						</button>
+			<div class="d-flex justify-content-around">
+				<div class="" style="width: 400px; height: 600px;">
+					${await new GlobalChat().getHtml()}
+				</div>
+				<div class="my-5 py-5 d-flex justify-content-center align-items-center">
+					<div class="login p-4 rounded-4" style="background-color: #35264E; color:#805EF6;">
+						<h1 class="">Log In</h1>
+						<div>
+							<input
+								id="login"
+								type="text"
+								placeholder="Intra login"
+								class="ps-2 d-block border-0 text-black border-bottom rounded-1 mt-5 form-input"
+								style="width:15rem; height:40px; letter-spacing: 1px;"/>
+							<button
+								onclick="signIn()"
+								class="d-block btn btn-primary mt-2 mb-2 text-start"
+								style="width:15rem; height: 40px; letter-spacing:1px;">
+								Sign In
+							</button>
+						</div>
 					</div>
 				</div>
 			</div>
