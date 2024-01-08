@@ -9,9 +9,7 @@ export default class Game {
     }
 
     async getHtml() {
-        const player = require('../scripts/globalData.js').default;
 
-        console.log(player.defaultPlayerName);
 
         const loader = document.querySelector('.loader');
         loader.classList.remove('hidden');

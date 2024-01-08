@@ -4,7 +4,10 @@ function createMessage(data) {
 	const messageDiv = document.createElement('div');
 	messageDiv.classList.add('global-chat-message');
 	messageDiv.innerHTML = `
-		<p class="fw-bold fs-6 text text-danger" style="letter-spacing: 1px;">${data.author}: ${data.message}</p>
+		<div class="message blue-bg">
+			<div class="message-sender">${data.author}</div> 
+			<div class="message-text">${data.message}</div>
+		</div>
 	`;
 	const chat = document.getElementById('global-chat');
 	chat.scrollTop = chat.scrollHeight + 10;
@@ -47,21 +50,19 @@ export default class GlobalChat {
 
 	async getHtml() {
 		return `
-			<div
-				id="global-chat"
-				class="global-chat border border-2 rounded-4"
-				style="background-color: #00000020;
-					overflow:hidden;
-					display:block; height:inherit;
-					border-color: #805EF6 !important">
+			<div id="global-chat" class="global-chat rounded-4 p-4">
 
 				<div class="global-chat-header">
-					<h1>Global Chat</h1>
+					<h1 class="fw-bold">Chat</h1>
 				</div>
 				<div class="global-chat-body py-4">
 					<div id="global-chat-messages">
 					</div>
 				</div>
+				<form class="chat-input-form">
+					<input type="text" class="chat-input" required placeholder="Type your message here..." />
+					<button type="submit" class="send-button">Send</button>
+				</form>
 			</div>
 		`;
 	}

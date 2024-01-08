@@ -77,6 +77,14 @@ async function signIn() {
 	navigateTo('/');
 }
 
+function loader_here() {
+	const loader = document.querySelector('.loader');
+	loader.classList.remove('hidden');
+	setTimeout(() => {
+		loader.classList.add('hidden');
+	}, 400);
+}
+
 
 export default class LoginPage {
     constructor() {
@@ -86,31 +94,37 @@ export default class LoginPage {
 		register(getCookie);
 		register(setCookie);
 		register(signIn);
+		register(loader_here, true);
     }
 
 	async getHtml() {
+
 		return `
 			${await new Navbar().getHtml()}
-			<div class="d-flex justify-content-around">
-				<div class="" style="width: 400px; height: 600px;">
-					${await new GlobalChat().getHtml()}
-				</div>
-				<div class="my-5 py-5 d-flex justify-content-center align-items-center">
-					<div class="login p-4 rounded-4" style="background-color: #35264E; color:#805EF6;">
-						<h1 class="">Log In</h1>
-						<div>
-							<input
-								id="login"
-								type="text"
-								placeholder="Intra login"
-								class="ps-2 d-block border-0 text-black border-bottom rounded-1 mt-5 form-input"
-								style="width:15rem; height:40px; letter-spacing: 1px;"/>
-							<button
-								onclick="signIn()"
-								class="d-block btn btn-primary mt-2 mb-2 text-start"
-								style="width:15rem; height: 40px; letter-spacing:1px;">
-								Sign In
-							</button>
+			<div class="game">
+				<div class="container">
+					<div class="row d-flex justify-content-center">
+						<div class="col-lg-6 col-md-7 p-5">
+							${await new GlobalChat().getHtml()}
+						</div>
+						<div class="col-lg-6 col-md-5 d-flex justify-content-center align-items-center">
+							<div class="login p-4 rounded-4" style="background-color: #35264E; color:#805EF6; letter-spacing: 3px; box-shadow: 0 0 0.25em #35264E;">
+								<h1 style="font-weight: bold;">Log In</h1>
+								<div>
+									<input
+										id="login"
+										type="text"
+										placeholder="Intra login"
+										class="ps-2 d-block border-0 text-black border-bottom rounded-1 mt-5 form-input"
+										style="width:15rem; height:40px; letter-spacing: 3px;"/>
+									<button
+										onclick="signIn()"
+										class="d-block btn btn-primary mt-2 mb-2 text-start"
+										style="width:15rem; height: 40px; letter-spacing:3px;">
+										Sign In
+									</button>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>

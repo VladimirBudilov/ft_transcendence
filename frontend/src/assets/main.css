@@ -273,6 +273,7 @@ canvas {
   justify-content: center;
   background: #35264E;
   transition: opacity 0.75s visibility 0.75s;
+  z-index: 9999;
 }
 
 .loader::after {
@@ -296,3 +297,116 @@ canvas {
   visibility: hidden;
 }
 
+.global-chat {
+  background: #35264E;
+  /* background: #15202b;   */
+  border-radius: 0.5em;
+  padding: 0.5em 1.25em;
+  margin: auto;
+
+  box-shadow: 0 0 0.25em #35264E;
+  /* overflow: auto; */
+  /* box-shadow: 0 0 0.25em #041b29; */
+  /* border: 2px solid #041b29; */
+}
+
+.send-button {
+  border: none;
+  padding: 0.625em;
+  border-radius: 0.5em;
+  cursor: pointer;
+  background: #805EF6;
+  color: #35264E;
+  letter-spacing: 3px;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.send-button:hover {
+  filter: brightness(0.9);
+}
+
+.send-button:active {
+  transform: translateY(2px);
+}
+
+.global-chat-body {
+  height: 25em;
+  overflow-y: scroll;
+}
+
+@media screen and (max-width: 768px) {
+  .global-chat-body {
+    height: 15em;
+  }
+}
+@media screen and (max-width: 576px) {
+  .global-chat-body {
+    height: 5em;
+  }
+}
+
+.global-chat-body::-webkit-scrollbar {
+  display: none;
+}
+
+
+
+.global-chat-header {
+  margin-bottom: 1em;
+  color: #805EF6;
+  letter-spacing: 3px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  
+}
+
+.message {
+  padding: 0.625em;
+  border-radius: 1em;
+  margin-bottom: 0.625em;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  font-family: 'Source Code Pro', monospace;
+
+}
+
+.message-sender {
+  font-weight: bold;
+  margin-bottom: 0.31em;
+}
+
+.message-text {
+  font-size: 1em;
+  margin-bottom: 0.31em;
+  word-wrap: break-word;
+}
+
+.blue-bg {
+  background-color: #805EF6;
+}
+
+.chat-input-form {
+  display: flex;
+  align-items: center;
+  margin-top: 2em;
+  gap: 0.625em;
+}
+
+.chat-input {
+  padding: 0.625em;
+  border: none;
+  border-radius: 0.5em;
+  background-color: #4f3874;
+  color: #fff;
+  font-size: 1em;
+  flex-grow: 1;
+  letter-spacing: 3px;
+  /* font-family: 'Source Code Pro', monospace;  */
+}
+
+.chat-input::-webkit-input-placeholder {
+  color: #fff;
+  opacity: 0.7;
+}
