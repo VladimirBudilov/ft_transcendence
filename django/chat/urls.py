@@ -4,8 +4,6 @@ from chat import consumers
 from chat import views
 
 urlpatterns = [
-    path("", views.index, name="index"),
-    path("room/global/", views.room, name="room"),
 ]
 
 websocket_urlpatterns = [

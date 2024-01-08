@@ -74,7 +74,7 @@ async function signIn() {
 	// If the response is ok, save the user data
 	data = await res.json();
 	setCookie('username', data.username, 3600);
-	window.location.href = '/';
+	navigateTo('/');
 }
 
 

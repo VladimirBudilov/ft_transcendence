@@ -8,6 +8,7 @@ import Settings from './components/Settings.js';
 import LoginPage from './components/LoginPage.js';
 
 import { script } from './izolda.js';
+import { register } from './izolda.js';
 
 
 function findContent(text) {
@@ -66,7 +67,9 @@ async function buttonClickHandler(buttonText) {
 
         } else if (buttonText === "Multiplayer") {
             
-        }
+        } else if (buttonText === "Sign In") {
+			navigateTo('/login');
+		}
 
 
     }, 400);
@@ -81,9 +84,9 @@ async function buttonClickHandler(buttonText) {
 
     После этого вызывается функция router, которая обновляет содержимое
  */
-const navigateTo = url => {
+async function navigateTo(url) {
     history.pushState(null, null, url);
-    router();
+    await router();
 };
 
 /*
@@ -96,8 +99,8 @@ const navigateTo = url => {
 
 */
 
-const router = async () => {
 
+async function router() {
     /* 
         routes - массив объектов, содержащих путь и представление
         создаем массив routes и заполняем его объектами, содержащими строку "путь" 
@@ -210,7 +213,9 @@ document.addEventListener('click', async e => {
     }
 });
 
-
 window.addEventListener('load', () => {
 	document.body.append(script);
 });
+
+
+export { navigateTo, router };

@@ -33,8 +33,7 @@ class GlobalChatConsumer(AsyncWebsocketConsumer):
         messages = messages.order_by("-created_at")[:10:-1]
         for message in messages:
             user = message.user if message.user else "Anonymous"
-            message_text = f"{user}: {message.message}"
-            await self.send(text_data=json.dumps({"message": message_text}))
+            await self.send(text_data=json.dumps({"message": message.message, "author": user}))
 
 
     async def disconnect(self, close_code):
@@ -60,12 +59,11 @@ class GlobalChatConsumer(AsyncWebsocketConsumer):
             message=message
         )
         user = user if user else "Anonymous"
-        message = f"{user}: {message}"
 
         # Send message to room group
         await self.channel_layer.group_send(
             self.room_group_name,
-            {"type": "chat_message", "message": message}
+            {"type": "chat_message", "author": user, "message": message}
         )
 
 
