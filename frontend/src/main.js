@@ -1,10 +1,11 @@
 import Hero from './components/Hero.js';
 import NewGameMenu from './components/NewGameMenu.js';
 import MainMenu from './components/MainMenu.js';
-import GamePage from './components/GamePage.js';
+import Game from './components/Game.js';
 import GameMode from './components/GameMode.js';
 import Tournament from './components/Tournament.js';
 import Settings from './components/Settings.js';
+import Multiplayer from './components/Multiplayer.js';
 import LoginPage from './components/LoginPage.js';
 
 import { script } from './izolda.js';
@@ -19,6 +20,7 @@ function findContent(text) {
         }
     }
 }
+
 
 async function buttonClickHandler(buttonText) {
     setTimeout(async () => {
@@ -43,7 +45,8 @@ async function buttonClickHandler(buttonText) {
         } else if (buttonText === "Main Menu") {
             const menu = new MainMenu();
             document.getElementById('menu').innerHTML = await menu.getHtml();
-            findContent("About Us");        
+            findContent("About Us");  
+
         } else if (buttonText === "Game Mode") {
             const gameMode = new GameMode();
             document.getElementById('menu').innerHTML = await gameMode.getHtml();
@@ -59,14 +62,22 @@ async function buttonClickHandler(buttonText) {
                 myAudio.muted = true;
             }
 
+        } else if (buttonText === "Multiplayer") {
+            const multiplayer = new Multiplayer();
+            document.getElementById('menu').innerHTML = await multiplayer.getHtml();
+
         } else if (buttonText === "Single Game") {
-            navigateTo('/newgame');
+            navigateTo('/singlegame');
 
         } else if (buttonText === "Exit") {
             navigateTo('/');
 
-        } else if (buttonText === "Multiplayer") {
-            
+        } else if (buttonText === "Two Players") {
+            navigateTo('/twoplayers');
+
+        } else if (buttonText === "Start") {
+            navigateTo('/tournament');
+
         } else if (buttonText === "Sign In") {
 			navigateTo('/login');
 		}
@@ -109,7 +120,9 @@ async function router() {
 
     const routes = [
         { path: '/', view: Hero },
-        { path: '/newgame', view: GamePage },
+        { path: '/singlegame', view: Game },
+        { path: '/twoplayers', view: Game },
+        { path: '/tournament', view: Game },
         { path: '/login', view: LoginPage },
     ];
 
@@ -150,6 +163,7 @@ async function router() {
 
     const view = new match.route.view();
     document.getElementById('app').innerHTML = await view.getHtml();
+    
 
     /* после рендеринга дома бежим циклом по всем кнопкам которые получаем с помощью querySelectorAll
         и если текст кнопки содержит "About Us", то добавляем атрибуты data-bs-toggle и data-bs-target
@@ -182,6 +196,8 @@ window.addEventListener('popstate', router);
         предположительно для начальной инициализации страницы.
 */
 
+
+
 document.addEventListener('DOMContentLoaded', () => {
     router();
 });
@@ -192,6 +208,15 @@ document.addEventListener('DOMContentLoaded', function () {
     var myModal = new bootstrap.Modal(document.getElementById('myModal'));
     myModal.show();
 });
+
+//Loader 
+
+window.addEventListener('load', () => {
+    const loader = document.querySelector('.loader');
+    loader.classList.add('hidden');
+});
+
+
 
 //для звука кнопки
 const audio = new Audio("/src/static/button_click2.mp3");

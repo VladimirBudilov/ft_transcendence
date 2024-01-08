@@ -1,17 +1,16 @@
 import MenuButton from "./MenuButton.js";
 
-export default class MainMenu {
+export default class Multiplayer {
     constructor() {
         this.buttons = [
-            new MenuButton("Start", "StartTournament()"),
-            new MenuButton("Results", "getAllResult()"),
+            new MenuButton("Two Players", "StartGameVsPlayer()"),
+            new MenuButton("Online"),
             new MenuButton("Main Menu"),
         ];
-        document.title = 'Game Mode';
+        document.title = 'Multiplayer';
     }
 
     async getHtml() {
-
         const buttonsHtml = await Promise.all(this.buttons.map(button => button.getHtml()));
         const menuHtml = buttonsHtml.map(html => `
             <div class="row">

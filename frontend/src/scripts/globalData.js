@@ -1,9 +1,9 @@
-class GameRender{
+class GameRender {
     WIDTH = 800;
     HEIGHT = 600;
-    renderer =null;
-    gameScene =null;
-    gameCamera =null;
+    renderer = null;
+    gameScene = null;
+    gameCamera = null;
     playerField = new Rectangular();
     table = new Rectangular();
     ground = new Rectangular();
@@ -12,23 +12,21 @@ class GameRender{
         let Hscale = (newHeight * 0.4) / this.HEIGHT;
         this.WIDTH = newWidth * 0.6;
         this.HEIGHT = newHeight * 0.4;
-        if(Wscale < 1 || Hscale < 1)
-        {
+        if (Wscale < 1 || Hscale < 1) {
             return Wscale < Hscale ? Wscale : Hscale;
         }
         this.renderer.setSize(newWidth, newHeight);
-        if(Wscale > 1 || Hscale > 1)
-        {
+        if (Wscale > 1 || Hscale > 1) {
             return Wscale > Hscale ? Wscale : Hscale;
         }
         return 1;
     }
 }
 
-class Vector3{
-    x=0;
-    y=0;
-    z=0;
+class Vector3 {
+    x = 0;
+    y = 0;
+    z = 0;
     constructor(x, y, z) {
         this.x = x;
         this.y = y;
@@ -36,7 +34,7 @@ class Vector3{
     }
 }
 
-class Data{
+class Data {
     playerScore = 0;
     opponentScore = 0;
     maxScore = 100;
@@ -50,21 +48,20 @@ class Data{
     playerFieldHeight = 540;
     playerFieldQuality = 100;
     bounceTime = 100;
-    startCameraPosition = this.playerFieldHeight*1.3;
+    startCameraPosition = this.playerFieldHeight * 1.3;
     maxCameraPosition = 220;
     allTimeouts = [];
     UpdateScreenData() {
-        
+
     }
 }
 
-class Lighting
-{
-    pointLight =null;
+class Lighting {
+    pointLight = null;
 }
 class Paddle {
     Mesh;
-    
+
     isSpellActive = false;
     leftPart;
     rightPart;
@@ -101,18 +98,18 @@ class Ball {
     Radius = 14;
     segments = 100;
     rings = 100;
-    Mesh =null;
-    Material=null;
+    Mesh = null;
+    Material = null;
     constructor() {
         this.Speed = gameData.ballSpeed;
     }
 }
 
-class Rectangular{
-    Width=0;
-    Height=0;
-    Quality=0;
-    Material=null;
+class Rectangular {
+    Width = 0;
+    Height = 0;
+    Quality = 0;
+    Material = null;
     Mesh = null;
 }
 
@@ -131,7 +128,7 @@ class Player {
     isFirstRound = true;
     constructor(name, id) {
         this.playerName = name;
-        this.id = id; 
+        this.id = id;
     }
 }
 let lighting = new Lighting();

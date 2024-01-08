@@ -1,3 +1,7 @@
+function printNames() {
+	document.getElementById("playerNames").innerHTML = player.defaultPlayerName + "-" + player.defaultOpponentName;
+}
+
 function StopGame()
 {
     for(let timeout of gameData.allTimeouts) {clearTimeout(timeout);}
@@ -52,12 +56,14 @@ function UpdateVsBot()
 
 function StartGameVsPlayer()
 {
-    gameData.UpdateScreenData();
-    ChangeDivStateById("StopGame", true);
-    PrepareData();
-    createScene();
-    UpdateVsPlayer();
-    startPlaying = true;
+    setTimeout(() => {
+        gameData.UpdateScreenData();
+        //ChangeDivStateById("StopGame", true);
+        // PrepareData();
+        createScene();
+        UpdateVsPlayer();
+        startPlaying = true;
+    }, 1000);
 }
 
 function UpdateVsPlayer()
