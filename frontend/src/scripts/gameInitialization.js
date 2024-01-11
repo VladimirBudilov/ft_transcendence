@@ -12,6 +12,7 @@ function createScene()
     gameRender.renderer = new THREE.WebGLRenderer();
     gameRender.gameScene = new THREE.Scene();
     InitLight();
+
     if(threeDPieceOfShit)
     {
 
@@ -39,7 +40,6 @@ function createScene()
         InitGameField();
         InitGround();
         InitGameTable();
-        InitLight();
         InitBall();
         InitPaddle( playerPaddle, (new THREE.MeshPhongMaterial(
             {
@@ -179,7 +179,7 @@ function InitGameField() {
 function InitGameTable() {
     gameRender.table = gameRender.playerField;
     gameRender.table.Material =
-        new THREE.MeshLambertMaterial(
+        new THREE.MeshPhongMaterial(
             {
                 //white color
                 color: gameColors.GameBorderColor
@@ -209,7 +209,7 @@ function InitCamera(WIDTH, HEIGHT) {
             NEAR,
             FAR);
     gameRender.gameScene.add(gameRender.gameCamera);
-    gameRender.gameCamera.position.z = gameData.startCameraPosition;
+    gameRender.gameCamera.position.z = gameData.startCameraPosition-100;
     gameRender.gameCamera.position.x = 0;
     gameRender.gameCamera.position.y = 0;
     gameRender.gameCamera.rotation.x = 0;

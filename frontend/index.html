@@ -54,15 +54,14 @@
             let isSkillActive = true;
             let isDefaultColor = true;
             let threeDPieceOfShit = false;
-            function setColor() {
+            function setColor() {           
                 if (isDefaultColor) {
                     gameColors.SetSpecialColor();
-                    threeDPieceOfShit = true;
                 } else {
                     gameColors.SetDefaultColor();
                     threeDPieceOfShit = false;
                 }
-                this.isDefoultColor = !isDefaultColor;
+                isDefaultColor = !isDefaultColor;
             }
             function setSkillActive() {
                 this.isSkillActive = !isSkillActive;

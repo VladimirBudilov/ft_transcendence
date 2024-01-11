@@ -124,7 +124,7 @@ button {
   color: #805EF6;
   font-weight: bold;
   text-decoration: none;
-  letter-spacing: 4px;
+  letter-spacing: 3px;
 }
 
 .nav_bar {
@@ -225,7 +225,7 @@ button {
   font-size: 3rem;
   color: #FFD4FB;
   font-weight: bold;
-  letter-spacing: 3px;
+  letter-spacing: 4px;
 }
 
 .back {
@@ -423,11 +423,12 @@ canvas {
   background: #131122;
 }
 
-.button_setting {
+/* .button_setting {
   font-size: 3rem;
   color: #FFD4FB;
   font-weight: bold;
-  letter-spacing: 3px;
+  letter-spacing: 4px;
+  transition: color 0.2s;
 }
 
 .button_setting:hover {
@@ -435,5 +436,43 @@ canvas {
 }
 
 .button_setting:active {
+  transition: color 0s;
   color: #D6562D;
+  text-shadow: 1px 1px 1px #041b29;
+} */
+
+.button_setting.defaultColor {
+  font-size: 3rem;
+  color: #FFD4FB;
+  font-weight: bold;
+  letter-spacing: 4px;
+  transition: color 0.2s;
+}
+
+.button_setting.defaultColor:hover {
+  color: #E6992A;
+}
+
+.button_setting.defaultColor:active {
+  transition: color 0s;
+  color: #D6562D;
+  text-shadow: 1px 1px 1px #041b29;
+} 
+
+.button_setting.clickedColor {
+  font-size: 3rem;
+  color: #D6562D;
+  font-weight: bold;
+  letter-spacing: 4px;
+  transition: color 0.2s;
+}
+
+.button_setting.clickedColor:hover {
+  color: #E6992A;
+}
+
+.button_setting.clickedColor:active {
+  transition: color 0s;
+  color: #D6562D;
+  text-shadow: 1px 1px 1px #041b29;
 }

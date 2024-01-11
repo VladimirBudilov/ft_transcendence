@@ -1,4 +1,14 @@
+import { register } from "../izolda.js";
 import MenuButton from "./MenuButton.js";
+
+function changeColor() {
+    if (isDefaultColor) {
+        document.getElementById("colorButton").innerHTML = "Default Color";
+    } else {
+        document.getElementById("colorButton").innerHTML = "Custom Color";
+    }
+}
+
 
 export default class Settings {
     constructor() {
@@ -7,6 +17,7 @@ export default class Settings {
             new MenuButton("Mute"),
             new MenuButton("Main Menu"),
         ];
+        // register(changeColor, false);
     }
 
     async getHtml() {

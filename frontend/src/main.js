@@ -41,11 +41,24 @@ async function buttonClickHandler(buttonText) {
                 myAudio.volume = x / width;
                 volume.style.width = x / width * 100 + '%';
             });
+
+
+            console.log(isDefaultColor);
+            console.log(gameColors.GameZoneColor);
+            if (isDefaultColor) {
+                const button = document.getElementById("colorButton");
+                button.classList.add('defaultColor',);
+                button.classList.remove('clickedColor');
+            } else {
+                const button = document.getElementById("colorButton");
+                button.classList.add('clickedColor');
+                button.classList.remove('defaultColor');
+            }
                         
         } else if (buttonText === "Main Menu") {
             const menu = new MainMenu();
             document.getElementById('menu').innerHTML = await menu.getHtml();
-            findContent("About Us");  
+            findContent("About Us");
 
         } else if (buttonText === "Game Mode") {
             const gameMode = new GameMode();
