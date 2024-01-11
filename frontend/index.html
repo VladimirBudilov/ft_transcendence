@@ -57,8 +57,10 @@
             function setColor() {
                 if (isDefaultColor) {
                     gameColors.SetSpecialColor();
+                    threeDPieceOfShit = true;
                 } else {
                     gameColors.SetDefaultColor();
+                    threeDPieceOfShit = false;
                 }
                 this.isDefoultColor = !isDefaultColor;
             }
