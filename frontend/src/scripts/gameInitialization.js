@@ -8,30 +8,53 @@ function PrepareData() {
 function createScene()
 {
     let currentCanvas = document.getElementById("gameCanvas");
-    if(currentCanvas == null) console.log("null");
+    if (currentCanvas == null) console.log("null");
     gameRender.renderer = new THREE.WebGLRenderer();
     gameRender.gameScene = new THREE.Scene();
-    InitCamera(gameRender.WIDTH, gameRender.HEIGHT);
-    gameRender.renderer.setSize(gameRender.WIDTH, gameRender.HEIGHT);
-    currentCanvas.appendChild(gameRender.renderer.domElement);
-    InitGameField();
-    //InitGround();
-    //InitGameTable();
     InitLight();
-    InitBall();
-    InitPaddle( playerPaddle, (new THREE.MeshPhongMaterial(
-        {
-            color: gameColors.playerColor
-        })))
-    InitPaddle(opponentPaddle, (new THREE.MeshPhongMaterial(
-        {
-            color: gameColors.playerColor2
-        })))
+    if(threeDPieceOfShit)
+    {
+
+        InitCamera3D(gameRender.WIDTH, gameRender.HEIGHT);
+        gameRender.renderer.setSize(gameRender.WIDTH, gameRender.HEIGHT);
+        currentCanvas.appendChild(gameRender.renderer.domElement);
+        InitGameField();
+        //InitGround();
+        //InitGameTable();
+        InitBall3D();
+        InitPaddle3D(playerPaddle, (new THREE.MeshPhongMaterial(
+            {
+                color: gameColors.playerColor
+            })))
+        InitPaddle3D(opponentPaddle, (new THREE.MeshPhongMaterial(
+            {
+                color: gameColors.playerColor2
+            })))
+    }
+    else
+    {
+        InitCamera(gameRender.WIDTH, gameRender.HEIGHT);
+        gameRender.renderer.setSize(gameRender.WIDTH, gameRender.HEIGHT);
+        currentCanvas.appendChild(gameRender.renderer.domElement);
+        InitGameField();
+        InitGround();
+        InitGameTable();
+        InitLight();
+        InitBall();
+        InitPaddle( playerPaddle, (new THREE.MeshPhongMaterial(
+            {
+                color: gameColors.playerColor
+            })))
+        InitPaddle(opponentPaddle, (new THREE.MeshPhongMaterial(
+            {
+                color: gameColors.playerColor2
+            })))
+    }
     playerPaddle.Mesh.position.x = -gameRender.playerField.Width/2 + playerPaddle.Width;
     opponentPaddle.Mesh.position.x =  gameRender.playerField.Width/2 - opponentPaddle.Width;
 }
 
-function InitCamera(WIDTH, HEIGHT) {
+function InitCamera3D(WIDTH, HEIGHT) {
     let VIEW_ANGLE = 50,
         ASPECT = WIDTH / HEIGHT,
         NEAR = 0.1,
@@ -46,13 +69,12 @@ function InitCamera(WIDTH, HEIGHT) {
     gameRender.gameCamera.position.z = gameData.startCameraPosition;
     gameRender.gameCamera.position.x = 0;
     gameRender.gameCamera.position.y = -350;
-    //rotate on 30 degrees on x axis
     gameRender.gameCamera.rotation.x = 0.5;
     gameRender.gameCamera.rotation.y = 0;
     gameRender.gameCamera.rotation.z = 0;
 }
 
-function InitBall() {
+function InitBall3D() {
     ball.Material =
         new THREE.MeshPhongMaterial(
             {
@@ -69,7 +91,7 @@ function InitBall() {
     ball.Mesh.position.z = ball.Radius;
 }
 
-function InitPaddle(paddle, paddle1Material) {
+function InitPaddle3D(paddle, paddle1Material) {
     paddle.Material= paddle1Material;
     paddle.Mesh = new THREE.Mesh(
         new THREE.CylinderGeometry(
@@ -97,19 +119,6 @@ function InitPaddle(paddle, paddle1Material) {
     gameRender.gameScene.add(paddle.leftPartMesh);
     gameRender.gameScene.add(paddle.rightPartMesh);
     updatePaddlePosition(paddle);
-    
-    /*
-     Skill object deprecated
-    paddle.SpellMesh = new THREE.Mesh(
-        paddle.Spell,
-        new THREE.MeshPhongMaterial(
-            {
-                color: 0xD43001
-            }));
-    paddle.SpellMesh.visible = false;
-    gameRender.gameScene.add(paddle.SpellMesh);
-    paddle.SpellMesh.receiveShadow = true;
-    paddle.SpellMesh.castShadow = true;*/
 }
 
 function InitGround() {
