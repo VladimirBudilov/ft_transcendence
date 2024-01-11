@@ -30,7 +30,7 @@ export default class Settings {
         const settingField = `
             <div class="d-flex justify-content-end">
                 <div class="back">
-                    <button class="button_volume mx-5" onclick="setColor(0x333333)">Color</button>
+                    <button class="button_volume mx-5" onclick="setColor()">Color</button>
                 </div>
             </div>
         `;

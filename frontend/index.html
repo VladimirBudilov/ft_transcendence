@@ -23,11 +23,47 @@
     <link rel="stylesheet" href="/src/assets/style.css" />
     <title>Document</title>
         <script>
-            isSettingField = true;
-            colorField = 0x000000;
+            class Colors {
+                ballColor = '#ffffff';
+                GameZoneColor = '#ffffff';
+                GameBorderColor = '#ffffff';
+                GroundColor = '#ffffff';
+                playerColor = '#ffffff';
+                playerColor2 = '#ffffff';
+                constructor() {
+                    this.SetDefaultColor();
+                }
+                SetDefaultColor() {
+                    this.ballColor = '#ffffff';
+                    this.GameZoneColor = '#ffffff';
+                    this.GameBorderColor = '#ffffff';
+                    this.GroundColor = '#ffffff';
+                    this.playerColor = '#ffffff';
+                    this.playerColor2 = '#ffffff';
+                }
+                SetSpecialColor() {
+                    this.ballColor = '#1fffff';
+                    this.GameZoneColor = '#1fffff';
+                    this.GameBorderColor = '#1fffff';
+                    this.GroundColor = '#1fffff';
+                    this.playerColor = '#1fffff';
+                    this.playerColor2 = '#1fffff';
+                }
+            }
+            let gameColors = new Colors();
+            let isSkillActive = true;
+            let isDefaultColor = true;
 
-            function setColor(color) {
-                this.colorField = color;
+            function setColor() {
+                if (isDefaultColor) {
+                    gameColors.SetSpecialColor();
+                } else {
+                    gameColors.SetDefaultColor();
+                }
+                this.isDefoultColor = !isDefaultColor;
+            }
+            function setSkillActive() {
+                this.isSkillActive = !isSkillActive;
             }
         </script>
   </head>
