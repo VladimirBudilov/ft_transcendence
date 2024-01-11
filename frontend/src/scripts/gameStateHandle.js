@@ -27,6 +27,7 @@ function StartGameVsBot()
         startPlaying = true;
         //ChangeDivStateById("StopGame", true);
         //PrepareData();
+        printNames();
         createScene();
         UpdateVsBot();
     }, 1000);

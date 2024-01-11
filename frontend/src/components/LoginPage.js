@@ -108,7 +108,7 @@ export default class LoginPage {
 							${await new GlobalChat().getHtml()}
 						</div>
 						<div class="col-lg-6 col-md-5 d-flex justify-content-center align-items-center">
-							<div class="login p-4 rounded-4" style="background-color: #35264E; color:#805EF6; letter-spacing: 3px; box-shadow: 0 0 0.25em #35264E;">
+							<div class="login p-4 rounded-4" style="background-color: #1f162e; color:#805EF6; letter-spacing: 3px; box-shadow: 0 0 0.25em #35264E;">
 								<h1 style="font-weight: bold;">Log In</h1>
 								<div>
 									<input

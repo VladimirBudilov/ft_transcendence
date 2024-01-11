@@ -1,6 +1,7 @@
 import Navbar from './Navbar.js';
 import MenuButton from './MenuButton.js';
 
+
 export default class Game {
     constructor() {
         document.title = 'Game';
@@ -9,7 +10,6 @@ export default class Game {
     }
 
     async getHtml() {
-
 
         const loader = document.querySelector('.loader');
         loader.classList.remove('hidden');
@@ -23,18 +23,18 @@ export default class Game {
             ${await this.navbar.getHtml()}
             <div class="game">
                 <div class="container">
-                    <div class="row d-flex justify-content-center">
+                    <div class="row d-flex justify-content-center align-items-center rounded-5 p-5" style="background: #1f162e;">
                         <div class="col-9 col-xxl-7 col-lg-8 col-md-7">
                             <div id='gameCanvas' class="mt-2"></div>
                         </div>
                         <div class="col-lg-3 col-md-5">
-                            <div id='scoreboard'>
-                                <h1 id='playerNames' class="text_game"></h1>
-                                <h1 id='scores' class="text_game" style="color: #805EF6!important">0-0</h1>
-                                <h2 id='winnerBoard' class="text_game">First to score 7 wins!</h2>
+                            <div id='scoreboard' class="rounded-top-5">
+                                <p id='playerNames' class="text_game fs-1 mt-3 pt-4"></p>
+                                <p id='scores' class="text_game" style="color: #805EF6!important">0-0</p>
+                                <p id='winnerBoard' class="text_game fs-2">First to score 7 wins!</p>
                             </div>
                             <div class="row">
-                                <div class="d-flex justify-content-center">
+                                <div class="d-flex justify-content-center pb-3">
                                     ${this.button.getHtml()}
                                 </div>
                             </div>

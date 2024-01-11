@@ -20,21 +20,20 @@ export default class StartModal {
                                 In-game management instructions:
                             </p>
                             <p class="text_modal">
-                                <span class="fw-bold" style="color: #D6562D;">Move left:</span> Press the <span class="fw-bold" style="color: #D6562D;">W</span> key<br>
-                                <span class="fw-bold" style="color: #D6562D;">Move right:</span> Press the <span class="fw-bold" style="color: #D6562D;">S</span> key<br>
+                                <span class="fw-bold" style="color: #D6562D;">Move left (↑):</span> Press the <span class="fw-bold" style="color: #D6562D;">W</span> key<br>
+                                <span class="fw-bold" style="color: #D6562D;">Move right (↓):</span> Press the <span class="fw-bold" style="color: #D6562D;">S</span> key<br>
                                 <span class="fw-bold" style="color: #D6562D;">Strong hit:</span> Press the <span class="fw-bold" style="color: #D6562D;">A</span> key<br>
                             </p>
                             
-                        <!--
-                            <p>
-                                You can also control the menu:
+                            <p class="text_modal">
+                                You can also play with other Players:
                             </p>
-                            <p>
-                                <span class="fw-bold" style="color: #D6562D;">Move up:</span> Use the Up key <span class="fw-bold" style="color: #D6562D;">(↑)</span><br>
-                                <span class="fw-bold" style="color: #D6562D;">Move down:</span> Use the Down key <span class="fw-bold" style="color: #D6562D;">(↓)</span><br>
-                                <span class="fw-bold" style="color: #D6562D;">Accept:</span> Enter <span class="fw-bold" style="color: #D6562D;">(⏎)</span><br>
+                            <p class="text_modal">
+                                <span class="fw-bold" style="color: #D6562D;">Move left (↑):</span> Press the <span class="fw-bold" style="color: #D6562D;">I</span> key<br>
+                                <span class="fw-bold" style="color: #D6562D;">Move right (↓):</span> Press the <span class="fw-bold" style="color: #D6562D;">K</span> key<br>
+                                <span class="fw-bold" style="color: #D6562D;">Strong hit:</span> Press the <span class="fw-bold" style="color: #D6562D;">O</span> key<br>
                             </p>
-                        -->
+
 
                         </div>
                         <div class="modal-footer">
