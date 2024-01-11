@@ -52,6 +52,7 @@ function ballPhysics()
     {
         ball.DirY = -1;
     }
+    ball.Speed = ball.Speed < gameData.ballSpeed ? gameData.ballSpeed : ball.Speed;
     ball.Mesh.position.x += ball.DirX * ball.Speed;
     ball.Mesh.position.y += ball.DirY * ball.Speed;
     setTimeout(() => {
