@@ -422,3 +422,18 @@ canvas {
 .dashboard {
   background: #131122;
 }
+
+.button_setting {
+  font-size: 3rem;
+  color: #FFD4FB;
+  font-weight: bold;
+  letter-spacing: 3px;
+}
+
+.button_setting:hover {
+  color: #E6992A;
+}
+
+.button_setting:active {
+  color: #D6562D;
+}
