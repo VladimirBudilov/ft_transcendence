@@ -15,8 +15,8 @@ function createScene()
     gameRender.renderer.setSize(gameRender.WIDTH, gameRender.HEIGHT);
     currentCanvas.appendChild(gameRender.renderer.domElement);
     InitGameField();
-    InitGround();
-    InitGameTable();
+    //InitGround();
+    //InitGameTable();
     InitLight();
     InitBall();
     InitPaddle( playerPaddle, (new THREE.MeshPhongMaterial(
@@ -45,8 +45,9 @@ function InitCamera(WIDTH, HEIGHT) {
     gameRender.gameScene.add(gameRender.gameCamera);
     gameRender.gameCamera.position.z = gameData.startCameraPosition;
     gameRender.gameCamera.position.x = 0;
-    gameRender.gameCamera.position.y = 0;
-    gameRender.gameCamera.rotation.x = 0;
+    gameRender.gameCamera.position.y = -350;
+    //rotate on 30 degrees on x axis
+    gameRender.gameCamera.rotation.x = 0.5;
     gameRender.gameCamera.rotation.y = 0;
     gameRender.gameCamera.rotation.z = 0;
 }
@@ -58,7 +59,7 @@ function InitBall() {
                 color: gameColors.ballColor
             });
     ball.Mesh = new THREE.Mesh(
-        new THREE.CircleGeometry(
+        new THREE.SphereGeometry(
             ball.Radius,
             ball.segments),
         ball.Material);
@@ -71,19 +72,21 @@ function InitBall() {
 function InitPaddle(paddle, paddle1Material) {
     paddle.Material= paddle1Material;
     paddle.Mesh = new THREE.Mesh(
-        new THREE.PlaneGeometry(
-            paddle.Width,
-            paddle.Height,
-            paddle.Quality,
+        new THREE.CylinderGeometry(
+            paddle.Width/4,
+            paddle.Width/4,
+            paddle.Height/1.5,
             paddle.Quality),
         paddle.Material);
     gameRender.gameScene.add(paddle.Mesh);
     paddle.Mesh.position.z = 2;
-    let leftPart = new THREE.CircleGeometry(
+    let leftPart = new THREE.SphereGeometry(
         paddle.Width/2,
+        ball.segments,
         paddle.Quality);
-    let rightPart = new THREE.CircleGeometry(
+    let rightPart = new THREE.SphereGeometry(
         paddle.Width/2,
+        ball.segments,
         paddle.Quality);
     paddle.leftPartMesh = new THREE.Mesh(
         leftPart,

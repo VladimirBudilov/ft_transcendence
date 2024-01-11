@@ -48,7 +48,7 @@ class Data {
     playerFieldHeight = 540;
     playerFieldQuality = 100;
     bounceTime = 100;
-    startCameraPosition = this.playerFieldHeight * 1.3;
+    startCameraPosition = this.playerFieldHeight * 1.5;
     maxCameraPosition = 220;
     allTimeouts = [];
     UpdateScreenData() {
@@ -65,7 +65,7 @@ class Paddle {
     isSpellActive = false;
     leftPart;
     rightPart;
-    Width = 20;
+    Width = 40;
     Height = 60;
     Depth = 10;
     Quality = 10;
