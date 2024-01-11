@@ -34,7 +34,7 @@ export default class Settings {
             </div>
         </div>
         <div class="row ms-5 me-1 mb-5">
-            <button onclick="setColor(0x333333)">Change</button>
+            <button onclick="setColor()">Change</button>
         </div>
         
         `;

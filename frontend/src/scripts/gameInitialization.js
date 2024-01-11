@@ -7,7 +7,6 @@ function PrepareData() {
 
 function createScene()
 {
-    console.log(colorField);
     let currentCanvas = document.getElementById("gameCanvas");
     if(currentCanvas == null) console.log("null");
     gameRender.renderer = new THREE.WebGLRenderer();
@@ -22,11 +21,11 @@ function createScene()
     InitBall();
     InitPaddle( playerPaddle, (new THREE.MeshPhongMaterial(
         {
-            color: 0x069E92
+            color: gameColors.playerColor
         })))
     InitPaddle(opponentPaddle, (new THREE.MeshPhongMaterial(
         {
-            color: 0xFE638B
+            color: gameColors.playerColor2
         })))
     playerPaddle.Mesh.position.x = -gameRender.playerField.Width/2 + playerPaddle.Width;
     opponentPaddle.Mesh.position.x =  gameRender.playerField.Width/2 - opponentPaddle.Width;
@@ -56,7 +55,7 @@ function InitBall() {
     ball.Material =
         new THREE.MeshPhongMaterial(
             {
-                color: 0xFCCA45
+                color: gameColors.ballColor
             });
     ball.Mesh = new THREE.Mesh(
         new THREE.CircleGeometry(
@@ -114,7 +113,7 @@ function InitGround() {
     gameRender.ground.Material =
         new THREE.MeshPhongMaterial(
             {
-                color: 0x041B29 
+                color: gameColors.GroundColor
             });
     gameRender.ground.Mesh = new THREE.Mesh(
         new THREE.CubeGeometry(
@@ -152,7 +151,7 @@ function InitGameField() {
         gameRender.playerField.Quality = gameData.playerFieldQuality;
         gameRender.playerField.Material = new THREE.MeshPhongMaterial(
             {
-                color: 0x041B29
+                color: gameColors.GameZoneColor
             });
     gameRender.playerField.Mesh = new THREE.Mesh(
         new THREE.PlaneGeometry(
@@ -171,7 +170,7 @@ function InitGameTable() {
         new THREE.MeshLambertMaterial(
             {
                 //white color
-                color: 0xffffff
+                color: gameColors.GameBorderColor
             });
     gameRender.table.Mesh = new THREE.Mesh(
         new THREE.PlaneGeometry(
