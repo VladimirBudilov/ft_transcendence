@@ -7,20 +7,20 @@ class GameRender {
     playerField = new Rectangular();
     table = new Rectangular();
     ground = new Rectangular();
-    SetWindowSize(newWidth, newHeight) {
-        let Wscale = (newWidth * 0.6) / this.WIDTH;
-        let Hscale = (newHeight * 0.4) / this.HEIGHT;
-        this.WIDTH = newWidth * 0.6;
-        this.HEIGHT = newHeight * 0.4;
-        if (Wscale < 1 || Hscale < 1) {
-            return Wscale < Hscale ? Wscale : Hscale;
-        }
-        this.renderer.setSize(newWidth, newHeight);
-        if (Wscale > 1 || Hscale > 1) {
-            return Wscale > Hscale ? Wscale : Hscale;
-        }
-        return 1;
-    }
+    // SetWindowSize(newWidth, newHeight) {
+    //     let Wscale = (newWidth * 0.6) / this.WIDTH;
+    //     let Hscale = (newHeight * 0.4) / this.HEIGHT;
+    //     this.WIDTH = newWidth * 0.6;
+    //     this.HEIGHT = newHeight * 0.4;
+    //     if (Wscale < 1 || Hscale < 1) {
+    //         return Wscale < Hscale ? Wscale : Hscale;
+    //     }
+    //     this.renderer.setSize(newWidth, newHeight);
+    //     if (Wscale > 1 || Hscale > 1) {
+    //         return Wscale > Hscale ? Wscale : Hscale;
+    //     }
+    //     return 1;
+    // }
 }
 
 class Vector3 {
@@ -40,14 +40,14 @@ class Data {
     maxScore = 100;
     difficulty = 0.8;
     ballSpeed = 8;
-    spellTime = 3000;
-    slidePunchSpeed = 0.5;
-    slidePunchTime = 1500;
-    spellSpeed = 0.5;
+    spellTime = 4000;
+    slidePunchSpeed = 0.6;
+    slidePunchTime = 2500;
+    spellSpeed = 0.7;
     playerFieldWidth = 720;
     playerFieldHeight = 540;
     playerFieldQuality = 100;
-    bounceTime = 100;
+    bounceTime = 500;
     startCameraPosition = this.playerFieldHeight * 1.5;
     maxCameraPosition = 220;
     allTimeouts = [];
@@ -65,7 +65,7 @@ class Paddle {
     isSpellActive = false;
     leftPart;
     rightPart;
-    Width = 40;
+    Width = 20;
     Height = 60;
     Depth = 10;
     Quality = 10;

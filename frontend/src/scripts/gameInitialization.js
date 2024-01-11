@@ -196,3 +196,68 @@ function InitGameTable() {
     gameRender.table.Mesh.position.z = -0.4;
     gameRender.gameScene.add(gameRender.table.Mesh);
 }
+
+function InitCamera(WIDTH, HEIGHT) {
+    let VIEW_ANGLE = 50,
+        ASPECT = WIDTH / HEIGHT,
+        NEAR = 0.1,
+        FAR = 10000;
+    gameRender.gameCamera =
+        new THREE.PerspectiveCamera(
+            VIEW_ANGLE,
+            ASPECT,
+            NEAR,
+            FAR);
+    gameRender.gameScene.add(gameRender.gameCamera);
+    gameRender.gameCamera.position.z = gameData.startCameraPosition;
+    gameRender.gameCamera.position.x = 0;
+    gameRender.gameCamera.position.y = 0;
+    gameRender.gameCamera.rotation.x = 0;
+    gameRender.gameCamera.rotation.y = 0;
+    gameRender.gameCamera.rotation.z = 0;
+}
+
+function InitBall() {
+    ball.Material =
+        new THREE.MeshPhongMaterial(
+            {
+                color: gameColors.ballColor
+            });
+    ball.Mesh = new THREE.Mesh(
+        new THREE.CircleGeometry(
+            ball.Radius,
+            ball.segments),
+        ball.Material);
+    gameRender.gameScene.add(ball.Mesh);
+    ball.Mesh.position.x = 0;
+    ball.Mesh.position.y = 0;
+    ball.Mesh.position.z = ball.Radius;
+}
+
+function InitPaddle(paddle, paddle1Material) {
+    paddle.Material= paddle1Material;
+    paddle.Mesh = new THREE.Mesh(
+        new THREE.PlaneGeometry(
+            paddle.Width,
+            paddle.Height,
+            paddle.Quality,
+            paddle.Quality),
+        paddle.Material);
+    gameRender.gameScene.add(paddle.Mesh);
+    paddle.Mesh.position.z = 2;
+    let leftPart = new THREE.CircleGeometry(
+        paddle.Width/2,
+        paddle.Quality);
+    let rightPart = new THREE.CircleGeometry(
+        paddle.Width/2,
+        paddle.Quality);
+    paddle.leftPartMesh = new THREE.Mesh(
+        leftPart,
+        paddle.Material);
+    paddle.rightPartMesh = new THREE.Mesh(
+        rightPart,
+        paddle.Material);
+    gameRender.gameScene.add(paddle.leftPartMesh);
+    gameRender.gameScene.add(paddle.rightPartMesh);
+    updatePaddlePosition(paddle);
+}
