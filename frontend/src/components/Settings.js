@@ -27,13 +27,25 @@ export default class Settings {
         </div>
         `;
 
+        const settingField = `
+        <div class="d-flex justify-content-end mb-2">
+            <div class="back">
+                <p class="button_volume mx-5">Color</p>
+            </div>
+        </div>
+        <div class="row ms-5 me-1 mb-5">
+            <button onclick="setColor(0x333333)">Change</button>
+        </div>
+        
+        `;
+
         const menuHtml = buttonsHtml.map(html => `
             <div class="d-flex justify-content-end">
                 ${html}
             </div>
         `).join('');
 
-        const settingsHtml = html + menuHtml;
+        const settingsHtml = html + settingField + menuHtml;
 
         return settingsHtml;
     }  

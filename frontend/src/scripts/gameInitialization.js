@@ -1,3 +1,4 @@
+
 function PrepareData() {
     document.getElementById("winnerBoard").innerHTML = "First to " + gameData.maxScore + " wins!";
     gameData.playerScore = 0;
@@ -6,6 +7,7 @@ function PrepareData() {
 
 function createScene()
 {
+    console.log(colorField);
     let currentCanvas = document.getElementById("gameCanvas");
     if(currentCanvas == null) console.log("null");
     gameRender.renderer = new THREE.WebGLRenderer();

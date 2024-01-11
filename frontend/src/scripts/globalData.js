@@ -146,5 +146,3 @@ let animationId;
 let SpellEvent = new Event("SpellEvent");
 let botCollisionCounter = 0;
 let botTryCastSpell = false;
-
-
