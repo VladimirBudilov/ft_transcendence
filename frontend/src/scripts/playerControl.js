@@ -98,7 +98,7 @@ function BotPaddleMovement()
 }
 
 const CanActiveSpell = (paddle) => {
-    if(paddle.isSpellActive) return false;
+    if(paddle.isSpellActive || !isSkillActive) return false;
     if(paddle.isSpellActive && !IsBallOnPaddleWidth(paddle, paddle.Width/2)) return false;
     return IsBallNearPaddle(paddle, paddle.Height * 0.5);
 };
