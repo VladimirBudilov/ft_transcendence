@@ -7,6 +7,8 @@ import Tournament from './components/Tournament.js';
 import Settings from './components/Settings.js';
 import Multiplayer from './components/Multiplayer.js';
 import LoginPage from './components/LoginPage.js';
+import Customize from './components/Customize.js';
+import Sound from './components/Sound.js';
 
 import { script } from './izolda.js';
 import { register } from './izolda.js';
@@ -72,24 +74,7 @@ async function buttonClickHandler(buttonText) {
         } else if (buttonText === "Settings") {
             const settings = new Settings();
             document.getElementById('menu').innerHTML = await settings.getHtml();
-            const volume = document.querySelector('.volume');
-            const volume_box = document.querySelector('.volume_box');
-            volume.style.width = myAudio.volume * 100 + '%';
-            volume_box.addEventListener('click', e => {
-                const x = e.offsetX;
-                const width = volume_box.clientWidth;
-                myAudio.volume = x / width;
-                volume.style.width = x / width * 100 + '%';
-            });
-
-            console.log(`color ${!isDefaultColor}`);
-            console.log(`3D ${threeDPieceOfShit}`);
-
-            changeFieldColor();
-            change3D();
-
-            
-                        
+             
         } else if (buttonText === "Main Menu") {
             const menu = new MainMenu();
             document.getElementById('menu').innerHTML = await menu.getHtml();
@@ -128,7 +113,26 @@ async function buttonClickHandler(buttonText) {
 
         } else if (buttonText === "Sign In") {
 			navigateTo('/login');
-		}
+
+		} else if (buttonText === "Customize") {
+            const customize = new Customize();
+            document.getElementById('menu').innerHTML = await customize.getHtml();
+            changeFieldColor();
+            change3D();
+
+        } else if (buttonText === "Sound") {
+            const sound = new Sound();
+            document.getElementById('menu').innerHTML = await sound.getHtml();
+            const volume = document.querySelector('.volume');
+            const volume_box = document.querySelector('.volume_box');
+            volume.style.width = myAudio.volume * 100 + '%';
+            volume_box.addEventListener('click', e => {
+                const x = e.offsetX;
+                const width = volume_box.clientWidth;
+                myAudio.volume = x / width;
+                volume.style.width = x / width * 100 + '%';
+            });  
+        }
 
     }, 400);
     
@@ -242,8 +246,6 @@ window.addEventListener('popstate', router);
         картинок, стилей и т.д.). Когда событие происходит, вызывается функция router(), 
         предположительно для начальной инициализации страницы.
 */
-
-
 
 document.addEventListener('DOMContentLoaded', () => {
     router();

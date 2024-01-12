@@ -10,7 +10,7 @@ function logout() {
 }
 
 function toLogin() {
-	window.location.href = "/login";
+	window.location.href = "http://localhost:8000/api/v1/auth/intra/login/";
 }
 
 function authButton() {
