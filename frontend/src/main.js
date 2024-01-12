@@ -21,6 +21,46 @@ function findContent(text) {
     }
 }
 
+function changeFieldColor() {
+    const button = document.getElementById("colorButton");
+    if (isDefaultColor) {
+        button.classList.add('defaultColor');
+    } else {
+        button.classList.add('clickedColor');
+    }
+
+    button.addEventListener('click', e => {
+        if (!isDefaultColor) {
+            button.classList.add('clickedColor');
+            button.classList.remove('defaultColor');
+        } else {
+            button.classList.add('defaultColor');
+            button.classList.remove('clickedColor');
+        }
+    });
+}
+
+function change3D() {
+    const button3D = document.getElementById("button3D");
+    if (!threeDPieceOfShit) {
+        button3D.classList.add('defaultColor3D');
+    } else {
+        button3D.classList.add('clickedColor3D');
+    }
+
+    button3D.addEventListener('click', e => {
+        if (threeDPieceOfShit) {
+            button3D.classList.add('clickedColor3D');
+            button3D.classList.remove('defaultColor3D');
+        } else {
+            button3D.classList.add('defaultColor3D');
+            button3D.classList.remove('clickedColor3D');
+        }
+    });
+
+};
+
+
 
 async function buttonClickHandler(buttonText) {
     setTimeout(async () => {
@@ -42,18 +82,13 @@ async function buttonClickHandler(buttonText) {
                 volume.style.width = x / width * 100 + '%';
             });
 
+            console.log(`color ${!isDefaultColor}`);
+            console.log(`3D ${threeDPieceOfShit}`);
 
-            console.log(isDefaultColor);
-            console.log(gameColors.GameZoneColor);
-            if (isDefaultColor) {
-                const button = document.getElementById("colorButton");
-                button.classList.add('defaultColor',);
-                button.classList.remove('clickedColor');
-            } else {
-                const button = document.getElementById("colorButton");
-                button.classList.add('clickedColor');
-                button.classList.remove('defaultColor');
-            }
+            changeFieldColor();
+            change3D();
+
+            
                         
         } else if (buttonText === "Main Menu") {
             const menu = new MainMenu();
@@ -94,7 +129,6 @@ async function buttonClickHandler(buttonText) {
         } else if (buttonText === "Sign In") {
 			navigateTo('/login');
 		}
-
 
     }, 400);
     
@@ -253,6 +287,7 @@ document.addEventListener('click', async e => {
 
 window.addEventListener('load', () => {
 	document.body.append(script);
+    
 });
 
 

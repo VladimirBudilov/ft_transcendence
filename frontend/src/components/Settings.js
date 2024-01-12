@@ -46,13 +46,21 @@ export default class Settings {
             </div>
         `;
 
+        const setting3D = `
+        <div class="d-flex justify-content-end">
+            <div class="back">
+                <button id="button3D" class="button_setting3d mx-5" onclick="set3D()">3D</button>
+            </div>
+        </div>
+    `;
+
         const menuHtml = buttonsHtml.map(html => `
             <div class="d-flex justify-content-end">
                 ${html}
             </div>
         `).join('');
 
-        const settingsHtml = html + settingField + menuHtml;
+        const settingsHtml = html + settingField + setting3D + menuHtml;
 
         return settingsHtml;
     }  
