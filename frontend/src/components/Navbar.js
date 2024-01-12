@@ -43,10 +43,12 @@ export default class {
 		return `
 		  <div class="row-1 nav_bar d-flex justify-content-between">
 			<div class="padding-2 mt-2">
-				<a class="logo_text ms-3" href="/">PING PONG</a>
+				<span class="logo_text ms-3" href="/">PING PONG</span>
 			</div>
 			<div id="auth_button" class="auth_button padding-2"></div>      
 		  </div>
 	`;
 	}
 }
+
+export { authButton };

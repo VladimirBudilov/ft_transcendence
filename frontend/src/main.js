@@ -12,6 +12,7 @@ import Sound from './components/Sound.js';
 
 import { script } from './izolda.js';
 import { register } from './izolda.js';
+import { authButton } from './components/Navbar.js';
 
 
 function findContent(text) {
@@ -22,6 +23,22 @@ function findContent(text) {
         }
     }
 }
+
+// function authButton() {
+// 	const auth_button = document.getElementById("auth_button");
+
+// 	if (getCookie('username') != null) {
+// 		auth_button.innerHTML = `
+// 				<button class="btn btn-primary me-3">${getCookie('username')}</a>
+// 				<button class="btn btn-primary me-3" onclick="logout()">Logout</button>
+// 			`.trim();
+// 	} else {
+// 		auth_button.innerHTML = `
+// 				<button class="btn btn-primary me-3" onclick="toLogin()">Sign In</button>
+// 			`.trim();
+// 	};
+// }
+
 
 function changeFieldColor() {
     const button = document.getElementById("colorButton");
@@ -132,8 +149,10 @@ async function buttonClickHandler(buttonText) {
                 myAudio.volume = x / width;
                 volume.style.width = x / width * 100 + '%';
             });  
+        } else if (buttonText === "Auth") {
+            navigateTo('/');
         }
-
+        authButton();
     }, 400);
     
 }
@@ -222,6 +241,7 @@ async function router() {
     */
 
     findContent("About Us");
+    authButton();
 };
 
 /* 
@@ -285,6 +305,11 @@ document.addEventListener('click', async e => {
         findContent("About Us");
         audio.play();
     }
+    if (e.target.classList.contains('button_auth')) {
+        e.preventDefault();
+        await buttonClickHandler(e.target.innerHTML);
+    }
+    authButton();
 });
 
 window.addEventListener('load', () => {

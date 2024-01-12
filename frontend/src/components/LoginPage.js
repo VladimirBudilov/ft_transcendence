@@ -2,34 +2,7 @@ import Navbar from './Navbar.js';
 import GlobalChat from './GlobalChat.js';
 import { register } from '../izolda.js';
 import { getCookie, setCookie } from '../utils.js';
-import Hero from './Hero.js';
-
-
-async function navigateTo(url) {
-    history.pushState(null, null, url);
-    await router();
-};
-
-async function router() {
-    const routes = [
-        { path: '/', view: Hero }
-    ];
-    const potentialMatches = routes.map(route => {
-        return {
-            route: route,
-            isMatch: location.pathname === route.path
-        };
-    });
-    let match = potentialMatches.find(potentialMatch => potentialMatch.isMatch);
-    if (!match) {
-        match = {
-            route: routes[0],
-            isMatch: true
-        };
-    }
-    const view = new match.route.view();
-    document.getElementById('app').innerHTML = await view.getHtml();
-}
+import MenuButton from './MenuButton.js';
 
 // Function to sign in with intra
 // Send a POST request to the backend with the login from 
@@ -102,7 +75,6 @@ async function signIn() {
 	data = await res.json();
 	setCookie('username', data.username, 3600);
 
-	navigateTo('/');
 }
 
 function loader_here() {
@@ -123,11 +95,14 @@ export default class LoginPage {
 		register(setCookie);
 		register(signIn);
 		register(loader_here, true);
+		this.button = new MenuButton("Exit");
+
     }
 
 	async getHtml() {
 
 		return `
+			
 			${await new Navbar().getHtml()}
 			<div class="game">
 				<div class="container">
@@ -147,10 +122,8 @@ export default class LoginPage {
 										style="width:15rem; height:40px; letter-spacing: 3px;"/>
 									<button
 										onclick="signIn()"
-										class="d-block btn btn-primary mt-2 mb-2 text-start"
-										style="width:15rem; height: 40px; letter-spacing:3px;">
-										Sign In
-									</button>
+										class="button_auth d-block btn btn-primary mt-2 mb-2 text-start"
+										style="width:15rem; height: 40px; letter-spacing:3px;">Auth</button>
 								</div>
 							</div>
 						</div>
