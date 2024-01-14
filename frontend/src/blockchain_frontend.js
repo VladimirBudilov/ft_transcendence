@@ -177,7 +177,7 @@ let tournamentsResult;
 function getAllResult() {
 	contract.methods.getAllResult().call()
 		.then(function(results) {
-			console.log("All results: ");
+			// console.log("All results: ");
 			// Распаковываем результаты
             const tournamentNames = results[0];
             const playerNames = results[1];
@@ -202,13 +202,23 @@ function getAllResult() {
                 });
             }
 
+            let result = "";
             // Выводим результаты
             for (const tournamentName in tournamentsResult) {
-                console.log("Tournament: " + tournamentName);
+                
+                result += "<span class='tournament-name mt-4'>" + tournamentName + "</span>\n";
+
+                // console.log("Tournament: " + tournamentName);
                 tournamentsResult[tournamentName].forEach(player => {
-                    console.log("  Player: " + player.playerName + ", Place: " + player.playerScore);
+                    result += "<span class='tournament-stats'>" + player.playerName + ": " + player.playerScore + "</span>\n";
+                    // console.log("  Player: " + player.playerName + ", Place: " + player.playerScore);
                 });
             }
+            if (result === "") {
+                result = "<p class='tournament-name'>No results</p>";
+            }
+            document.getElementById("results").innerHTML = result;
+            
 		})
 		.catch(function(error) {
 			console.error(error);
@@ -218,4 +228,4 @@ function getAllResult() {
 //getResultTournament("first")
 //getAllResult()
 // getResultPlayer("Vova", "first")
-export { getAllResult };
+// export { getAllResult };

@@ -40,7 +40,7 @@ class Tournament
     }
     StartMatch = () =>
     {
-        document.getElementById("tournament").remove();
+        document.getElementById("tournament").innerHTML = "";
         console.log("start match");
         console.log("names of losers: " + this.looserPool);
         console.log("names of winners: " + this.winnersPool);
@@ -211,9 +211,10 @@ function ReadInput() {
         successMessage.style.color = "green";
         errorMessageContainer.appendChild(successMessage);
         setTimeout(() => {
-            if(document.getElementById("errorMessage") !== null)
+            if(document.getElementById("errorMessage") !== null) {
                 document.getElementById("errorMessage").remove();
-            document.getElementById("userInput").value = ""
+            }
+            // document.getElementById("userInput").value = "";
             //ChangeDivStateById("tournament", false);
         }, 2000);
         tournament.StartTournament();

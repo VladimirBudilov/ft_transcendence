@@ -19,6 +19,10 @@ export default class Game {
 
         const tournamrnInputs = window.location.href.substring(window.location.href.lastIndexOf('/')) === '/tournament' ? await this.tournamrnInputs() : '';
 
+        const buttonHtml = await this.button.getHtml();
+        const button = buttonHtml.replace(/back/g, "");
+        
+
         return `
             ${await this.navbar.getHtml()}
             <div class="game">
@@ -36,7 +40,7 @@ export default class Game {
                             ${tournamrnInputs}
                             <div class="row">
                                 <div class="d-flex justify-content-center pb-3">
-                                    ${this.button.getHtml()}
+                                    ${button}
                                 </div>
                             </div>
                         </div>

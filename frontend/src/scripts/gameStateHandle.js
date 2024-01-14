@@ -11,7 +11,7 @@ function StopGame()
     stopGame = false;
     ball.Speed = gameData.ballSpeed;
     let gameCanvas = document.getElementById("gameCanvas");
-    gameCanvas.removeChild(gameRender.renderer.domElement);
+    // gameCanvas.removeChild(gameRender.renderer.domElement);
     cancelAnimationFrame(animationId);
     cancelIdleCallback(animationId);
     printScore();

@@ -9,6 +9,7 @@ import Multiplayer from './components/Multiplayer.js';
 import LoginPage from './components/LoginPage.js';
 import Customize from './components/Customize.js';
 import Sound from './components/Sound.js';
+import ResultTable from './components/ResultTable.js';
 
 import { script } from './izolda.js';
 import { register } from './izolda.js';
@@ -135,6 +136,8 @@ async function buttonClickHandler(buttonText) {
             });  
         } else if (buttonText === "Auth") {
             navigateTo('/');
+        } else if (buttonText === "Results") {
+            navigateTo('/results');
         }
         authButton();
     }, 400);
@@ -178,6 +181,7 @@ async function router() {
         { path: '/twoplayers', view: Game },
         { path: '/tournament', view: Game },
         { path: '/login', view: LoginPage },
+        { path: '/results', view: ResultTable },
     ];
 
     /* 

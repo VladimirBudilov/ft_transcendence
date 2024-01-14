@@ -533,3 +533,42 @@ canvas {
   box-shadow: none;
   letter-spacing: 1px;
 }
+
+.tournament-name {
+  color: #D6562D;
+  font-size: 2rem;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: 3rem;
+  letter-spacing: 3px;
+}
+
+.table-results {
+  height: 93vh;
+  background: #1f162e;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+}
+
+.tournament-stats {
+  color: #805EF6;
+  font-size: 1.5rem;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  height: 2rem;
+  letter-spacing: 3px;
+}
+
+.scroll-result {
+  height: 60vh;
+  overflow-y: scroll;
+}
+
+.scroll-result::-webkit-scrollbar {
+  display: none;
+}

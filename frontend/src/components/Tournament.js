@@ -4,7 +4,7 @@ export default class MainMenu {
     constructor() {
         this.buttons = [
             new MenuButton("Start", "StartTournament()"),
-            new MenuButton("Results", "getAllResult()"),
+            new MenuButton("Results", " getAllResult()"),
             new MenuButton("Main Menu"),
         ];
         document.title = 'Game Mode';
