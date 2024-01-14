@@ -33,12 +33,12 @@ export default class Game {
                                 <p id='scores' class="text_game" style="color: #805EF6!important">0-0</p>
                                 <p id='winnerBoard' class="text_game fs-2">First to score 7 wins!</p>
                             </div>
+                            ${tournamrnInputs}
                             <div class="row">
                                 <div class="d-flex justify-content-center pb-3">
                                     ${this.button.getHtml()}
                                 </div>
                             </div>
-                            ${tournamrnInputs}
                         </div>
                     </div>
                 </div>
@@ -48,12 +48,17 @@ export default class Game {
 
     async tournamrnInputs() {
         return `
-            <div class="row">
+            <div class="row my-5">
                 <div id='tournament'>
-                    <label for="userInput">
-                        <h1>Enter tournament name</h1>
-                    </label><input type="text" id="userInput" placeholder="Enter text here">
-                    <button onclick="ReadInput()">Submit</button>
+                    <div class="row">
+                        <label for="userInput" class="p-0 form-label">
+                            <h1 id="tournament-text" class="tournament-text">Enter number of players:</h1>
+                        </label>
+                    </div>
+                    <div class="row">
+                        <input type="text" class="tournament-text-input form-control" id="userInput" placeholder="Enter text here" aria-describedby="emailHelp">
+                        <button class="tournament-text-button mt-2"onclick="ReadInput()">Submit</button>
+                    </div>
                 </div>
             </div>
         `;

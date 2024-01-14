@@ -1,3 +1,5 @@
+
+
 class Tournament
 {
     tournamentInput = null;
@@ -38,6 +40,7 @@ class Tournament
     }
     StartMatch = () =>
     {
+        document.getElementById("tournament").remove();
         console.log("start match");
         console.log("names of losers: " + this.looserPool);
         console.log("names of winners: " + this.winnersPool);
@@ -119,9 +122,11 @@ class Tournament
         this.currentPair[1] = this.currentParticipants[1];
         let player1 = this.currentPair[0];
         let player2 = this.currentPair[1];
+
         //TODO add player names on screen
         console.log(player1.playerName + " vs " + player2.playerName);
         this.currentParticipants.splice(0, 2);
+        document.getElementById("playerNames").innerHTML = player1.playerName + "-" + player2.playerName;
         return true;
     }
 }
@@ -148,7 +153,15 @@ function generateError(errorMessageContainer, errorMessageContent) {
     const errorMessage = document.createElement("p");
     errorMessage.id = "errorMessage";
     errorMessage.textContent = errorMessageContent;
+    errorMessage.setAttribute("class", "row");
     errorMessage.style.color = "red";
+    errorMessage.style.marginTop = "1rem";
+    errorMessage.style.padding = "1rem";
+    errorMessage.style.fontWeight = "bold";
+    errorMessage.style.justifyContent = "center";
+    errorMessage.style.border = "2px solid red";
+    errorMessage.style.borderRadius = "0.375rem";
+    errorMessage.style.letterSpacing = "2px";
     errorMessageContainer.appendChild(errorMessage);
 }
 
@@ -163,22 +176,27 @@ function ReadInput() {
     }
     if(tournament.numberOfParticipants === 0)
     {
+        document.getElementById("tournament-text").innerHTML = "Enter name of tournament:";
         tournament.numberOfParticipants = userInput;
         document.getElementById("userInput").value = "";
         if(tournament.numberOfParticipants < 2)
         {
+            document.getElementById("tournament-text").innerHTML = "Enter number of players:";
             tournament.numberOfParticipants = 0;
-            generateError(errorMessageContainer, "Error: Number of participants must be at least 2");
+            generateError(errorMessageContainer, "Error: Number of players must be at least 2");
         }
         if(!IsDigit(tournament.numberOfParticipants))
         {
+            document.getElementById("tournament-text").innerHTML = "Enter number of players:";
             tournament.numberOfParticipants = 0;
             generateError(errorMessageContainer, "Error: Input must be a number");
         }
         return;
     }
+    
     if(tournament.tournamentName === "")
     {
+        document.getElementById("tournament-text").innerHTML = `Enter name of player:`;
         tournament.tournamentName = userInput;
         document.getElementById("userInput").value = "";
         return;

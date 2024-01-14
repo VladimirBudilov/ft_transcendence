@@ -278,7 +278,7 @@ canvas {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #35264E;
+  background: #1f162e;
   transition: opacity 0.75s visibility 0.75s;
   z-index: 9999;
 }
@@ -495,4 +495,41 @@ canvas {
   transition: color 0s;
   color: #D6562D;
   text-shadow: 1px 1px 1px #041b29;
+}
+
+.tournament-text {
+  color:#FFD4FB;
+  font-size: 1rem;
+  font-family: 'Source Code Pro', monospace;
+}
+
+.tournament-text-button {
+  color: #FFD4FB;
+  /* border: 1px solid #4431D8; */
+  border-radius: 0.375rem;
+  height: 2rem;
+  background: #4431D8;
+  letter-spacing: 2px;
+  border: none;
+  transition: 0s;
+  
+}
+
+.tournament-text-button:active {
+  
+  color: #0a081c;
+  background: #FFFFFF;
+ 
+}
+
+.tournament-text-input {
+  height: 2rem;
+
+}
+
+.tournament-text-input::-webkit-input-placeholder {
+  opacity: 0.3;
+  border: none;
+  box-shadow: none;
+  letter-spacing: 1px;
 }

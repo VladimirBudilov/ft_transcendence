@@ -24,22 +24,6 @@ function findContent(text) {
     }
 }
 
-// function authButton() {
-// 	const auth_button = document.getElementById("auth_button");
-
-// 	if (getCookie('username') != null) {
-// 		auth_button.innerHTML = `
-// 				<button class="btn btn-primary me-3">${getCookie('username')}</a>
-// 				<button class="btn btn-primary me-3" onclick="logout()">Logout</button>
-// 			`.trim();
-// 	} else {
-// 		auth_button.innerHTML = `
-// 				<button class="btn btn-primary me-3" onclick="toLogin()">Sign In</button>
-// 			`.trim();
-// 	};
-// }
-
-
 function changeFieldColor() {
     const button = document.getElementById("colorButton");
     if (isDefaultColor) {
