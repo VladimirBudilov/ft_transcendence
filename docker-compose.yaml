@@ -42,3 +42,16 @@ services:
             interval: 10s
             timeout: 5s
             retries: 5
+    node:
+        container_name: blockchain
+        build: ./blockchain
+        command: npx hardhat node
+        ports:
+          - "8545:8545"
+          
+    deploy:
+      container_name: deploy
+      build: ./blockchain
+      command: npx hardhat run scripts/deploy.js --network localhost
+      depends_on:
+        - node
