@@ -3,6 +3,10 @@ version: "3.0"
 services:
     django:
         build: ./django
+        networks:
+          - webapp
+          - database
+          - blockchainnet
         container_name: DJANGO
         command: python manage.py runserver 0.0.0.0:8000
         ports:
@@ -31,6 +35,8 @@ services:
     postgres:
         image: postgres:16
         container_name: POSTGRES
+        networks:
+          - database
         ports:
             - "5432:5432"
         environment:
@@ -43,15 +49,20 @@ services:
             timeout: 5s
             retries: 5
     node:
-        container_name: blockchain
+        container_name: BLOCKCHAIN
         build: ./blockchain
-        command: npx hardhat node
+        networks:
+          - webapp
+          - blockchainnet
+        command: >
+          bash -c "npx hardhat node & sleep 10 && npx hardhat run scripts/deploy.js --network localhost"
         ports:
           - "8545:8545"
           
-    deploy:
-      container_name: deploy
-      build: ./blockchain
-      command: npx hardhat run scripts/deploy.js --network localhost
-      depends_on:
-        - node
+networks:
+  webapp:
+    driver: bridge
+  database:
+    driver: bridge
+  blockchainnet:
+    driver: bridge
