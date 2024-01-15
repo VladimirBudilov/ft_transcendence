@@ -52,7 +52,7 @@ export default class Game {
 
     async tournamrnInputs() {
         return `
-            <div class="row my-5">
+            <div class="row my-5" id='tournament-field'>
                 <div id='tournament'>
                     <div class="row">
                         <label for="userInput" class="p-0 form-label">

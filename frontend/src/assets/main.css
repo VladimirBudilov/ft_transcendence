@@ -287,7 +287,7 @@ canvas {
   content: '';
   width: 75px;
   height: 75px;
-  border: 15px solid #FFD4FB;
+  border: 15px solid #FFFFFF;
   border-top-color: #805EF6;
   border-radius: 50%;
   animation: loading 0.75s ease infinite;
@@ -496,6 +496,35 @@ canvas {
   color: #D6562D;
   text-shadow: 1px 1px 1px #041b29;
 }
+
+.button_setting_hit.defaultColorHit {
+  font-size: 3rem;
+  color: #FFD4FB;
+  font-weight: bold;
+  letter-spacing: 4px;
+  transition: color 0.2s;
+}
+
+.button_setting_hit.defaultColorHit:active {
+  transition: color 0s;
+  color: #D6562D;
+  text-shadow: 1px 1px 1px #041b29;
+} 
+
+.button_setting_hit.clickedColorHit {
+  font-size: 3rem;
+  color: #D6562D;
+  font-weight: bold;
+  letter-spacing: 4px;
+  transition: color 0.2s;
+}
+
+.button_setting_hit.clickedColorHit:active {
+  transition: color 0s;
+  color: #D6562D;
+  text-shadow: 1px 1px 1px #041b29;
+}
+
 
 .tournament-text {
   color:#FFD4FB;

@@ -64,6 +64,26 @@ function change3D() {
 
 };
 
+function changeHit() {
+    const buttonHit = document.getElementById("buttonHit");
+    if (!isSkillActive) {
+        buttonHit.classList.add('defaultColorHit');
+    } else {
+        buttonHit.classList.add('clickedColorHit');
+    }
+
+    buttonHit.addEventListener('click', e => {
+        if (isSkillActive) {
+            buttonHit.classList.add('clickedColorHit');
+            buttonHit.classList.remove('defaultColorHit');
+        } else {
+            buttonHit.classList.add('defaultColorHit');
+            buttonHit.classList.remove('clickedColorHit');
+        }
+    });
+
+};
+
 
 
 async function buttonClickHandler(buttonText) {
@@ -121,6 +141,7 @@ async function buttonClickHandler(buttonText) {
             document.getElementById('menu').innerHTML = await customize.getHtml();
             changeFieldColor();
             change3D();
+            changeHit();
 
         } else if (buttonText === "Sound") {
             const sound = new Sound();

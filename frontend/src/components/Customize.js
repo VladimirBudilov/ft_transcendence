@@ -19,12 +19,20 @@ export default class Customize {
         `;
 
         const setting3D = `
-        <div class="d-flex justify-content-end">
-            <div class="back">
-                <button id="button3D" class="button_setting3d mx-5" onclick="set3D()">3D</button>
+            <div class="d-flex justify-content-end">
+                <div class="back">
+                    <button id="button3D" class="button_setting3d mx-5" onclick="set3D()">3D Field</button>
+                </div>
             </div>
-        </div>
-    `;
+        `;
+
+        const superHit = `
+            <div class="d-flex justify-content-end">
+                <div class="back">
+                    <button id="buttonHit" class="button_setting_hit mx-5" onclick="setSkillActive()">Super Hit</button>
+                </div>
+            </div>
+        `;
 
         const menuHtml = buttonsHtml.map(html => `
             <div class="d-flex justify-content-end">
@@ -32,7 +40,7 @@ export default class Customize {
             </div>
         `).join('');
 
-        const settingsHtml = settingField + setting3D + menuHtml;
+        const settingsHtml = settingField + setting3D + superHit + menuHtml;
 
         return settingsHtml;
     }
