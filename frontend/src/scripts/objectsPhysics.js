@@ -24,25 +24,24 @@ function updatePaddlePosition(paddle) {
 let paddleBounced = false;
 function ballPhysics()
 {
-    if(paddleBounced) return;
     let rand = Math.random() * 0.3;
-    
-    
-    if (ball.Mesh.position.y - ball.Radius <= -gameRender.playerField.Height/2)
+    if (!paddleBounced && ball.Mesh.position.y - ball.Radius <= -gameRender.playerField.Height/2)
     {
         ball.DirY =  -ball.DirY;
         if(ball.DirX > 0)
             ball.DirX = ball.DirX < 0.3 ? 0.3 : ball.DirX;
         else
             ball.DirX = ball.DirX > -0.3 ? -0.3 : ball.DirX;
+        paddleBounced = true;
     }
-    if (ball.Mesh.position.y + ball.Radius >= gameRender.playerField.Height/2)
+    else if (!paddleBounced && ball.Mesh.position.y + ball.Radius >= gameRender.playerField.Height/2)
     {
         ball.DirY = -ball.DirY;
         if(ball.DirX > 0)
             ball.DirX = ball.DirX < 0.3 ? 0.3 : ball.DirX;
         else
             ball.DirX = ball.DirX > -0.3 ? -0.3 : ball.DirX;
+        paddleBounced = true;
     }
     if (ball.DirY > 1)
     {
@@ -94,12 +93,12 @@ function ChangeBallDirection(paddle) {
 function IsBallNearPaddle(paddle, offset = 0) {
     let isNear = false;
     if (paddle.isPlayer) {
-        isNear = ball.Mesh.position.x - ball.Radius <= paddle.Mesh.position.x + paddle.Width + offset
-            && ball.Mesh.position.x - ball.Radius >= paddle.Mesh.position.x - paddle.Width/2;
+        isNear = ball.Mesh.position.x - ball.Radius <= paddle.Mesh.position.x + paddle.Width/2 + offset
+            && ball.Mesh.position.x - ball.Radius >= paddle.Mesh.position.x;
     }
     else {
-        isNear = ball.Mesh.position.x - ball.Radius >= paddle.Mesh.position.x - paddle.Width * 1.5 - offset
-            && ball.Mesh.position.x - ball.Radius <= paddle.Mesh.position.x + paddle.Width/2;
+        isNear = ball.Mesh.position.x + ball.Radius >= paddle.Mesh.position.x - paddle.Width/2 - offset
+            && ball.Mesh.position.x + ball.Radius <= paddle.Mesh.position.x;
     }
     return isNear;
 }

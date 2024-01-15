@@ -1,4 +1,5 @@
 function MovePaddleInCenter(opponentPaddle) {
+
     let center = gameRender.playerField.Mesh.position.y;
     let gap = 10;
     if (opponentPaddle.Mesh.position.y > center + gap)
@@ -16,14 +17,25 @@ function MovePaddleInCenter(opponentPaddle) {
     opponentPaddle.Mesh.position.y += opponentPaddle.DirectionY;
 }
 
+function ReachedBorder(opponentPaddle, top) {
+    if(top === "top")
+    {
+        return opponentPaddle.Mesh.position.y >= gameRender.playerField.Height/2 - opponentPaddle.Height/2 - opponentPaddle.Width/2;
+    }
+    else
+    {
+        return opponentPaddle.Mesh.position.y <= -gameRender.playerField.Height/2 + opponentPaddle.Height/2 + opponentPaddle.Width/2;
+    }
+}
+
 function CalculateBotPaddleSpeed(speed, difficulty) {
     opponentPaddle.DirectionY = (ball.Mesh.position.y - opponentPaddle.Mesh.position.y) * difficulty;
     if (Math.abs(opponentPaddle.DirectionY) <= speed) {
         opponentPaddle.Mesh.position.y += opponentPaddle.DirectionY;
     } else {
-        if (opponentPaddle.DirectionY > speed) {
+        if (opponentPaddle.DirectionY > speed && !ReachedBorder(opponentPaddle, "top")) {
             opponentPaddle.Mesh.position.y += speed;
-        } else if (opponentPaddle.DirectionY < -speed) {
+        } else if (opponentPaddle.DirectionY < -speed && !ReachedBorder(opponentPaddle, "bottom")) {
             opponentPaddle.Mesh.position.y -= speed;
         }
     }
@@ -100,7 +112,7 @@ function BotPaddleMovement()
 const CanActiveSpell = (paddle) => {
     if(paddle.isSpellActive || !isSkillActive) return false;
     if(paddle.isSpellActive && !IsBallOnPaddleWidth(paddle, paddle.Width/2)) return false;
-    return IsBallNearPaddle(paddle, paddle.Height * 0.5);
+    return IsBallNearPaddle(paddle, paddle.Height/2);
 };
 
 function ActivateSpell(paddle) {

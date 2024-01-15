@@ -47,7 +47,7 @@ class Data {
     playerFieldWidth = 720;
     playerFieldHeight = 540;
     playerFieldQuality = 100;
-    bounceTime = 500;
+    bounceTime = 100;
     startCameraPosition = this.playerFieldHeight * 1.3;
     maxCameraPosition = 220;
     allTimeouts = [];
