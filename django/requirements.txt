@@ -6,5 +6,6 @@ django-async-orm==0.1.12
 django-cors-headers==4.1.0
 djangorestframework==3.14.0
 djangorestframework-simplejwt==5.3.0
+django-sslserver==0.22
 python-dotenv==0.21.1
 requests==2.31.0

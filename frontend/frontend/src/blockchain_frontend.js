@@ -1,4 +1,4 @@
-var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+var web3 = new Web3(new Web3.providers.HttpProvider("http://node:8545")); //изменил localhost на node(имя сервиса из docker-compose)
 
 var contractABI = [
     {
