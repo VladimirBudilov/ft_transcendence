@@ -1,69 +1,69 @@
 version: "3.0"
 
 services:
-    django:
-        build: ./django
-        container_name: DJANGO
-        command: sh -c "python manage.py makemigrations && \
-                        python manage.py migrate && \
-                        python manage.py runserver 0.0.0.0:8000"
-        ports:
-            - "8000:8000"
-        volumes:
-            - ./django/:/usr/src/app/
-        depends_on:
-          postgres:
-            condition: service_healthy
+#     django:
+#         build: ./django
+#         container_name: DJANGO
+#         command: sh -c "python manage.py makemigrations && \
+#                         python manage.py migrate && \
+#                         python manage.py runserver 0.0.0.0:8000"
+#         ports:
+#             - "8000:8000"
+#         volumes:
+#             - ./django/:/usr/src/app/
+#         depends_on:
+#           postgres:
+#             condition: service_healthy
     
 
-    nginx:
-      image: nginx:latest
-      container_name: NGINX
-      ports:
-        - "443:443"
-      volumes:
-          - ./nginx/tools:/etc/nginx/ssl/
-          - ./nginx/conf/nginx.conf:/etc/nginx/nginx.conf
-      depends_on:
-        - django
+#     nginx:
+#       image: nginx:latest
+#       container_name: NGINX
+#       ports:
+#         - "443:443"
+#       volumes:
+#           - ./nginx/tools:/etc/nginx/ssl/
+#           - ./nginx/conf/nginx.conf:/etc/nginx/nginx.conf
+#       depends_on:
+#         - django
 
         
-    postgres:
-        image: postgres:16
-        container_name: POSTGRES
-        ports:
-            - "5432:5432"
-        environment:
-            POSTGRES_DB: "transcendence"
-            POSTGRES_USER: "transcendence"
-            POSTGRES_PASSWORD: "transcendence"
-        healthcheck:
-            test: ["CMD-SHELL", "pg_isready -U transcendence -d transcendence"]
-            interval: 10s
-            timeout: 5s
-            retries: 5
-    #     restart: always
+#     postgres:
+#         image: postgres:16
+#         container_name: POSTGRES
+#         ports:
+#             - "5432:5432"
+#         environment:
+#             POSTGRES_DB: "transcendence"
+#             POSTGRES_USER: "transcendence"
+#             POSTGRES_PASSWORD: "transcendence"
+#         healthcheck:
+#             test: ["CMD-SHELL", "pg_isready -U transcendence -d transcendence"]
+#             interval: 10s
+#             timeout: 5s
+#             retries: 5
+#     #     restart: always
 
     node:
         container_name: BLOCKCHAIN
         build: ./blockchain
         command: >
-          bash -c "npx hardhat node & sleep 10 && npx hardhat run scripts/deploy.js"
+          bash -c "npx hardhat node & sleep 10 && npx hardhat run scripts/deploy.js --network localhost"
         ports:
           - "8545:8545"
         # restart: always
     
-    frontend:
-        container_name: FRONTEND
-        build: ./frontend
-        ports:
-          - "8080:8080"
-        volumes:
-          - ./frontend:/app
-        depends_on:
-          - django
-          - node
-          - nginx
-          - postgres
-        # restart: always
+#     frontend:
+#         container_name: FRONTEND
+#         build: ./frontend
+#         ports:
+#           - "8080:8080"
+#         volumes:
+#           - ./frontend:/app
+#         depends_on:
+#           - django
+#           - node
+#           - nginx
+#           - postgres
+#         # restart: always
 
