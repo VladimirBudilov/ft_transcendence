@@ -31,7 +31,6 @@ function authButton() {
 
 export default class {
 	constructor() {
-		this.intra_login_url = "http://localhost:8000/api/v1/auth/intra/login/";
 
 		// Register the functions
 		register(authButton, true);
