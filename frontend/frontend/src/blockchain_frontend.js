@@ -1,4 +1,4 @@
-var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+var web3 = new Web3(new Web3.providers.HttpProvider("http://10.19.204.151:8545"));
 
 var contractABI = [
     {
