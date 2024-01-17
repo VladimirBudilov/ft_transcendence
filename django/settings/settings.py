@@ -31,7 +31,6 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
-    'daphne',
     'corsheaders',
     'sslserver',
     'django.contrib.admin',
@@ -75,9 +74,9 @@ TEMPLATES = [
     },
 ]
 
-# WSGI_APPLICATION = 'settings.wsgi.application'
+WSGI_APPLICATION = 'settings.wsgi.application'
 
-ASGI_APPLICATION = "settings.asgi.application"
+# ASGI_APPLICATION = "settings.asgi.application"
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels.layers.InMemoryChannelLayer",
@@ -90,8 +89,12 @@ CHANNEL_LAYERS = {
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'HOST': "POSTGRES",
+        'PORT': "5432",
+        'NAME': "transcendence",
+        'USER': "transcendence",
+        'PASSWORD': "transcendence",
     }
 }
 

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link 
+      rel="preconnect" 
+      href="https://fonts.gstatic.com" 
+      crossorigin
+    >
+    <link 
+      href="https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap" 
+      rel="stylesheet"
+    >
+    <link 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" 
+        rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" 
+        crossorigin="anonymous"
+    >
+    <link rel="stylesheet" href="/src/assets/main.css" />
+    <link rel="stylesheet" href="/src/assets/style.css" />
+    <title>Document</title>
+        <script>
+            class Colors {
+                ballColor = '#ffffff';
+                GameZoneColor = '#ffffff';
+                GameBorderColor = '#ffffff';
+                GroundColor = '#ffffff';
+                playerColor = '#ffffff';
+                playerColor2 = '#ffffff';
+                constructor() {
+                    this.SetDefaultColor();
+                }
+                SetDefaultColor() {
+                    this.ballColor = '#E6F8FA';
+                    this.GameZoneColor = '#091011';
+                    this.GameBorderColor = '#091011';
+                    this.GroundColor = '#091011';
+                    this.playerColor = '#ffffff';
+                    this.playerColor2 = '#ffffff';
+                }
+                SetSpecialColor() {
+                    this.ballColor = '#E6F8FA';
+                    this.GameZoneColor = '#D6562D';
+                    this.GameBorderColor = '#1f162e';
+                    this.GroundColor = '#D6562D';
+                    this.playerColor = '#1f162e';
+                    this.playerColor2 = '#1f162e';
+                }
+            }
+            let gameColors = new Colors();
+            let isSkillActive = true;
+            let isDefaultColor = true;
+            let threeDPieceOfShit = false;
+            function setColor() {           
+                if (isDefaultColor) {
+                    gameColors.SetSpecialColor();
+                } else {
+                    gameColors.SetDefaultColor();
+                }
+                isDefaultColor = !isDefaultColor;
+            }
+            function set3D() {
+                threeDPieceOfShit = !threeDPieceOfShit;
+            }
+            function setSkillActive() {
+                isSkillActive = !isSkillActive;
+            }
+        </script>
+  </head>
+
+  <body>
+    <!-- Loader -->
+    <div class="loader"></div>
+    <!-- Audio -->
+    <audio id="myAudio" class="myAudio">
+      <source src="/src/static/music.mp" type="audio/mp3">
+    </audio>
+    <script>
+      const audio = document.getElementById('myAudio');
+    
+      document.addEventListener('click', () => {
+        audio.play();
+      });
+    </script>
+
+    <!-- Main -->
+    <div id="app"></div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    >
+    </script>
+    <script type="module" src="/src/main.js"></script>
+
+    <!-- ForGame -->
+    <script src='/src/scripts/three.min.js'></script>
+		<script src='/src/scripts/globalData.js'></script>
+		<script src='/src/scripts/keyboard.js'></script>
+		<script src='/src/scripts/playerControl.js'></script>
+		<script src='/src/scripts/tournamentLogic.js'></script>
+		<script src='/src/scripts/gameStateHandle.js'></script>
+		<script src='/src/scripts/objectsPhysics.js'></script>
+		<script src='/src/scripts/gameInitialization.js'></script>
+		<script src='/src/scripts/gameTools.js'></script>
+		<script src='/src/scripts/sceneHandling.js'></script>
+
+		<!-- Include web3.js using CDN -->
+		<script src="https://cdn.jsdelivr.net/npm/web3@1.6.0/dist/web3.min.js"></script>
+		<script src='/src/blockchain_frontend.js'></script>
+
+  </body>
+</html>
