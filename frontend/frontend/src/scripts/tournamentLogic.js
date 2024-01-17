@@ -40,7 +40,7 @@ class Tournament
     }
     StartMatch = () =>
     {
-        document.getElementById("tournament-field").remove();
+        //document.getElementById("tournament-field").remove(); //закоментили а то здесь крашится
         console.log("start match");
         console.log("names of losers: " + this.looserPool);
         console.log("names of winners: " + this.winnersPool);
