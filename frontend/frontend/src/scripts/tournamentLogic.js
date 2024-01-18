@@ -86,12 +86,6 @@ class Tournament
             this.looserPool = [];
             this.secondPlace = null;
         }*/
-        this.currentPair[1] = this.currentParticipants[1];
-        this.currentPair[2] = this.currentParticipants[2];
-        let player1 = this.currentPair[1];
-        let player2 = this.currentPair[2];
-        console.log(player1.playerName + " vs " + player2.playerName);
-        this.currentParticipants.splice(1, 2);
 /*        console.log("names of losers: " + this.looserPool.length);
         console.log("names of winners: " + this.winnersPool.length);
         console.log("names of current participants: " + this.currentParticipants.length);
@@ -108,6 +102,24 @@ class Tournament
     }
 
     IsValidState() {
+        if (this.currentParticipants.length === 1) {
+            gameType.tournament = false;
+            this.winner = this.currentParticipants[0].playerName;
+            //TODO add winner on screen
+            setResult(this.currentPair[0].playerName, 1, this.tournamentName);
+            setResult(this.currentPair[1].playerName, 2, this.tournamentName);
+            console.log(this.winner);
+            return false;
+        }
+        this.currentPair[0] = this.currentParticipants[0];
+        this.currentPair[1] = this.currentParticipants[1];
+        let player1 = this.currentPair[0];
+        let player2 = this.currentPair[1];
+        //TODO add player names on screen
+        //console.log(player1.playerName + " vs " + player2.playerName);
+        document.getElementById("playerNames").innerHTML = player1.playerName + "-" + player2.playerName;
+        this.currentParticipants.splice(0, 2);
+        return true;
         /*if (this.currentParticipants.length === 0
             && this.winnersPool.length === 0
             && this.looserPool.length === 0
