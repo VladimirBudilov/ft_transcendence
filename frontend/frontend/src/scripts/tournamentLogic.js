@@ -37,16 +37,17 @@ class Tournament
         this.currentParticipants = [];
         this.currentPair = [];
         this.winner = "";
-        ChangeDivStateById("StopGame", false);
+        //ChangeDivStateById("StopGame", false);
     }
     StartMatch = () =>
     {
-        console.log("start match");
+/*        console.log("start match");
         console.log("names of losers: " + this.looserPool);
         console.log("names of winners: " + this.winnersPool);
         console.log("names of current participants: " + this.currentParticipants);
-        console.log("before validation");
-        if(!this.winnerBranch && this.looserPool.length === 1 && this.currentParticipants.length === 1)
+        console.log("before validation");*/
+
+        /*if(!this.winnerBranch && this.looserPool.length === 1 && this.currentParticipants.length === 1)
         {
             this.currentParticipants.push(this.looserPool[0]);
             this.looserPool = [];
@@ -84,17 +85,22 @@ class Tournament
             this.winnersPool = [];
             this.looserPool = [];
             this.secondPlace = null;
-        }
-        console.log("start match");
-        console.log("names of losers: " + this.looserPool.length);
+        }*/
+        this.currentPair[1] = this.currentParticipants[1];
+        this.currentPair[2] = this.currentParticipants[2];
+        let player1 = this.currentPair[1];
+        let player2 = this.currentPair[2];
+        console.log(player1.playerName + " vs " + player2.playerName);
+        this.currentParticipants.splice(1, 2);
+/*        console.log("names of losers: " + this.looserPool.length);
         console.log("names of winners: " + this.winnersPool.length);
         console.log("names of current participants: " + this.currentParticipants.length);
-        console.log("after validation");
+        console.log("after validation");*/
         if(!this.IsValidState()) {
             this.StopTournament();
             return;
         }
-        //ChangeDivStateById("StopGame", true);
+        console.log("start match");
         PrepareData();
         createScene();
         UpdateVsPlayer();
@@ -102,7 +108,7 @@ class Tournament
     }
 
     IsValidState() {
-        if (this.currentParticipants.length === 0
+        /*if (this.currentParticipants.length === 0
             && this.winnersPool.length === 0
             && this.looserPool.length === 0
         ) {
@@ -127,7 +133,7 @@ class Tournament
         console.log(player1.playerName + " vs " + player2.playerName);
         this.currentParticipants.splice(0, 2);
         document.getElementById("playerNames").innerHTML = player1.playerName + "-" + player2.playerName;
-        return true;
+        return true;*/
     }
 }
 
