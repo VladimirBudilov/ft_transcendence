@@ -163,7 +163,7 @@ async function buttonClickHandler(buttonText) {
             setTimeout(() => {
                 loader.classList.add('hidden');
             }, 600);
-            window.dispatchEvent(new Event('click'));
+            
 
         } else if (buttonText === "Results") {
             navigateTo('/results');
@@ -199,6 +199,8 @@ async function navigateTo(url) {
 
 
 async function router() {
+
+	
     /* 
         routes - массив объектов, содержащих путь и представление
         создаем массив routes и заполняем его объектами, содержащими строку "путь" 
@@ -252,6 +254,8 @@ async function router() {
     const view = new match.route.view();
     document.getElementById('app').innerHTML = await view.getHtml();
     
+	
+
     
 
     /* после рендеринга дома бежим циклом по всем кнопкам которые получаем с помощью querySelectorAll
@@ -260,7 +264,9 @@ async function router() {
     */
 
     findContent("About Us");
-    authButton();
+	setTimeout(async () => {
+		authButton();
+	}, 700);
 };
 
 /* 
@@ -290,9 +296,6 @@ document.addEventListener('DOMContentLoaded', () => {
     router();
 });
 
-window.addEventListener('load', () => {
-    authButton();
-});
 
 
 // для модального окна в начале
@@ -333,6 +336,7 @@ document.addEventListener('click', async e => {
     if (e.target.classList.contains('button_auth')) {
         e.preventDefault();
         await buttonClickHandler(e.target.innerHTML);
+
     }
     authButton();
 });

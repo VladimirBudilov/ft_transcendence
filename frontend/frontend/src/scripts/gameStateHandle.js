@@ -13,7 +13,7 @@ function StopGame()
     let gameCanvas = document.getElementById("gameCanvas");
     gameCanvas.removeChild(gameRender.renderer.domElement);
     cancelAnimationFrame(animationId);
-    cancelIdleCallback(animationId);
+    // cancelIdleCallback(animationId);
     printScore();
     //ChangeDivStateById("StopGame", false);
 }
