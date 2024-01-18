@@ -18,7 +18,6 @@ INTRA_LOGIN_URL = os.environ.get('INTRA_API_URL') + \
         '&response_type=code' 
 
 
-
 class IntraLogin(APIView):
     def get(self, request):
         """

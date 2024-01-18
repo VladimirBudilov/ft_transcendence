@@ -25,6 +25,7 @@ function findContent(text) {
     }
 }
 
+
 function changeFieldColor() {
     const button = document.getElementById("colorButton");
     if (isDefaultColor) {
@@ -161,8 +162,8 @@ async function buttonClickHandler(buttonText) {
             navigateTo('/results');
         }
         authButton();
+
     }, 400);
-    
 }
 
 
@@ -292,6 +293,7 @@ document.addEventListener('DOMContentLoaded', function () {
 window.addEventListener('load', () => {
     const loader = document.querySelector('.loader');
     loader.classList.add('hidden');
+    
 });
 
 
@@ -302,6 +304,7 @@ const audio = new Audio("/src/static/button_click2.mp3");
 const myAudio = document.getElementById('myAudio');
 myAudio.volume = 0.1;
 
+// authButton();
 
 document.addEventListener('click', async e => {
     if (e.target.className === 'link') {

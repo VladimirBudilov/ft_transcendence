@@ -15,7 +15,7 @@ function toLogin() {
 
 function authButton() {
 	const auth_button = document.getElementById("auth_button");
-
+	
 	if (getCookie('username') != null) {
 		auth_button.innerHTML = `
 				<button class="btn btn-primary me-3">${getCookie('username')}</a>

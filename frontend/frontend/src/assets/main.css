@@ -24,13 +24,6 @@ body {
     height: 100%;
 }
 
-@media screen and (max-width: 2000px) {
-    body {
-        font-size: 70%;
-    }
-  
-}
-
 .hero {
     background-image: url('/src/static/3.gif');
      /* Путь к вашей картинке */

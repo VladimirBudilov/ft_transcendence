@@ -160,7 +160,7 @@ function ChangeDivStateById(name, state){
 }
 
 function StartTournament()
-{   
+{
     setTimeout(() => {
     //ChangeDivStateById("tournament", true);
     tournament.tournamentInput = document.getElementById("tournament");
@@ -184,6 +184,9 @@ function generateError(errorMessageContainer, errorMessageContent) {
 }
 
 function ReadInput() {
+    document.getElementById("playerNames").remove();
+    document.getElementById("scores").remove();
+
     var buttonExit = document.querySelector('.button_menu');
     buttonExit.onclick = function () {
         tournament.StopTournament();
