@@ -118,7 +118,7 @@ class Tournament
         let player1 = this.currentPair[0];
         let player2 = this.currentPair[1];
         //TODO add player names on screen
-        //console.log(player1.playerName + " vs " + player2.playerName);
+        console.log(player1.playerName + " vs " + player2.playerName);
         document.getElementById("playerNames").innerHTML = player1.playerName + "-" + player2.playerName;
         this.currentParticipants.splice(0, 2);
         return true;
@@ -186,8 +186,6 @@ function generateError(errorMessageContainer, errorMessageContent) {
 }
 
 function ReadInput() {
-    document.getElementById("playerNames").remove();
-    document.getElementById("scores").remove();
 
     var buttonExit = document.querySelector('.button_menu');
     buttonExit.onclick = function () {

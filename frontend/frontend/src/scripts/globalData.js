@@ -37,7 +37,7 @@ class Vector3 {
 class Data {
     playerScore = 0;
     opponentScore = 0;
-    maxScore = 3;
+    maxScore = 1;
     difficulty = 0.8;
     ballSpeed = 10;
     spellTime = 4000;

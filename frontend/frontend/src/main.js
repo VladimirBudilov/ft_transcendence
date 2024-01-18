@@ -158,12 +158,20 @@ async function buttonClickHandler(buttonText) {
             });  
         } else if (buttonText === "Auth") {
             navigateTo('/');
+            const loader = document.querySelector('.loader');
+            loader.classList.remove('hidden');
+            setTimeout(() => {
+                loader.classList.add('hidden');
+            }, 600);
+            window.dispatchEvent(new Event('click'));
+
         } else if (buttonText === "Results") {
             navigateTo('/results');
         }
         authButton();
 
     }, 400);
+    
 }
 
 
@@ -244,6 +252,7 @@ async function router() {
     const view = new match.route.view();
     document.getElementById('app').innerHTML = await view.getHtml();
     
+    
 
     /* после рендеринга дома бежим циклом по всем кнопкам которые получаем с помощью querySelectorAll
         и если текст кнопки содержит "About Us", то добавляем атрибуты data-bs-toggle и data-bs-target
@@ -279,6 +288,10 @@ window.addEventListener('popstate', router);
 
 document.addEventListener('DOMContentLoaded', () => {
     router();
+});
+
+window.addEventListener('load', () => {
+    authButton();
 });
 
 
