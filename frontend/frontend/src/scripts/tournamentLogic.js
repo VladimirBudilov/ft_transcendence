@@ -105,9 +105,11 @@ class Tournament
         if (this.currentParticipants.length === 1) {
             gameType.tournament = false;
             this.winner = this.currentParticipants[0].playerName;
-            //TODO add winner on screen
-            setResult(this.currentPair[0].playerName, 1, this.tournamentName);
-            setResult(this.currentPair[1].playerName, 2, this.tournamentName);
+            let secondPlayer = this.currentPair[0].playerName === this.winner
+                ? this.currentPair[1].playerName
+                : this.currentPair[0].playerName;
+            setResult(this.winner, 1, this.tournamentName);
+            setResult(secondPlayer, 2, this.tournamentName);
             console.log(this.winner);
             return false;
         }
