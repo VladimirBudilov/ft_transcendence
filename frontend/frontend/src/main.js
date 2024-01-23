@@ -25,6 +25,7 @@ function findContent(text) {
     }
 }
 
+
 function changeFieldColor() {
     const button = document.getElementById("colorButton");
     if (isDefaultColor) {
@@ -157,10 +158,18 @@ async function buttonClickHandler(buttonText) {
             });  
         } else if (buttonText === "Auth") {
             navigateTo('/');
+            const loader = document.querySelector('.loader');
+            loader.classList.remove('hidden');
+            setTimeout(() => {
+                loader.classList.add('hidden');
+            }, 600);
+            
+
         } else if (buttonText === "Results") {
             navigateTo('/results');
         }
         authButton();
+
     }, 400);
     
 }
@@ -190,6 +199,8 @@ async function navigateTo(url) {
 
 
 async function router() {
+
+	
     /* 
         routes - массив объектов, содержащих путь и представление
         создаем массив routes и заполняем его объектами, содержащими строку "путь" 
@@ -243,6 +254,9 @@ async function router() {
     const view = new match.route.view();
     document.getElementById('app').innerHTML = await view.getHtml();
     
+	
+
+    
 
     /* после рендеринга дома бежим циклом по всем кнопкам которые получаем с помощью querySelectorAll
         и если текст кнопки содержит "About Us", то добавляем атрибуты data-bs-toggle и data-bs-target
@@ -250,7 +264,9 @@ async function router() {
     */
 
     findContent("About Us");
-    authButton();
+	setTimeout(async () => {
+		authButton();
+	}, 700);
 };
 
 /* 
@@ -281,6 +297,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+
 // для модального окна в начале
 document.addEventListener('DOMContentLoaded', function () {
     var myModal = new bootstrap.Modal(document.getElementById('myModal'));
@@ -292,6 +309,7 @@ document.addEventListener('DOMContentLoaded', function () {
 window.addEventListener('load', () => {
     const loader = document.querySelector('.loader');
     loader.classList.add('hidden');
+    
 });
 
 
@@ -302,6 +320,7 @@ const audio = new Audio("/src/static/button_click2.mp3");
 const myAudio = document.getElementById('myAudio');
 myAudio.volume = 0.1;
 
+// authButton();
 
 document.addEventListener('click', async e => {
     if (e.target.className === 'link') {
@@ -317,6 +336,7 @@ document.addEventListener('click', async e => {
     if (e.target.classList.contains('button_auth')) {
         e.preventDefault();
         await buttonClickHandler(e.target.innerHTML);
+
     }
     authButton();
 });

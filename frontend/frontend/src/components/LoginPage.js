@@ -8,7 +8,7 @@ import MenuButton from './MenuButton.js';
 // Send a POST request to the backend with the login from 
 // the input and the code from the url
 async function signIn() {
-	const backend_url = 'http://localhost:8000';
+	const backend_url = server_url;
 	let login = document.getElementById('login').value;
 	let code = window.location.href.split('?code=')[1];
 

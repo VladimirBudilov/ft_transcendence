@@ -19,6 +19,7 @@ export default class Game {
 
         const tournamrnInputs = window.location.href.substring(window.location.href.lastIndexOf('/')) === '/tournament' ? await this.tournamrnInputs() : '';
 
+
         const buttonHtml = await this.button.getHtml();
         const button = buttonHtml.replace(/back/g, "");
         
@@ -29,17 +30,17 @@ export default class Game {
                 <div class="container">
                     <div class="row d-flex justify-content-center align-items-center rounded-5 p-5" style="background: #1f162e;">
                         <div class="col-9 col-xxl-7 col-lg-8 col-md-7">
-                            <div id='gameCanvas' class="mt-2"></div>
+                            <div id='gameCanvas'></div>
                         </div>
                         <div class="col-lg-3 col-md-5">
                             <div id='scoreboard' class="rounded-top-5">
-                                <p id='playerNames' class="text_game fs-1 mt-3 pt-4"></p>
-                                <p id='scores' class="text_game" style="color: #805EF6!important">0-0</p>
-                                <p id='winnerBoard' class="text_game fs-2">First to score 7 wins!</p>
+                                <div id='playerNames' class="text_game fs-1 pt-4"></div>
+                                <div id='scores' class="text_game" style="color: #805EF6!important">0-0</div>
+                                <div id='winnerBoard' class="text_game fs-2">First to score 7 wins!</div>
                             </div>
                             ${tournamrnInputs}
                             <div class="row">
-                                <div class="d-flex justify-content-center pb-3">
+                                <div class="d-flex justify-content-center">
                                     ${button}
                                 </div>
                             </div>

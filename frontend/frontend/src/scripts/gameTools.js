@@ -60,20 +60,21 @@ function ChooseWinnerName(winner, loser) {
 	if (gameType.tournament) {
 		playerName = tournament.currentPair[winner].playerName;
 		if(tournament.winnerBranch) {
-			tournament.winnersPool.push(tournament.currentPair[winner]);
+			tournament.currentParticipants.push(tournament.currentPair[winner]);
+			/*tournament.winnersPool.push(tournament.currentPair[winner]);
 			if (tournament.currentPair[loser].isFirstRound &&
 				tournament.firstPlace === null) {
 				tournament.looserPool.push(tournament.currentPair[loser]);
 				tournament.looserPool[tournament.looserPool.length - 1].isFirstRound = false;
 			}
-			tournament.winnersPool[tournament.winnersPool.length - 1].isFirstRound = false;
+			tournament.winnersPool[tournament.winnersPool.length - 1].isFirstRound = false;*/
 		}
 		else
 		{
 			tournament.looserPool.push(tournament.currentPair[winner]);
 		}
-		ValidateFirstPlace(winner,loser);
-		ValidateThirdPlace(winner, loser);
+		//ValidateFirstPlace(winner,loser);
+		//ValidateThirdPlace(winner, loser);
 	}
 	return playerName;
 }

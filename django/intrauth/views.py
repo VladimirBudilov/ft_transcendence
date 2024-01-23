@@ -18,7 +18,6 @@ INTRA_LOGIN_URL = os.environ.get('INTRA_API_URL') + \
         '&response_type=code' 
 
 
-
 class IntraLogin(APIView):
     def get(self, request):
         """
@@ -51,7 +50,7 @@ class IntraLogin(APIView):
 
         # Check if access_token is valid
         if (access_token == None):
-            return Response({'error': 'invalid code'}, status=401)
+            return Response({'error': 'invalid code or secret key was updated'}, status=401)
 
         # Check if user exists
         user = User.objects.filter(username=intra_login).first()
@@ -94,6 +93,8 @@ class IntraLogin(APIView):
             'code': code
         }
         response = requests.post('https://api.intra.42.fr/oauth/token', data=data)
+        if response.status_code != 200:
+            return None
         return response.json()
 
 

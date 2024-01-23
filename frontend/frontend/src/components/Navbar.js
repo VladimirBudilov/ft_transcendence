@@ -10,12 +10,12 @@ function logout() {
 }
 
 function toLogin() {
-	window.location.href = "http://localhost:8000/api/v1/auth/intra/login/";
+	window.location.href = "api/v1/auth/intra/login/";
 }
 
 function authButton() {
 	const auth_button = document.getElementById("auth_button");
-
+	
 	if (getCookie('username') != null) {
 		auth_button.innerHTML = `
 				<button class="btn btn-primary me-3">${getCookie('username')}</a>
@@ -31,7 +31,6 @@ function authButton() {
 
 export default class {
 	constructor() {
-		this.intra_login_url = "http://localhost:8000/api/v1/auth/intra/login/";
 
 		// Register the functions
 		register(authButton, true);

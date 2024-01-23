@@ -1,9 +1,11 @@
-FROM node:alpine3.19
+FROM node:21-alpine
 
 WORKDIR /app
-COPY package*.json ./app/
-COPY . /app
+
+COPY . .
 
 RUN npm install
+
+EXPOSE 8080
 
 CMD ["node", "server.js"]

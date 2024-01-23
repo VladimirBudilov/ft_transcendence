@@ -31,8 +31,8 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
-    'daphne',
     'corsheaders',
+    'sslserver',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -74,9 +74,9 @@ TEMPLATES = [
     },
 ]
 
-# WSGI_APPLICATION = 'settings.wsgi.application'
+WSGI_APPLICATION = 'settings.wsgi.application'
 
-ASGI_APPLICATION = "settings.asgi.application"
+# ASGI_APPLICATION = "settings.asgi.application"
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels.layers.InMemoryChannelLayer",
@@ -89,8 +89,12 @@ CHANNEL_LAYERS = {
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'HOST': "POSTGRES",
+        'PORT': "5432",
+        'NAME': "transcendence",
+        'USER': "transcendence",
+        'PASSWORD': "transcendence",
     }
 }
 
@@ -132,6 +136,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = "static/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
